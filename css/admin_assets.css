@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+#gold_highlighter{
+    color: #BB9441;
+}
+
+@font-face {
+    font-family: 'heebo-light';
+    src: url(../fonts/Heebo-Light.ttf);
+}
+
+@font-face {
+    font-family: 'heebo-medium';
+    src: url(../fonts/Heebo-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'montserrat-light';
+    src: url(../fonts/Montserrat-Light.ttf);
+}
+
+@font-face {
+    font-family: 'montserrat-bold';
+    src: url(../fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'delafield';
+    src: url(../fonts/MrsSaintDelafield-p5or.ttf);
+}
+
+@font-face {
+    font-family: 'heebo-regular';
+    src: url(../fonts/Heebo-Regular.ttf);
+}
+
+/* @font-face {
+    font-family: 'heebo-bold';
+    src: url(../fonts/Heebo-Bold.ttf);
+} */
+
+@font-face {
+    font-family: 'montserrat-regular';
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'montserrat-medium';
+    src: url(../fonts/Montserrat-Medium.ttf);
+} 
+

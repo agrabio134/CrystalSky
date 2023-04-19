@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .gallery_nice{
+    display: grid;
+    width: 100%;
+    flex-direction: column;
+    /* flex-direction: row; */
+    grid-template-rows: auto auto;
+}
+.try{
+    display: flex;
+    flex-wrap: wrap;
+    width: 33.33%;
+    border: 1px solid blue;
+}
+.content_gallery {
+    background-color: white;
+    padding: 10px;
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid #dad9d9;
+    margin-top: 10px;
+    margin: 10px;
+    margin-bottom: 10px;
+}
+.gallery_publish_button{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.publish_button_text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+    height: 30px;
+    background-color: #BB9441;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid #dad9d9;
+    border-radius: 4px;
+}
+.publish_button_text a {
+    text-decoration: none;
+    color: white;
+    font-family: montserrat-bold;
+}
+</style>
+<body>
+    <div class="gallery_nice">
+        <div id="getGalleryUnPublish" class="try">
+            <div class="content_gallery">
+                <div class="img_row">
+                    <img id="chosen-image" src="/assets/SUBSYSTEM_PHOTOS/CMSimage4.jpg" alt="Mountains" class="gallery_img"
+                        style="width:100%">
+                </div>
+                
+                <div class="gallery_publish_button">
+                    <div class="publish_button_text">
+                        <a class="defBtn acceptBtn">PUBLISH</a>
+                    </div>
+                    <div class="publish_button_text">
+                        <a>ARCHIVE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content_gallery">
+                <div class="img_row">
+                    <img id="chosen-image" src="/assets/SUBSYSTEM_PHOTOS/CMSimage4.jpg" alt="Mountains" class="gallery_img"
+                        style="width:100%">
+                </div>
+            
+                <div class="gallery_publish_button">
+                    <div class="publish_button_text">
+                        <a class="defBtn acceptBtn">PUBLISH</a>
+                    </div>
+                    <div class="publish_button_text">
+                        <a>ARCHIVE</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</body>
+</html>

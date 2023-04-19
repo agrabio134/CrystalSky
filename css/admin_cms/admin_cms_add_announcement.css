@@ -1,0 +1,30 @@
+
+
+.create_add_aanouncement{
+    display: flex;
+    width: 100%;
+    /* border: 1px solid green; */
+    min-height: 100px;
+    gap: 30px;
+}
+
+.announcement_right_container{
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #dad9d9;
+    width: 100%;
+    background-color: white;
+    height: 130px;
+    min-height: 600px;
+}
+.getLabelAnnouncementForm_container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+    /* align-items: center; */
+    justify-content: center;
+    /* border: 1px solid green; */
+}
+
