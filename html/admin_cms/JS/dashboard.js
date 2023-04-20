@@ -337,9 +337,13 @@ const getLiveRooms = () => {
                                     </div>
                                 </div>
                                 <div class="button">
-                              
+                                <div class="edit_button">
+                                <a onclick="editRoom(${content.id})">EDIT</a>
+                                                                    </div>
                                     <div class="live_publish_button">
+
                                     <a type="button" onclick="RoomUnPublish(${content.id})" class="defBtn acceptBtn" id="RoomUnPublish${content.id}" >UNPUBLISH</a>
+
                                     </div>
                                     
                                 </div>
@@ -1184,7 +1188,7 @@ $(document).ready(function () {
   getRooms();
 });
 
-function editRoom(roomId) {
+const editRoom = (roomId) =>{
   $.ajax({
     url: url + "getRooms",
     type: "post",
@@ -1197,7 +1201,7 @@ function editRoom(roomId) {
 
       const roomNumber = Rooms.find(
         (content) => content.id === roomId
-      ).room_number;
+      );
       window.location.href = `http://127.0.0.1:5501//html/admin_cms/create_room.html?id=${roomId}`;
       // i want to auto click the edit button by room id
     })

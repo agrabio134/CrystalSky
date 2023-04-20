@@ -258,6 +258,11 @@
             modal.style.display = "none";
         }
     }
+
+    // every after load make one second delay then auto click show all
+    setTimeout(function () {
+        document.getElementsByClassName("btn active")[0].click();
+    }, 800);
 </script>
 
 </html>
