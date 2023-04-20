@@ -294,13 +294,15 @@ const getCategoryEditForm = (categoryId) => {
                 <input class="input_number_edit_cat" type="number" name="price" value="${content.price}">
               </div>
               
+
+              <div class="capacity_div">
+                <label class="label_capacity_edit" for="capacity">Capacity: </label>
+                <input class="input_capacity_edit_cat" type="number" name="RoomCapacity"   value="${content.capacity}">
+              </div>
             </div>
 
 
-            <div>
-            <label for="capacity">Capacity: </label>
-            <input class="input_number_edit_cat" type="number" name="RoomCapacity"   value="${content.capacity}">
-            </div>
+            
        
         
 

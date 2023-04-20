@@ -69,6 +69,7 @@ table {
 }
 .editBtn {
   background-color: #4BB1F7;
+  cursor: pointer;
 }
 .deletebtn{
   background-color: #FF5D5D;
@@ -148,88 +149,7 @@ const getRoomForm = () => {
 
       let str = `   
         <style>
-          .form_create_room{
-            display: flex;
-            // margin-left: 30px;
-            flex-direction:row;
-            width:  100%;
-            height: 45px;
-            align-items: center;
-          }
-          .room_container{
-            display: flex;
-            gap:10px;
-            align-items: center;
-            height:100%;  
-            flex-direction-row;
-            // border:1px solid blue;
-            width:30%;
-          }
-          .room_number_label{
-            font-family: montserrat-medium;
-            font-size: 15px;
-            letter-spacing: 1px;
-            color: #424857;
-            margin-left: 30px;
-          }
-          .Room_number_input{
-            width: 45%;
-            height:10px;
-            // border: 1px solid green;
-            background-color: white;
-            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
-            border: 1px solid #dad9d9;
-          }
-          input[type=number]{
-            padding:10px;
-            font-family:montserrat-medium;
-            letter-spacing:1px;  
-          }
-          .label_container{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            width:22%;
-            // border: 1px solid black;
-            height:100%;
-            gap:10px;
-          }
-          .category_name{
-            font-family: montserrat-medium;
-            font-size: 15px;
-            letter-spacing: 1px;
-            color: #424857;
-          }
-          .category_id_cont{
-            width: 60%;
-            padding-left:5px;
-            height:30px;
-            background-color: white;
-            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
-            border: 1px solid #dad9d9;
-          }
-          .submit_cont{
-            display:flex;
-            width:40%;
-          }
-          .submit_input{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #2FA83F;
-            height: 30px;
-            border: none;
-            width: 20%;
-            cursor: pointer;
-            border-radius: 4px;
-          }
-          input[type=submit]{
-            font-family: montserrat-medium;
-            font-size: 15px;
-            color: white;
-          }
+          
         </style>    
 
 
@@ -296,10 +216,12 @@ const getRoomsCategory = () => {
                 <input type="hidden" id="id">
 
                 <div class="about_text_container">
-                <label for="RoomNumber">Room Number</label>
-                  <input type="text" id="RoomNumber" readonly>
+                <label class="assign_room_container" for="RoomNumber">Room Number</label>
+                  <input class="" type="text" id="RoomNumber" readonly>
                 </div>
 
+                <div class="assign_category_container">
+                <div class="choose_category_rooms">Choose Category:</div>
                 <select class="about_textarea_input" id="categoriInput">
                 <option value="" selected disabled>Select a category</option>
 
@@ -311,13 +233,14 @@ const getRoomsCategory = () => {
         str += `  
                 
                 <option value="${content.id}">${content.name}</option>
-
+                
 
 
                 `;
       });
       str += `
               <select>
+              </div>
               <div class="submit_button_about">
                 <button class="saveButton_about" type="button" id="saveButton">Save</button>
       

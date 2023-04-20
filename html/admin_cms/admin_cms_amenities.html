@@ -10,51 +10,50 @@
   <link rel="stylesheet" href="/css/admin_cms/admin_cms.css">
   <link rel="stylesheet" href="/css/admin_assets.css">
   <link rel="stylesheet" href="/css/admin_tabs_pane.css">
-  <link rel="stylesheet" href="/css/admin_cms/admin_cms_about.css">
-  <link rel="stylesheet" href="/css/admin_cms/admin_cms_rooms.css">
+  <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms_about.css"> -->
+  <link rel="stylesheet" href="/css/admin_cms/admin_cms_amenities.css">
+  <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms_rooms.css"> -->
   <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <style>
- /* The Modal (background) */
-/* Edit modal styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
+  /* The Modal (background) */
+  /* Edit modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 700px;
-}
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+  }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 </style>
 
 
@@ -172,12 +171,12 @@
     <div class="admin_right_pane">
       <div class="admin_right_pane_content_container">
 
-        <div class="admin_room_border">
-          <div class="admin_room_container">
+        <div class="admin_amenities_border">
+          <div class="admin_amenities_container">
 
 
             <!-- MAIN (Center website) -->
-            <div class="create_room_head">
+            <div class="add_amenities_title">
               <p>ADD AMENITIES </p>
             </div>
             <div id="getAmenitiesForm" class="get_room_container"></div>
@@ -185,29 +184,33 @@
 
 
             <!-- Portfolio Gallery Grid -->
-     
 
 
 
 
-            <div id="getAllAmenities"></div>
-          
+
+            
+
             <div class="modal-container" id="editModal">
               <div class="modal1" id="getCategoryID">
-               
+                  <h2>Edit Amenity</h2>
               </div>
             </div>
 
 
 
-        
 
 
-          <!-- <input type="file" id="fileInput" multiple /> -->
 
+            <!-- <input type="file" id="fileInput" multiple /> -->
+
+          </div>
         </div>
+          <div id="getAllAmenities"></div>
+
       </div>
     </div>
+  </div>
 
 
 

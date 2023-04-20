@@ -16,94 +16,53 @@ const getRoomForm = () => {
 
       let str = `   
         <style>
-        #amenity_image_preview {
-            width: 100px;
-            height: 100px;
-            border: 1px solid black;
-          }
-
-          #amenity_image_preview img {
-            width: 100%;
-            object-fit: cover;
-          }
-          .amenities_submit_input_container{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 20%;
-            height:30px;
-            //  border: 1px solid black;
-          }
-          .amenities_submit_input{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #2FA83F;
-            border: none;
-            width: 100%;
-            height: 30px;
-            cursor: pointer;
-            border-radius: 4px;
-          }
-          input[type="submit"]{
-          font-family: montserrat-medium;
-          font-size: 15px;
-          color: white;
-          }
-          .amenities_images_cont{
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center; 
-              width: 40%;
-              height: 50%;
-              //  border: 1px solid black;
-          }
-          .amenities_images_cont_input::-webkit-file-upload-button{
-            width: 150px;
-            height: 30px;
-            color: white;
-            background-color:#424857;
-            border: 2px solid #dad9d9;
-            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-            // border: 1px solid black;
-            font-family: montserrat-medium;
-            cursor: pointer;
-            font-size: 15x;
-            border-radius: 4px;
-          }
-            input[type=file]{
-            font-family: montserrat-medium;
-            font-size: 15px;
-          }
+        
+          
           </style>
             <form action="${url}addAmenitiy" method="POST" enctype="multipart/form-data">
-
-            <label for="amenity_image">Amenity Icon</label>
+            
+            <div class="amenity_sub_main_cont">
+            <div class="amenity_main_container">
+            <div class="amenity_title_icon">
+            <label class="amenity_label_icon" for="amenity_image">Amenity Icon</label>
+            </div>
 
             <div class="amenities_images_cont">
             <input class="amenities_images_cont_input" type="file" name="amenity_image" id="amenity_image" onchange="previewImage()">
             </div>
+            </div>
 
             <div id="amenity_image_preview"></div>
-            <select id="category" name="category">
+            
+
+            <div class="amenities_category_container">
+            <div class="choose_category_amenities">Choose Category:</div>
+            <select class="category_drop_container" id="category" name="category">
+            
            `;
 
       RoomContent.forEach((content) => {
         str += ` 
+                  
+                  
                   <option value="${content.id}">${content.name}</option>
   
             `;
       });
       str += `  
             </select>
+            </div>
 
+            <div class="amenities_item_container">
             <div id="amenities-container" >
+            <div class="add_amenity_item_cont">Add Amenities Item:</div>
             <div class="amenity-item">
-              <input type="text" name="amenity_name" id="amenity_name" placeholder="Amenity Item">
+              <input class="amenity_name_input" type="text" name="amenity_name" id="amenity_name" placeholder="Type here...">
             </div>
           </div>
-        
+          </div>
+          </div>
+
         <div class="amenities_submit_input_container">
           <input class="amenities_submit_input" type="submit" value="Submit">
           </div>
@@ -197,6 +156,7 @@ const getAllAmenities = () => {
         border-radius: 3px;
         font-family: 'montserrat-medium';
         color: white;
+        cursor: pointer;
         background-color: #4BB1F7;
         text-decoration: none;
       }
@@ -356,12 +316,15 @@ const getRoomsCategory = () => {
 
       // $("#ArchivedGallery").empty();
 
-      let str = ` <h2>Edit Amenity</h2>
+      let str = ` 
               <form class="form_container_about">
-                <input type="hidden" id="id">
-
-                <input type="file" id="file" name="media" accept="image/*" onchange="loadFile(event)" />
-                <img id="output" width="100px" height="100px" />
+              
+                  <input type="hidden" id="id">
+                
+                  <div class="amenities_modal_images">
+                <input class="amenities_modal_images_input" type="file" id="file" name="media" accept="image/*" onchange="loadFile(event)" />
+                </div>
+                <img class="amenities_modal_preview" id="output" />
                 <script>
 
                 var loadFile = function(event) {
@@ -372,10 +335,12 @@ const getRoomsCategory = () => {
                 </script>
 
                 <div class="about_text_container">
-                  <input type="amenities" id="amenities" placeholder="Edit item" >
+                  <input class="amenities_input_edit" type="amenities" id="amenities" placeholder="Edit item" >
                 </div>
 
-                <select class="about_textarea_input" id="categoriInput">
+                <div class="amenities_textarea_container">
+                <div class="edit_category_amenities">Edit Category:</div>
+                <select class="amenities_text_select" id="categoriInput">
                 <option value="" selected disabled>Select a category</option>
 
           
@@ -393,10 +358,13 @@ const getRoomsCategory = () => {
       });
       str += `
               <select>
-              <div class="submit_button_about">
-                <button class="saveButton" type="button" id="saveButtonUpdate">Save</button>
+                </div>
+
+               
+              <div class="submit_button_amenities">
+                <button class="saveButtonAmenities" type="button" id="saveButtonUpdate">Save</button>
       
-                <button class="cancelButton" type="button" id="cancelButton">Cancel</button>
+                <button class="cancelButtonAmenities" type="button" id="cancelButton">Cancel</button>
               </div>
             </form>`;
 

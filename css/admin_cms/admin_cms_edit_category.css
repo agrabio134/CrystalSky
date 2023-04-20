@@ -46,7 +46,7 @@
 .edit_cont{
     display: flex;
     align-items: center;
-    gap:10px;
+    gap:5px;
     width: 100%;
     height: 50%;
     /* border: 1px solid green; */
@@ -109,7 +109,7 @@ input[type=text] {
     letter-spacing: 1px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     font-family: heebo;
-    width: 80%;
+    width: 60%;
     height: 15px;
     border: 1px solid #dad9d9;
     border-radius: 4px;
@@ -209,4 +209,32 @@ input[type=submit] {
     cursor: pointer;
     font-size: 15x;
     border-radius: 4px;
+}
+.capacity_div{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    height: 45px;
+    gap: 10px;
+    flex-direction: row;
+    /* border: 1px solid palevioletred; */
+}
+.label_capacity_edit{
+    font-family: montserrat-medium;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #424857;
+}
+.input_capacity_edit_cat{
+    font-family: montserrat-medium;
+    font-size: 15px;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    font-family: heebo;
+    width: 60%;
+    height: 15px;
+    border: 1px solid #dad9d9;
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: 10px;
 }

@@ -357,6 +357,7 @@ const getContentAboutFacilities = () => {
             color: white;
             background-color: #4BB1F7;
             text-decoration: none;
+            cursor: pointer;
         }
         .delete_about{
             padding: 7px 10px;
@@ -366,6 +367,7 @@ const getContentAboutFacilities = () => {
             color: white;
             background-color: #FF5D5D;
             text-decoration: none;
+            cursor: pointer;
         }
         .add_facilities_description_td{
           text-align: justify !important;

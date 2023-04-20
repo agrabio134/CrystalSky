@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CS Admin - CMS </title>
-    <link rel="stylesheet" href="/css/admin_cms/admin_cms.css">
+    <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms.css"> -->
     <link rel="stylesheet" href="/css/admin_assets.css">
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
-    <link rel="stylesheet" href="/css/admin_cms/admin_cms_modal.css">
+    <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms_modal.css"> -->
+    <link rel="stylesheet" href="/css/admin_cms/admin_cms_archived.css">
     <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -68,8 +69,7 @@
                     <p id="admin_left_pane_content_management"> Management </p>
                     <p id="admin_left_pane_content_short_management"> Manage</p>
 
-                    <a class="admin_current_tab tabs pulse admin_tab_secgroup"
-                        href="/html/admin_cms/admin_cms.html">
+                    <a class="admin_current_tab tabs pulse admin_tab_secgroup" href="/html/admin_cms/admin_cms.html">
                         <div class="admin_tab_logo_container">
                             <img id="admin_tab_logo"
                                 src="/assets/Back Office - Tabs Logos/admin_cms/CMS Logo/CMS - Blue.png">
@@ -90,8 +90,7 @@
                             <p id="admin_tab_short_text"> CDMS </p>
                         </div>
                     </a>
-                    <a class="admin_unselected_tab tabs admin_tab_secgroup"
-                        href="/html/admin_ems/admin_ems.html">
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_ems/admin_ems.html">
                         <div class="admin_tab_logo_container">
                             <img id="admin_tab_logo"
                                 src="/assets/Back Office - Tabs Logos/admin_ems/EMS Logo/EMS - 7b.png">
@@ -102,8 +101,7 @@
                         </div>
                     </a>
 
-                    <a class="admin_unselected_tab tabs admin_tab_secgroup"
-                        href="/html/admin_ims/admin_ims.html">
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_ims/admin_ims.html">
                         <div class="admin_tab_logo_container">
                             <img id="admin_tab_logo"
                                 src="/assets/Back Office - Tabs Logos/admin_ims/Inventory Logo/Inventory - 7b.png">
@@ -114,8 +112,7 @@
                         </div>
                     </a>
 
-                    <a class="admin_unselected_tab tabs admin_tab_secgroup"
-                        href="/html/admin_rms/admin_rms.html">
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_rms/admin_rms.html">
                         <div class="admin_tab_logo_container">
                             <img id="admin_tab_logo"
                                 src="/assets/Back Office - Tabs Logos/admin_rms/Revenue Logo/Revenue - 7b.png">
@@ -175,21 +172,21 @@
                         <div class="title_archived_post">
                             <a href="">Archived Post</a>
                         </div>
-                        <div class="title_archived_separator"></div>
+                        <!-- <div class="title_archived_separator"></div> -->
                         <div class="inside_right_archived_images" id="getArchivedGallery">
-                            
-                          
+
+
                         </div>
 
-                       
+
 
                         <div class="third_archived_events" id="getArchivedEvents">
-                           
+                                
                         </div>
 
                         <div class="fourth_archived_announcements" id="getArchivedAnnouncements">
-                            
-                          
+                        </div>
+
 
 
                     </div>
@@ -197,6 +194,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 
@@ -205,9 +203,9 @@
 <script src="./js/getArchived.js"></script>
 <script>
     filterSelection("all")
-    window.onload = function() {
-    filterSelection('all');
-  }
+    window.onload = function () {
+        filterSelection('all');
+    }
     function filterSelection(c) {
         var x, i;
         x = document.getElementsByClassName("filterDiv");

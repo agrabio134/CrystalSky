@@ -148,13 +148,30 @@ $(document).on('click', '.edit-btn', function() {
         <div class="modal-content">
           <span class="close">&times;</span>
           <form action="${url}editLabel" method="post">
-            <h3>Edit Content</h3>
+          <div class="modal_edit_content">
+            <p>Edit Content</p>
+            </div>
+
             <input type="hidden" name="id" value="${contentId}"/>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name"  value="${name}"/>
-            <label for="color">Color:</label>
-            <input type="color" name="color" id="color" />
-            <input type="submit"/>
+
+            <div>
+            <label class="modal_name_content" for="name">Name:</label>
+            </div>
+
+            <div class="modal_name_text_content">
+            <input class="modal_name_text_edit" type="text" name="name" id="name"  value="${name}"/>
+            </div>
+
+            <div class="color_container">
+            <label class="color_label" for="color">Color Picker:</label>
+            <input class="color_label_picker" type="color" name="color" id="color" />
+            </div>
+
+            <div class="announce_modal_content">
+            <input class="announce_modal_input" type="submit"/>
+            </div>
+
+
           </form>
         </div>
       </div>
@@ -314,12 +331,27 @@ const addLabel = () => {
   //     // $("#ArchivedGallery").empty();
 
   let str = `<form action="${url}addLabel" method="post">
-      <h3>Add Label</h3>
-      <Label for="name">Category Name:</Label>
-      <input type="text" name="name" id="name"/>
-      <Label for="name">Color:</Label>
-      <input type="color" name="color" id="color"/>
-      <input type="submit"/>
+    
+      <div class="modal_edit_content_add">  
+      <p>Add Label</p>
+      </div>
+
+      <div class="modal_name_container">
+      <Label class="modal_name_content" for="name">Category Name:</Label>
+      </div>
+      
+      <div class="modal_name_text_content">
+      <input class="modal_name_text_edit" type="text" name="name" id="name"/>
+      </div>
+
+      <div class="color_container">
+      <Label class="color_label" for="name">Color:</Label>
+      <input class="color_label_picker" type="color" name="color" id="color"/>
+      </div>
+
+      <div class="announce_modal_content">
+      <input class="announce_modal_input" type="submit"/>
+      </div>
       </form>
 
 

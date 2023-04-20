@@ -17,46 +17,32 @@ const getArchivedEvents = () => {
       // accessing all items in the payload
       $("#getArchivedEvents").empty();
 
-      let str = `   <div class="filterDiv announce">
-      <div class="archived_text_aerobics">`;
+      let str = ` <div class="filterDiv events">
+
+             
+      `;
 
       inactiveContent.forEach((content) => {
-        str += `
-             
-          <a href="">${content.title} </a>
-          </div>
-          <div class="announcement_paragraph">
-              <a href="">${content.description} </a>
-              
-          </div>
-          <button onclick="document.getElementById('id01').style.display='block'" class="restore">
-              <p>Retrieve</p>
-          </button>
+        str += ` 
+             <div class="">
+                <p>${content.title} </p>
+                </div>
+                <div class="announcement_paragraph">
+                    <a href="">${content.description} </a>
+                    
+                </div>
+
+                <div>
+                <button onclick="document.getElementById('id01').style.display='block'" class="restore">
+                    <p>Retrieve</p>
+                </button> 
+                </div>
         `;
       });
 
-      str += ` <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close"
-            title="Close Modal">×</span>
-        <form class="modal-content" action="#">
-            <div class="container">
-                <a>Retrieve Post</a>
-                <p>Are you sure you want to retrieve your post?</p>
-
-                <div class="clearfix">
-                    <button type="button"
-                        onclick="document.getElementById('id01').style.display='none'"
-                        class="cancelbtn">No</button>
-                    <button type="button"
-                        onclick="document.getElementById('id01').style.display='none'"
-                        class="deletebtn">Yes</button>
-                </div>
-            </div>
-      
-            
-        </form>
-    </div>
-
+      str += `      
+           </div>
+     
            
 
   `;
@@ -88,13 +74,13 @@ const getArchivedAnnouncements = () => {
       // accessing all items in the payload
       $("#getArchivedAnnouncements").empty();
       str = `
-        <div class="filterDiv announce">
-        <div class="archived_text_aerobics">`;
+        <div class=" announce">
+        `;
 
       inactiveContent.forEach((content) => {
         str += `
 
-
+          <div class="archived_text_aerobics">
           <a href="">${content.title} </a>
           </div>
           <div class="announcement_paragraph">
@@ -161,8 +147,8 @@ const getArchivedGallery = () => {
 
       // $("#ArchivedGallery").empty();
 
-      let str = `<div class="filterDiv announce">
-      <div class="archived_text_aerobics">`;
+      let str = `<div class="filterDiv">
+      `;
 
       inactiveContent.forEach((content) => {
         str += `
@@ -176,27 +162,9 @@ const getArchivedGallery = () => {
    
         `;
       });
-      str += ` <div id="id01" class="modal">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close"
-          title="Close Modal">×</span>
-      <form class="modal-content" action="#">
-          <div class="container">
-              <a>Retrieve Post</a>
-              <p>Are you sure you want to retrieve your post?</p>
-
-              <div class="clearfix">
-                  <button type="button"
-                      onclick="document.getElementById('id01').style.display='none'"
-                      class="cancelbtn">No</button>
-                  <button type="button"
-                      onclick="document.getElementById('id01').style.display='none'"
-                      class="deletebtn">Yes</button>
-              </div>
-          </div>
-    
-          
-      </form>
-  </div>`;
+      str += ` </div>
+      
+  `;
 
       $("#ArchivedGallery").append(str);
 
