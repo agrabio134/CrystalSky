@@ -144,9 +144,11 @@
 .dashboard_count{
     margin-left: 15px;
 }
+/* ------------------------------------------------------------------------------------------------------------------------- */
 .dashboard_count p{
     font-family: montserrat-bold;
     font-size: 100px;
+    /* font-size: 80px; */
     color: #BB9441;
 }
 .dashboard_title{
@@ -353,6 +355,7 @@
     align-items: center;
     word-wrap: break-word;
     margin-top: 1px;
+    padding-right: 10px;
 }
 .paragraph_rooms p{
     text-align: justify;
@@ -365,8 +368,10 @@
     /* padding: 5px; */
     color: #424857;
     line-height: 25px;
+    /* overflow-wrap: break-word; */
     /* border: 1px solid green; */
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
+    word-break: break-all;
 }
 /* .see-more {
     display: inline-block;
@@ -506,6 +511,7 @@
     padding-bottom: 10px;
     padding-left: 4px;
     letter-spacing: 1px;
+    color: #424857;
 }
 .content_text .content_paragraph{
     display: flex;
@@ -521,6 +527,7 @@
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
+    color: #424857;
 }
 .content_a_container{
     display: flex;
@@ -608,6 +615,7 @@
 .announcement_text p{
     font-family: montserrat-bold;
     font-size: 15px;
+    color: #424857;
 }
 .lavels_announcement{
     /* border: 1px solid brown; */
@@ -630,7 +638,7 @@
     margin-bottom: 10px;
 }
 .labels_container p{
-    color: black;
+    color: #424857;
     text-decoration: none;
     margin-left: 15px;
     /* border: 1px solid peru; */
@@ -695,6 +703,7 @@
     margin-top: 1px;
     /* border: 5px solid red; */
     width: 50%;
+    color: #424857;
 }
 .birthday_labels{
     /* border: 10px solid purple; */
@@ -1014,6 +1023,7 @@
     font-size: 20px;
     text-align: left;
     padding-left: 48px;
+    color: #424857;
     /* border: 1px solid green; */
 }
 .ann_container{
@@ -1025,7 +1035,6 @@
 }
 .getAnnouncements_down{
     width: 100%;
-    margin-top: 10px
 }
 /* <div class="announcement_name_p"><p style="color: ${content.color}">${content.name}</p></div> */
 #myInput {
@@ -1049,7 +1058,7 @@
 
 #myUL li a {
     text-decoration: none;
-    color: black;
+    color: #424857;
     display: flex;
 }
 
@@ -1659,6 +1668,7 @@ display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    word-break: break-all;
     
 }
 .publish_paragraph_announcement p{

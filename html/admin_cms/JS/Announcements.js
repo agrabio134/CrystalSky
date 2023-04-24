@@ -407,6 +407,7 @@ const getLabelsAnnouncements = () => {
         font-size: 20px;
         padding-left: 30px;
         letter-spacing: 1px;
+        color: #424857;
       }
       .form_text_announcement{
         width: 100%;
@@ -452,6 +453,7 @@ const getLabelsAnnouncements = () => {
         justify-content: center;
         // border: 1px solid black;
         margin-left: 15px;
+        color: #424857;
       }
       .label_category_announcement{
         font-family: montserrat-bold;
@@ -465,6 +467,7 @@ const getLabelsAnnouncements = () => {
         align-items: center;
         justify-content: center;
         margin-top: 5px;
+        
       }
       .description_form_add_announcement p{
         display: flex;
@@ -473,6 +476,7 @@ const getLabelsAnnouncements = () => {
         height: 100%;
         margin-right:950px;
         // border: 1px solid green;
+        color: #424857;
       }
       .description_text{
         width: 100%;
@@ -509,6 +513,7 @@ const getLabelsAnnouncements = () => {
       .thumbnail_text p{
         font-family: montserrat-bold;
         font-size: 15px;
+        color: #424857;
       }
       .thumbnail_images{
         display: flex;
@@ -536,6 +541,7 @@ const getLabelsAnnouncements = () => {
       input[type=file]{
         font-family: montserrat-medium;
         font-size: 15px;
+        color: #424857;
       }
       .submit_announcement{
         display: flex;
