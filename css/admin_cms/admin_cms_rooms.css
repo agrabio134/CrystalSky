@@ -428,7 +428,6 @@ input[type="submit"] {
 .submit_divs {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
   align-items: center;
   flex-direction: row;
   /* border: 1px solid blue; */
@@ -504,6 +503,10 @@ input[type="submit"] {
   align-items: center;
   margin-top: 5px;
   margin-bottom: 5px;
+  height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+  /* border: 1px solid red; */
 }
 .category_p p{
   font-family: heebo-light;
@@ -512,6 +515,8 @@ input[type="submit"] {
   word-break: break-all;
   overflow: ellipsis;
   letter-spacing: 1px;
+  height: 90px;
+  width: 100%;
 }
 .create_p{
   display: flex;
@@ -521,6 +526,10 @@ input[type="submit"] {
   align-items: center;
   margin-top: 5px;
   margin-bottom: 5px;
+  overflow: scroll;
+    overflow-x: hidden;
+  height: 100%;
+  /* border: 1px solid red; */
 }
 .create_p p {
   font-family: heebo-light;
@@ -529,6 +538,9 @@ input[type="submit"] {
   word-break: break-all;
   letter-spacing: 1px;
   overflow: ellipsis;
+  height: 90px;
+  width: 100%;
+  /* border: 1px solid red; */
 }
 .amenities_p{
   display: flex;
@@ -538,6 +550,10 @@ input[type="submit"] {
   align-items: center;
   margin-top: 5px;
   margin-bottom: 5px;
+  height: 100%;
+  overflow: scroll;
+    overflow-x: hidden;
+  /* border: 1px solid red; */
 }
 .amenities_p p {
   font-family: heebo-light;
@@ -546,6 +562,9 @@ input[type="submit"] {
   word-break: break-all;
   letter-spacing: 1px;
   overflow: ellipsis;
+  height: 90px;
+  width: 100%;
+  /* border: 1px solid red; */
 }
 .Reception_p {
   display: flex;
@@ -555,6 +574,10 @@ input[type="submit"] {
   align-items: center;
   margin-top: 5px;
   margin-bottom: 5px;
+  height: 100%;
+  overflow: scroll;
+    overflow-x: hidden;
+    /* border: 1px solid red; */
 }
 
 .Reception_p p {
@@ -564,6 +587,9 @@ input[type="submit"] {
   word-break: break-all;
   letter-spacing: 1px;
   overflow: ellipsis;
+  height: 90px;
+  width: 100%;
+    /* border: 1px solid red; */
 }
 .category_title_container:hover {
   /* transform: scale(1.04); */
@@ -584,4 +610,48 @@ input[type="submit"] {
   /* transform: scale(1.04); */
   animation: popUp 0.1s;
   cursor: pointer;
+}
+
+
+/* room media ----------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .submit_divs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .category_title_container,
+  .create_submit_container,
+  .amenities_submit_container,
+  .Reception_submit_container {
+    width: 100%;
+  }
+
+  .category_title,
+  .create_submit,
+  .amenities_submit,
+  .Reception_submit {
+    margin: 20px;
+    width: 88%;
+    margin-top: 100px;
+  }
+
+  .category_p,
+  .create_p,
+  .amenities_p,
+  .Reception_p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+    text-align: center;
+    width: 88%;
+  }
+}
+.swal2-popup {
+  font-size: 0.8rem !important;
+  color: #424857 !important;
+  background-color: #ffffff !important;
+  font-family: "Montserrat-bold" !important;
 }

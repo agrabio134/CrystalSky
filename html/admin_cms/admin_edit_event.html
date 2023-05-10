@@ -7,13 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CS Admin - CMS </title>
-    <link rel="stylesheet" href="/css/admin_cms/admin_cms.css">
+    <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms.css"> -->
     <link rel="stylesheet" href="/css/admin_assets.css">
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
     <link rel="stylesheet" href="/css/admin_cms/admin_cms_event.css">
     <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms_galley.css"> -->
     <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
+    <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    
+
 </head>
 
 
@@ -146,6 +150,13 @@
                         <div class="container">
                             <div class="left">
                                 <div class="calendar">
+                                    <div class="goto-today">
+                                        <div class="goto">
+                                            <input type="text" placeholder="mm/yyyy" class="date-input" />
+                                            <button class="goto-btn">Go</button>
+                                        </div>
+                                        <button class="today-btn">Today</button>
+                                    </div>
                                     <div class="month">
                                         <i class="fas fa-angle-left prev"></i>
                                         <div class="date"></div>
@@ -161,13 +172,7 @@
                                         <div>Sat</div>
                                     </div>
                                     <div class="days"></div>
-                                    <div class="goto-today">
-                                        <div class="goto">
-                                            <input type="text" placeholder="mm/yyyy" class="date-input" />
-                                            <button class="goto-btn">Go</button>
-                                        </div>
-                                        <button class="today-btn">Today</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="right">
@@ -176,16 +181,18 @@
                                     <div class="event-date"></div>
                                 </div>
 
-                                <div class="events"></div>
-                                <div class="add-event-wrapper">
+                                <div class="events">
+                                    
+                                </div>
+                                <div class="add-event-wrapper active">
 
                                     <div class="add-event-header">
-    <div class="title">ADD EVENT</div>
-    <i class="fas fa-times close"></i>
-</div>
-<div class="add-event-body" id="addEventFunction">
-   
-</div>
+                                <div class="title">ADD EVENT</div>
+                                <i class="fas fa-times close"></i>
+                                </div>
+                                <div class="add-event-body" id="addEventFunction">
+                                
+                                </div>
 
 <!-- <div class="add-event-footer">
     <button class="add-event-btn" onclick="addEventPost()">POST EVENT</button>
@@ -195,9 +202,9 @@
 
                                 
                             </div>
-                            <button class="add-event">+
+                            <!-- <button class="add-event">+
                                 <i class="fas fa-plus"></i>
-                            </button>
+                            </button> -->
                         </div>
 
 
@@ -210,10 +217,12 @@
     </div>
 
 
-
+<div class="loader-wrapper fadeOut" id="loader-wrapper">
+    <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+</div>
 
 </body>
-<script src="javascript/default.js"></script>
+<!-- <script src="javascript/default.js"></script> -->
 <script src="/html/admin_cms/event.js"></script>
 <script src="./JS/EventForm.js"></script>
 <script>
@@ -230,6 +239,6 @@
         fileName.textContent = uploadButton.files[0].name;
     }
 </script>
-
+<script src="./JS/loading.js"></script>
 <script src="./JS/Events.js"></script>
 </html>

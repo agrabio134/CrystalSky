@@ -26,7 +26,7 @@
 }
 .c_c p{
     font-family: montserrat-bold;
-    color: #424857;
+    color: #4BB1F7;
     font-size: 40px;
     letter-spacing: 1px;
     margin-left: 30px;
@@ -56,6 +56,8 @@
     /* border: 1px solid blue; */
 }
 .label_category_name{
+    display: flex;
+    align-items: center;
     width: 30%;
     margin-left: 30px;
     /* border: 1px solid red; */
@@ -85,7 +87,8 @@ input[type=text]{
     letter-spacing: 1px;
 }
 .price_category{
-    width: 30%;
+    width: 50%;
+    /* border: 1px solid red; */
 }
 .price_category_label{
     font-family: montserrat-medium;
@@ -99,7 +102,7 @@ input[type=text]{
     letter-spacing: 1px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     font-family: heebo;
-    width: 40%;
+    width: 50%;
     height: 15px;
     border: 1px solid #dad9d9;
     border-radius: 4px;
@@ -110,6 +113,7 @@ input[type=number]{
     padding: 10px;
     font-family: montserrat-medium;
     letter-spacing: 1px;
+    color: #424857;
 }
 .category_description_label{
     display: flex;
@@ -137,6 +141,7 @@ input[type=number]{
 }
 .div_category{
     width: 100%;
+    /* border: 1px solid red; */
 }
 .description_text_label_category{
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
@@ -146,10 +151,12 @@ input[type=number]{
   border: 1px solid #dad9d9;
   border-radius: 4px;
   resize: vertical;
+  resize: none;
   margin-left: 60px;
   font-family:montserrat-medium;
   font-size: 15px;
   letter-spacing: 1px;
+  color: #424857;
 }
 .category_submit{
     display: flex;
@@ -157,8 +164,7 @@ input[type=number]{
     justify-content: center;
     width: 100%;
     /* border: 1px solid green; */
-    margin-bottom: 30px;
-    height: 20%;
+    /* height: 20%; */
 }
 .submit_category_button{
     display: flex;
@@ -180,3 +186,89 @@ input[type=submit]{
 .table_cont_container{
     margin-top: 30px;
 }
+.description_text_label_category:focus, .description_text_label_category:active{
+    outline: none;
+}
+.table_cont_container {
+    width: 100%;
+    /* border: 1px solid red; */
+}
+ .tableMainCont {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+ }
+
+ .tableCont {
+     border: 1px solid #dfdede;
+     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+     width: 99.9%;
+ }
+
+ table {
+     font-family: 'montserrat-medium';
+     border-collapse: collapse;
+     width: 100%;
+     color: #424857;
+ }
+
+ td,
+ th {
+     padding: 8px;
+     text-align: center !important;
+ }
+
+
+ .thRight {
+     border-radius: 0 15px 0 0;
+ }
+
+ td {
+     font-size: 14px;
+     padding-top: 15px !important;
+     padding-bottom: 15px !important;
+     vertical-align: middle;
+ }
+
+ th {
+     text-transform: uppercase;
+     font-family: 'montserrat-bold';
+     font-size: 17px;
+     padding: 20px !important;
+     background: #F1F1F1;
+ }
+
+ .defBtn {
+     padding: 7px 10px;
+     border: none;
+     border-radius: 3px;
+     font-family: 'montserrat-medium';
+     color: white;
+ }
+
+ .editBtn {
+     background-color: #4BB1F7;
+     text-decoration: none;
+ }
+
+ .deletebtn {
+     background-color: #FF5D5D;
+     text-decoration: none;
+ }
+
+ .category_content_name {
+     text-align: justify !important;
+ }
+
+ .category_content_description {
+     text-align: justify !important;
+     width: 40%;
+ }
+
+ .category_buttons_action {
+     display: flex;
+     width: 100%;
+     flex-direction: row;
+     gap: 3px;
+ }

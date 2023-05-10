@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CS Admin - CMS </title>
+    <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms.css"> -->
+    <link rel="stylesheet" href="/css/admin_assets.css">
+    <link rel="stylesheet" href="/css/admin_tabs_pane.css">
+    <link rel="stylesheet" href="/css/admin_cms/admin_cms_about.css">
+    <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
+    <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+
+<body>
+    <div class="admin_navigation_container">
+        <div class="admin_navigation_logo_container">
+            <a href="/html/admin_index/admin_index.html"><img id="admin_header_logo"
+                    src="/assets/General Photos/Crystal Sky - Logo.png"></a>
+        </div>
+        <div class="admin_right_navigation_tabs_container">
+            <div class="admin_navigation_tab_logo_container">
+                <img id="admin_navigation_tab_logo" src="/assets/Back Office - Tabs Logos/admin_cms/CMS.png">
+            </div>
+            <div class="admin_navigation_tabs_container">
+                <ul>
+                    <a href="/html/admin_cms/admin_cms.html">
+                        <li> Panel </li>
+                    </a>
+                    <a href="/html/admin_cms/admin_cms_content.html">
+                        <li> Content </li>
+                    </a>
+                    <a href="/html/admin_cms/admin_cms_rooms.html">
+                        <li> Rooms </li>
+                    </a>
+                    <a href="/html/admin_cms/admin_cms_about.html" id="active_subsystem_tab">
+                        <li> About Us </li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="admin_container">
+        <div class="admin_left_pane">
+            <div class="admin_left_pane_content">
+                <div class="admin_left_pane_content_account_name_container">
+                    <img id="admin_icon" src="/assets/General Photos/admin_icon.png">
+                    <p id="admin_name_header"> Welcome, <span id="admin_name"> CMS!</span></p>
+                </div>
+                <div class="admin_left_pane_content_tabs_container">
+                    <a class="admin_unselected_tab tabs" href="/html/admin_index/admin_index.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_dashboard/Dashboard Logo/Dashboard - 7b.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Dashboard</p>
+                            <p id="admin_tab_short_text"> PANEL </p>
+                        </div>
+                    </a>
+
+                    <p id="admin_left_pane_content_management"> Management </p>
+                    <p id="admin_left_pane_content_short_management"> Manage</p>
+
+                    <a class="admin_current_tab tabs pulse admin_tab_secgroup" href="/html/admin_cms/admin_cms.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_cms/CMS Logo/CMS - Blue.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Content </p>
+                            <p id="admin_tab_short_text"> CMS </p>
+                        </div>
+                    </a>
+
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_cdms/admin_cdms.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_cdms/CDMS Logo/CDMS - 7b.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Customer </p>
+                            <p id="admin_tab_short_text"> CDMS </p>
+                        </div>
+                    </a>
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_ems/admin_ems.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_ems/EMS Logo/EMS - 7b.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Employee </p>
+                            <p id="admin_tab_short_text"> EMS </p>
+                        </div>
+                    </a>
+
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_ims/admin_ims.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_ims/Inventory Logo/Inventory - 7b.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Inventory </p>
+                            <p id="admin_tab_short_text"> IMS </p>
+                        </div>
+                    </a>
+
+                    <a class="admin_unselected_tab tabs admin_tab_secgroup" href="/html/admin_rms/admin_rms.html">
+                        <div class="admin_tab_logo_container">
+                            <img id="admin_tab_logo"
+                                src="/assets/Back Office - Tabs Logos/admin_rms/Revenue Logo/Revenue - 7b.png">
+                        </div>
+                        <div class="admin_tab_text_container">
+                            <p id="admin_tab_text"> Revenue </p>
+                            <p id="admin_tab_short_text"> RMS </p>
+                        </div>
+                    </a>
+
+                    <div class="admin_logout_icon_pane">
+                        <div class="admin_logout_icon_container">
+                            <img id="admin_logout_icon" src="/assets/General Photos/logout.png">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!-- ADD YOUR SUBSYSTEM CODES HERE -->
+
+        <div class="admin_right_pane">
+
+            <div class="admin_right_pane_content_container">
+
+                <div class="admin_right_pane_edit_aboutus_container">
+                    <div class="admin_right_pane_edit_aboutus_container_content">
+                        <div class="about_us_head">
+                            <p>ABOUT US</p>
+                        </div>
+                        <div class="content_about" id="getContentAbout"></div>
+
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="admin_right_pane_edit_aboutus_container">
+                    <div class="admin_right_pane_edit_aboutus_container_content">
+                        <div class="about_us_head">
+                            <p>Contact US</p>
+                            <div class="content_about" id="getContentContactus"></div>
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="facilities_cont">
+                    <div class="facilities_main_cont">
+                        <div class="second_about_us">
+
+                            <div class="facilities_container">
+                                <p>FACILITIES</p>
+                            </div>
+                            <div class="add_facilities_container">
+                                <button class="add_facilities" id="myBtn">Add Facilities</button>
+                            </div>
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                                    <div id="getContentFormFacilities"></div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="modal-container" id="editModal">
+                                <div class="modal1">
+                                    <span class="close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                                    <h2>Edit Item</h2>
+                                    <div class="modalLine"></div>
+                                    <form class="form_container_about">
+                                        <div class="about_text_container">
+                                            <input type="text" id="nameInput" placeholder="Name">
+                                        </div>
+                                        <div class="textarea_container">
+                                            <textarea class="about_textarea_input" type="text" id="descriptionInput"
+                                                placeholder="Description" style="min-height: 150px;"></textarea>
+                                        </div>
+                                        <div class="image_input_about">
+                                            <input class="image_about_content" type="file" id="imageInput"
+                                                accept="image/*">
+                                        </div>
+                                        <img class="img_about" id="preview" src="" alt="" width="20%" height="20%"
+                                            style="display:none">
+
+                                        <div class="submit_button_about">
+                                            <button class="saveButton_about" type="button" id="saveButton">Save</button>
+
+                                            <button class="cancelButton_about" type="button"
+                                                id="cancelButton">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+                            <div class="about_main_cont">
+                                <div class="about_container_facilities" id="getContentAboutFacilities">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="loader-wrapper fadeOut" id="loader-wrapper">
+        <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+    </div>
+
+</body>
+<script src="javascript/default.js"></script>
+<script src="./JS/loading.js"></script>
+<script src="./JS/aboutUs.js"></script>
+
+<script>
+    function previewImage(input, img) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                img.attr('src', e.target.result);
+                img.show();
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#upload_image1").change(function () {
+        previewImage(this, $('#preview1'));
+    });
+
+    $("#upload_image2").change(function () {
+        previewImage(this, $('#preview2'));
+    });
+
+    $("#upload_image3").change(function () {
+        previewImage(this, $('#preview3'));
+    });
+    $("#upload_image4").change(function () {
+        previewImage(this, $('#preview4'));
+    });
+    $("#upload_image5").change(function () {
+        previewImage(this, $('#preview5'));
+    });
+</script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</html>

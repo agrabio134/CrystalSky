@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS Admin - EMS - Departments</title>
+    <link rel="stylesheet" href="/css/admin_tabs_pane.css" />
+    <link rel="stylesheet" href="/css/admin_assets.css">
+    <link rel="stylesheet" href="/css/admin_index/admin_index.css">
+    <link rel="stylesheet" href="/css/admin_ems/admin_ems_dept.css" /><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      href="/assets/General Photos/Crystal Sky - Logo Only.png"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+  </head>
+
+  <body>
+    <div class="admin_navigation_container">
+      <div class="admin_navigation_logo_container">
+        <a href="/html/admin_index/admin_index.html"
+          ><img
+            id="admin_header_logo"
+            src="/assets/General Photos/Crystal Sky - Logo.png"
+        /></a>
+      </div>
+      <div class="admin_right_navigation_tabs_container">
+        <div class="admin_navigation_tab_logo_container">
+          <img
+            id="admin_navigation_tab_logo"
+            src="/assets/Back Office - Tabs Logos/admin_ems/EMS.png"
+          />
+        </div>
+        <div class="admin_navigation_tabs_container">
+          <ul>
+            <a href="index.html">Panel</a>
+            <a href="admin_ems_emp.html"><li>Employees</li></a>
+            <a href="admin_ems_departments.html" id="active_subsystem_tab"><li>Department</li></a>
+            <a href="admin_ems_calendar.html"><li>Calendar</li></a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="admin_container">
+      <div class="admin_left_pane">
+        <div class="admin_left_pane_content">
+          <div class="admin_left_pane_content_account_name_container">
+            <img id="admin_icon" src="/assets/General Photos/admin_icon.png" />
+            <p id="admin_name_header">
+              Welcome, <span id="admin_name"> CMS!</span>
+            </p>
+          </div>
+          <div class="admin_left_pane_content_tabs_container">
+            <a
+              class="admin_unselected_tab tabs"
+              href="/html/admin_index/admin_index.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_dashboard/Dashboard Logo/Dashboard - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Dashboard</p>
+                <p id="admin_tab_short_text">PANEL</p>
+              </div>
+            </a>
+
+            <p id="admin_left_pane_content_management">Management</p>
+            <p id="admin_left_pane_content_short_management">Manage</p>
+
+            <a
+              class="admin_unselected_tab tabs pulse admin_tab_secgroup"
+              href="/html/admin_cms/admin_cms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_cms/CMS Logo/CMS - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Content</p>
+                <p id="admin_tab_short_text">CMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_cdms/admin_cdms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_cdms/CDMS Logo/CDMS - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Customer Data</p>
+                <p id="admin_tab_short_text">CDMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_current_tab tabs admin_tab_secgroup"
+              href="/html/admin_ems/admin_ems.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_ems/EMS Logo/EMS - Blue.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Employee</p>
+                <p id="admin_tab_short_text">EMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_ims/admin_ims.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_ims/Inventory Logo/Inventory - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Inventory</p>
+                <p id="admin_tab_short_text">IMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_rms/admin_rms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_rms/Revenue Logo/Revenue - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Revenue</p>
+                <p id="admin_tab_short_text">RMS</p>
+              </div>
+            </a>
+
+            <div class="admin_logout_icon_pane">
+              <div class="admin_logout_icon_container">
+                <img
+                  id="admin_logout_icon"
+                  src="/assets/General Photos/logout.png"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD YOUR SUBSYSTEM CODES HERE -->
+
+      <div class="admin_right_pane">
+        <div class="admin_right_pane_content_container">
+          <div class="headerCont">
+            <h1 class="textHeading">DEPARTMENTS</h1>
+            <div class="line"></div>
+          </div>
+
+          <div class="inputCont">
+            <input
+              id="searchInput"
+              class="inputText"
+              type="text"
+              placeholder="&#xf002;    Search..."
+              style="font-family: montserrat-regular, FontAwesome"
+            />
+            <button id="searchBtn" class="filterBtn">FILTER</button>
+          </div>
+          <div class="tableMainCont">
+            <div class="left">
+                  
+                <!-- DIV FOR TABS -->
+                <!-- 
+                <div class="tabBtnCont">
+                  <button class="PageBtn" id="activeBtn">ACTIVE</button>
+                  <button class="PageBtn" id="inactiveBtn">INACTIVE</button>
+                </div> -->
+
+              <div class="departments tableCont">
+                <!-- Data Tables for Department List-->
+              </div>
+            </div> 
+
+            <div class="right">
+              <!-- <div class="departmentsForm"> -->
+                <form class="departmentsForm">
+                  <h2 class="addnewdept_header">Add New Department</h2>
+                  <label>Department Name: </label>
+                  <input type="text" id="department_field"><br/>
+                  <p class="error" id='error_message' hidden>* Enter department name</p>
+                  <button type='button' class='button hollow square' id="addDepartment">
+                    Create Department
+                  </button>
+                </form>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of right panel -->
+      
+      <!-- Edit Modal -->
+      <div id="editModal" class="modal">
+        <!-- Modal content -->
+
+        <div class="modal-content">
+          <div class="modalHeader">
+            <span class="close" id="editcloseBtn"
+              ><i class="fa fa-times-circle-o" aria-hidden="true"></i></span
+            >
+            <div class="headTitle" id="headTitle">
+              <h1>EDIT DEPARTMENT INFO
+            </div>
+
+            <div class="modalLine"></div>
+          </div>
+          <div class="modalBody" id="modalBody">
+            <input type="text" id="departmentID" hidden disabled>
+            <label for="department_name">Department Name: </label>
+            <input type="text" id="department_name"/>
+            <p class="error" id='edit_error_message' hidden>* Enter department name</p><br><br><br>
+          </div>
+          <div class="modalFooter">
+            <div class="modalButtonCont" id="buttonsModal">
+              <button type="button" class="modalBtn modalConfirmBtn" id="editModalAccept">
+                APPLY CHANGES
+              </button>
+            </form>
+              <button class="modalBtn banBtn " id="editmodalCancel">
+                CANCEL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- <script src="../javascript/default.js"></script> -->
+    <script src="../admin_ems/js/departments.js"></script>
+</html>

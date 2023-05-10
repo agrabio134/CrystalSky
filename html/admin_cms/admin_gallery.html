@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
     <link rel="stylesheet" href="/css/admin_cms/admin_cms_galley.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -150,28 +152,30 @@
                             </div>
                             <!-- <div id="myBtnContainer" class="buttom_gallery"> -->
                             <!-- <div class="gallery_all"> -->
-                            <form method="post" enctype="multipart/form-data"
+                                <form method="post" enctype="multipart/form-data" id="upload_form"
                                 action="http://localhost/CrystalSky/html/admin_cms/api/routes?request=upload_image">
                                 <div class="buttons_gallery">
                                     <!-- <div class="button_files"> -->
-                                        <label for="title">Title</label>
-                                        <input type="text" id="title" name="title" placeholder="Title..">
+                                        <div class="gallery_title_navs">
+                                        <label class="title_navs" for="title">Title:</label>
+                                        <input class="nav_placeholder_gallery" type="text" id="title" name="title" placeholder="Title.." required>
+                                        </div>
+                                        <div class="gallery_button_conts">
                                         <label class="file_button" for="file" >Choose Files</label>
-                                        <input class="choose_file_container" type="file" id="file" name="images[]" multiple />
-                                    
+                                        <input class="choose_file_container" type="file" id="file" name="images[]" multiple required/>
+                                        
 
                                     <!-- </div> -->
                                     <div class="submit_upload"> 
-                                        <input class="choose_upload_container" type="submit" name="submit" value="Upload" />
+                                        <input class="choose_upload_container" type="submit" name="upload_submit" value="Upload" />
                                     </div>
-                                        <div id="image-preview-container">
+                                    </div>
+                                        <div class="image_preview_gallery" id="image-preview-container">
+                                            
                                             <!-- dito yung preview -->
                                         </div>
                                 </div>
-                                <!-- <button class="btnm active" id="addFormModal">
-                                        <p>Add Image</p>
-                                        
-                                    </button> -->
+                             
                             </form>
 
 
@@ -197,10 +201,14 @@
 
 
 
-
-</body>
+<div class="loader-wrapper fadeOut" id="loader-wrapper">
+    <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+</div>
+<script src="./JS/loading.js"></script>
 <script src="./JS/Gallery.js"></script>
 <script src="/html/admin_cms/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 $('#file').on('change', function() {
@@ -215,7 +223,7 @@ $('#file').on('change', function() {
 
     reader.onload = function(event) {
       // Create new image element
-      const image = $('<img style="height: 100px">');
+      const image = $('<img class="image_content_container" style="height: 150px">');
 
       // Set source of image to loaded file data
       image.attr('src', event.target.result);
@@ -229,7 +237,42 @@ $('#file').on('change', function() {
   }
 });
 
+
+
+$("form").on("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to upload these images?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, upload!",
+        cancelButtonText: "Cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If user confirms, submit the form
+            
+            Swal.fire({
+                title: "Success!",
+                text: "Images uploaded successfully!",
+                icon: "success",
+                confirmButtonText: "OK",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("upload_form").submit();
+
+                    // location.reload();
+                }
+            });
+        }
+    });
+});
+
 </script>
 
+</body>
 
 </html>

@@ -1,0 +1,446 @@
+
+/* Header and Search */
+
+.headerCont {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.textHeading {
+    font-family: 'montserrat-bold';
+    color: #424857;
+    font-size: 41;
+    letter-spacing: 0.1em; 
+}
+
+.line {
+    width: 20%;
+    background-color: #4BB1F7;
+    height: 3px;
+}
+
+.inputText {
+    width: 30%;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 20px 0 0 20px;
+    margin-top: 40px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+    border: 1px solid #dfdede;
+}
+
+/* Table Container */
+
+.tableMainCont{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.tableCont {
+    border: 1px solid #dfdede;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 15PX 15px 15px 15px;
+    width: 100%;
+}
+
+table {
+    font-family: 'montserrat-medium';
+    border-collapse: collapse;
+    width: 100%;
+    color: #424857;
+  }
+  
+
+  .tableData{
+    padding: 8px;
+    text-align: center !important;
+    font-size: 15px;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+
+  .tableHeading{
+    padding: 8px;
+    text-align: center !important;
+    text-transform: uppercase;
+    font-family: 'montserrat-bold';
+    font-size: 17px;
+    padding: 20px !important;
+    background: #F1F1F1;
+  }
+
+  .thRight {
+    border-radius: 0 15px 0 0;
+  }
+
+  .thLeft {
+    border-radius: 15px 0 0 0;
+  }
+
+.selectCont {
+    padding: 5px;
+    text-align: center;
+    border: 3px solid #424857;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: 'montserrat-medium';
+}
+
+.banBtn {
+    padding: 7px;
+    padding-left: 23px;
+    padding-right: 23px;
+    background-color: #F27171;
+    border: none;
+    border-radius: 3px;
+    font-family: 'montserrat-medium';
+    color: white;
+}
+
+.defBtn {
+  padding: 7px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border: none;
+  border-radius: 3px;
+  font-family: 'montserrat-medium';
+  color: white;
+}
+
+.acceptBtn {
+  background-color: #2FA83F;
+}
+
+.keepBtn {
+  background-color: #4BB1F7;
+}
+
+.viewBtn {
+  background-color: #424857;
+}
+
+.unBanBtn {
+    background-color: #BB9441;
+}
+
+.filterBtn {
+  padding: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #4BB1F7;
+  border: none;
+  border-radius: 0 20px 20px 0px;
+  font-family: 'montserrat-medium';
+  color: white;
+  font-size: 15px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.dataTables_wrapper .dataTables_info {
+    clear: both;
+    float: left;
+    padding-top: 0.755em;
+    margin: 17px;
+    font-family: 'montserrat-medium';
+    font-size: 13px;
+    color: #424857 !important;
+  }
+
+  .dataTables_filter{
+    display: none;
+  }
+
+  .dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+  }
+
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    cursor: default;
+    color: #4BB1F7 !important;
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 60px;
+    font-size: 15px;
+    font-family: 'montserrat-medium';
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0.5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: #5E6574 !important;
+    border-radius: 2px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button i{
+    color: #4BB1F7 !important;
+
+  }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: #d1d1d1;
+      border-radius: 5px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate {
+    color: white;
+  }
+
+/* Pagination Tab */
+
+.tabBtnCont {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  gap: 15px;
+}
+
+.PageBtn{
+  width: 30%;
+  padding: 20px 0 20px 0;
+  background-color: #FFFFFF;
+  border-radius: 15px 15px 0 0;
+  border: none;
+  font-family: 'montserrat-bold';
+  color: #5E6574;
+  font-size: 17px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.feedbackPageBtn:active{
+  background-color: #4BB1F7;
+  color: white;
+}
+
+.savedPageBtn:active{
+  background-color: #4BB1F7;
+  color: white;
+}
+
+/* Modal */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  margin: 10% auto; /* 15% from the top and centered */
+  width: 30%; /* Could be more or less, depending on screen size */
+  border: 1px solid #dfdede;
+  border-radius: 7px 7px 7px 7px;
+}
+
+
+/* The Close Button */
+.close {
+  color: #BDBDBD;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #F27171;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalBody{
+  background-color: #F8FAFB;
+  padding: 20px;
+}
+
+.modalBody h1{
+  font-family: 'montserrat-regular';
+  font-weight: 100;
+  font-size: 20px;
+  color: #5E6574;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.modalHeader{
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-bottom: 1px solid #dfdede;
+  border-radius: 5px 5px 0 0;
+}
+
+.modalHeader h1{
+  font-family: 'montserrat-bold';
+  color: #4BB1F7;
+  font-size: 23px;
+}
+
+.textArea {
+  margin-top: 10px;
+  background-color: #F1F1F1;
+  border-radius: 5px;
+  font-family: 'montserrat-regular';
+  padding: 10px;
+  border: none;
+  width: 96.3%;
+  resize: none;
+  height: 100%;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+  font-size: 15px;
+}
+
+.modalFooter{
+  background-color: #F8FAFB;
+  width: 100%;
+  padding-bottom: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+.modalButtonCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.modalBtn{
+  padding: 20px;
+  font-family: 'montserrat-bold';
+  color: white;
+  min-width: 25%;
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.modalCancelBtn{
+  background-color: #BDBDBD;
+}
+
+.modalUnBanBtn{
+  background-color: #BB9441;
+}
+
+.modalLine{
+  margin-top: 5px;
+  width: 17%;
+  height: 2px;
+  background-color: #4BB1F7;
+}
+
+/* Date Picker */
+
+.printBtn{
+  padding: 15px;
+  padding-left: 23px;
+  padding-right: 23px;
+  background-color: #BB9441;
+  border: none;
+  border-radius: 3px;
+  font-family: 'montserrat-medium';
+  color: white;
+  font-size: 17px;
+}
+
+.datePrintCont{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 35px;
+}
+
+.datePickerInput{
+  padding: 7px;
+  font-family: 'montserrat-medium';
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+}
+
+.datePickerMainCont{
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  width: 20%;
+  justify-content: space-around;
+  border-radius: 7px;
+}
+
+.dateLabel{
+  display: flex;
+  align-items: center;
+}
+
+.dateLabel h1 {
+  font-family: 'montserrat-bold';
+  font-size: 20px;
+  color: #424857;
+}
+
+.dateLabel i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #4BB1F7;
+}
+
+table.dataTable thead .sorting,
+  table.dataTable thead .sorting_asc,
+  table.dataTable thead .sorting_desc,
+  table.dataTable thead .sorting_asc_disabled,
+  table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+    background-repeat: no-repeat;
+    background-position: center right;
+  }
+  table.dataTable thead .sorting {
+    background-image: url("../../assets/sort.png");
+  }
+  table.dataTable thead .sorting_asc {
+    background-image: url("../../assets/asc_sort.png") !important;
+  }
+  table.dataTable thead .sorting_desc {
+    background-image: url("../../assets/desc_sort.png") !important;
+  }
+  table.dataTable thead .sorting_asc_disabled {
+    background-image: url("../images/sort_asc_disabled.png");
+  }
+  table.dataTable thead .sorting_desc_disabled {
+    background-image: url("../images/sort_desc_disabled.png");
+  }

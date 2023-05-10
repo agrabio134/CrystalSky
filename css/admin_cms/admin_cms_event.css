@@ -14,7 +14,7 @@
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     border: 1px solid #dad9d9;
     border-radius: 8px;
-    min-height: 600px;
+    min-height: 200px;
 }
 
 :root {
@@ -45,9 +45,9 @@
 
 
 .container {
-    position: relative;
+    /* position: relative; */
     width: 100%;
-    min-height: 850px;
+    min-height: 350px;
     margin: 0 auto;
     /* padding: 5px; */
     color: black;
@@ -100,14 +100,16 @@
 
 .calendar .month {
     width: 100%;
-    height: 150px;
+    height: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 50px;
     font-size: 1.2rem;
     font-weight: 500;
+    margin-bottom:40px ;
     text-transform: capitalize;
+    /* border: 1px solid red; */
 }
 
 .calendar .month .prev,
@@ -122,7 +124,7 @@
 
 .calendar .weekdays {
     width: 100%;
-    height: 70px;
+    height: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -131,7 +133,8 @@
     font-weight: 500;
     text-transform: capitalize;
     /* border: 1px solid green; */
-    margin-top: -80px;
+    margin-top: -20px;
+    margin-bottom: 15px;
 }
 
 .weekdays div {
@@ -157,7 +160,7 @@
 
 .calendar .days .day {
     width: 14.28%;
-    height: 90px;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -251,7 +254,7 @@
     justify-content: space-between;
     gap: 5px;
     padding: 0 20px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     color: var(--primary-clr);
 }
 
@@ -336,7 +339,7 @@
 .events {
     width: 100%;
     height: 100%;
-    max-height: 600px;
+    max-height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
@@ -473,22 +476,22 @@
 
 .add-event-wrapper {
     position: absolute;
-    bottom: 90px;
-    left: 53.5%;
+    bottom: 20px;
+    left: 8%;
     width: 90%;
     max-height: 0;
     overflow: hidden;
     border-radius: 5px;
     background-color: white;
-    transform: translateX(-50%);
-    transition: max-height 0.5s ease;
+    /* transform: translateX(-50%);
+    transition: max-height 0.5s ease; */
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     border: 1px solid #dad9d9;
     /* border: 1px solid black; */
 }
 
 .add-event-wrapper.active {
-    max-height: 600px;
+    max-height: 400px;
 }
 
 .add-event-header {
@@ -590,7 +593,7 @@
 
 /* media queries */
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 768px) {
     body {
         align-items: flex-start;
         justify-content: flex-start;
@@ -684,14 +687,39 @@
 }  */
 
 /* event picture post gallery */
+
 .content {
     background-color: white;
-    padding: 10px;
-    width: 100%;
+    /* padding: 10px; */
+    /* width: 100%;
+    min-height: 100px;
     border-radius: 8px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-    border: 1px solid #dad9d9;
+    border: 1px solid #dad9d9; */
+    margin-top: 10px;
     }
+    .event-description{
+        display: flex;
+        border: 1px solid #dad9d9;
+        border-radius: 4px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+        width: 100%;
+        background-color: white;
+        min-height: 10px;
+        resize: none;
+        padding: 20px;
+        color: #424857;
+        font-family: Montserrat-medium;
+    }
+        .event-description:active, .event-description:focus{
+            outline: none;
+        }
+        input[type=text] {
+            padding: 10px;
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-family: Montserrat-medium;
+        }
     input[type="file"] {
     display: none;
     }
@@ -712,11 +740,11 @@
     }
     
     
-    .content:hover {
+    /* .content:hover {
     transform: scale(1.04);
     animation: popUp 0.2s;
     cursor: pointer;
-    }
+    } */
 /* enf here event picture post gallery */
 .event_form_submit_container_submit{
     display: flex;
@@ -734,7 +762,7 @@
     background-color: #2FA83F;
     height: 35px;
     border: none;
-    width: 50%;
+    width: 100%;
     cursor: pointer;
     border-radius: 4px;
 }
@@ -743,3 +771,65 @@ input[type="submit"] {
     font-size: 15px;
     color: white;
 }
+input:focus,
+input:active {
+    outline: none;
+}
+
+@media (max-height: 350px) {
+    .calendar {
+        font-size: 0.75em;
+    }
+
+    .weekdays div {
+        font-size: 0.6em;
+    }
+
+    .days div {
+        font-size: 1em;
+        padding: 0.1em;
+    }
+
+    .today-date {
+        font-size: 0.75em;
+        padding: 0.5em;
+    }
+
+    .add-event-header {
+        font-size: 0.9em;
+        padding: 0.75em;
+    }
+
+    .add-event-body input {
+        font-size: 0.75em;
+        padding: 0.5em;
+    }
+
+    .add-event-btn {
+        font-size: 0.75em;
+        padding: 0.5em;
+    }
+
+    /* Hide the calendar's header arrows to save space */
+    .prev,
+    .next {
+        display: none;
+    }
+
+    /* Display the date in a single line to save space */
+    .date {
+        display: inline-block;
+        margin: 0.5em 0;
+    }
+
+    /* Reduce the height of the event date and day display */
+    .today-date {
+        height: 2.5em;
+    }
+
+    /* Reduce the height of the event list to fit in the screen */
+    .events {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}   

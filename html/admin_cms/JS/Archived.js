@@ -17,9 +17,10 @@ const getArchivedEvents = () => {
       // accessing all items in the payload
       $("#getArchivedEvents").empty();
 
-      let str = ` <div class="filterDiv events">
+      let str = ` 
+      <div class="filterDiv events">
 
-             
+
       `;
 
       inactiveContent.forEach((content) => {

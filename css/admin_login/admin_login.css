@@ -107,6 +107,13 @@ form{
     transform: translateY(-50%);
 }
 
+.swal2-popup {
+    font-size: 0.8rem !important;
+    color: white !important;
+    background-color:  #0e2535 !important;
+    font-family: "Montserrat-bold" !important;
+  }
+
 @media(max-width: 1100px){
     .form_header_container h1{
         font-size: 27px;

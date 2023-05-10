@@ -6,11 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CS Admin - CDMS </title>
+    <!-- <link rel="stylesheet" href="../../css/admin_cdms/admin_datatable.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="/css/admin_assets.css">
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
     <link rel="stylesheet" href="/css/admin_cdms/admin_cdms.css">
     <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+    <!-- <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+    
 </head>
 
 <body>
@@ -24,10 +33,9 @@
             </div>
             <div class="admin_navigation_tabs_container">
                 <ul>
-                    <a href="#"><li> Accounts </li></a>
-                    <a href="/html/admin_cdms/admin_cdms_feedback.html"><li> Feedbacks </li></a>
-                    <a href="#"><li> Bookings </li></a>
-                    <a href="#"><li> Banned </li></a>
+                    <a href="../admin_cdms/admin_cdms.html" id="active_subsystem_tab"><li> Accounts </li></a>
+                    <a href="../admin_cdms/admin_cdms_feedback.html"><li> Feedbacks </li></a>
+                    <a href="../admin_cdms/admin_cdms_bookings.html"><li> Bookings </li></a>
                 </ul>
             </div>
         </div>
@@ -37,7 +45,7 @@
             <div class="admin_left_pane_content">
                 <div class="admin_left_pane_content_account_name_container">
                     <img id="admin_icon" src="/assets/General Photos/admin_icon.png">
-                    <p id="admin_name_header"> Welcome, <span id="admin_name"> CMS!</span></p>
+                    <p id="admin_name_header"> Welcome, <span id="admin_name"> CDMS!</span></p>
                 </div>
                 <div class="admin_left_pane_content_tabs_container">
                     <a class="admin_unselected_tab tabs" href="/html/admin_index/admin_index.html"> 
@@ -122,21 +130,375 @@
         <div class="admin_right_pane">
 
             <div class="admin_right_pane_content_container">
+
+                
+
+
+
+                <div class="headerCont">
+                    <h1 class="textHeading">CUSTOMER ACCOUNTS</h1>
+                    <div class="line"></div>
+                </div>
+                
+                <div class="inputCont">
+                    <input id="searchInput" class="inputText" type="text" placeholder="&#xf002;    Search..."  style="font-family:montserrat-regular, FontAwesome">
+                    <button id="searchBtn" class="filterBtn">FILTER</button>
+                </div>
+                <div class="tableMainCont">
+                    <div class="tabBtnCont">
+                        <button class="PageBtn activePageBtn" id="ActivePageBtn">ACTIVE</button>
+                        <button class="PageBtn bannedPageBtn"  id="BannedPageBtn">BANNED</button>
+                        <button class="PageBtn historyPageBtn"  id="BanningHistoryPageBtn">BANNING HISTORY</button>
+                    </div>
+                <div class="tableCont userTableCont">
+                    <!-- <table id="example" >
+                        <thead>
+                            <tr>
+                                <th class="thLeft">Name</th>
+                                <th>Contact no.</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th class="thRight">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Abdul Burdagul</td>
+                            <td>+639123456781</td>
+                            <td>Abdul_123</td>
+                            <td>
+                                <select name="role" id="role" class="selectCont">
+                                    <option value="loyal">LOYAL</option>
+                                    <option value="vip">VIP</option>
+                                    <option value="regular">REGULAR</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" class="banBtn" id="banBtn">BAN</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                      </table> -->
+                      
+                </div>
+
+
+
+                <div class="tableCont bannedUserTableCont" hidden>
+                    <!-- <table id="save" >
+                        <thead>
+                            <tr>
+                                <th class="thLeft">Name</th>
+                                <th>Transact no.</th>
+                                <th>Username</th>
+                                <th class="thRight">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kim Padua</td>
+                                <td>+9123456789</td>
+                                <td>Kim_123</td>
+                                <td>
+                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
+                                    <button type="button" class="defBtn keepBtn">KEEP</button>
+                                    <button type="button" class="defBtn viewBtn" id="keptViewBtn">VIEW</button>
+                                </td>
+                            </tr>
+                          
+                            
+                           
+                        </tbody>
+                      </table> -->
+                </div>
+
+                
+            <div class="tableCont banningHistoryTableCont" hidden>
+                <!-- <table id="save" >
+                    <thead>
+                        <tr>
+                            <th class="thLeft">Name</th>
+                            <th>Transact no.</th>
+                            <th>Username</th>
+                            <th class="thRight">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kim Padua</td>
+                            <td>+9123456789</td>
+                            <td>Kim_123</td>
+                            <td>
+                                <button type="button" class="defBtn acceptBtn">ACCEPT</button>
+                                <button type="button" class="defBtn keepBtn">KEEP</button>
+                                <button type="button" class="defBtn viewBtn" id="keptViewBtn">VIEW</button>
+                            </td>
+                        </tr>
+                      
+                        
+                       
+                    </tbody>
+                  </table> -->
+            </div>
+            </div>
+
+
+
+
+
+
+
+            <div id="banModal" class="modal">
+                <!-- Modal content -->
+                
+                <div class="modal-content">
+                    <div class="modalHeader">
+                        <span class="close" onclick="closebanModal()"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                        <h1>BAN CONFIRMATION</h1>
+                        <div class="modalLine"></div>
+                    </div>
+                    <div class="modalBody" id="modalBody">
+                        <input type="text" id="guestModalID" hidden>
+                        <input type="text" id="guestModalStatus" hidden>
+                        <!-- <h1>Do you really want to ban this customer?</h1> -->
+                        <textarea name="" id="banRemarksInput" class="textArea" rows="10" placeholder="Input remarks here..."></textarea>
+                    </div>
+                    <div class="modalFooter">
+                        
+                        <div class="modalButtonCont">
+                            <button class="modalBtn modalBanBtn" onclick="inputRemarks()">BAN</button>
+                            <button class="modalBtn modalCancelBtn" onclick="closebanModal()" id="modalCancel">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             
 
 
-
-
+            <div id="banDetailModal" class="modal">
+                <!-- Modal content -->
                 
+                <div class="modal-content">
+                    <div class="modalHeader">
+                        <span class="close" onclick="closebaDetailModal()"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                        <h1>BAN DETAILS</h1>
+                        <div class="modalLine"></div>
+                    </div>
+                    <div class="modalBody" id="modalBody">
+                        <input type="text" id="banID" disabled hidden>
+                        <div class="banDetailModalCredCont">
+                            <div class="banDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <h3>Guest Name: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input type="text" id="banfname" disabled>
+                                </div>
+                            </div>
+                            <div class="banDetailModalDate">
+                                <div class="detailColumn divModalWidth">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <h3>Date Banned: </h3>
+                                 </div>
+                                 <div class="divModalWidth">
+                                    <input type="text" id="ban_date" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resonCont">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <h1>Reason</h1>
+                        </div>
+                        <textarea name="" id="banReason" class="textArea" rows="10" placeholder="Input remarks here..." disabled></textarea>
+                         <input type="text" id="res_date" hidden disabled>
+                    
+
+                    </div>
+                    <div class="modalFooter">
+                        <!-- <div class="modalButtonCont">
+                            <button class="modalBtn modalBanBtn" onclick="inputRemarks()">BAN</button>
+                            <button class="modalBtn modalCancelBtn" onclick="closeunbanModal()" id="modalCancel">CANCEL</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="accountModal" class="modal">
+                <!-- Modal content -->
+                
+                <div class="modal-content">
+                    <div class="modalHeader">
+                        <span class="close" onclick="closeaccountModal()"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                        <h1>ACCOUNT DETAILS</h1>
+                        <div class="modalLine"></div>
+                    </div>
+                    <div class="modalBody" id="modalBody">
+                        <input type="text" id="accountID" disabled hidden>
+                        <div class="guestDetailModalCont">
+                            <div class="guestDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <h3>Guest Name: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input type="text" id="fullname" disabled>
+                                </div>
+                            </div>
+                            <div class="guestDetailModalName">
+                                <div class="detailColumn divModalWidth">
+                                    <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                                    <h3>Gender: </h3>
+                                 </div>
+                                 <div class="divModalWidth">
+                                    <input type="text" id="gender" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banDetailModalCredCont">
+                            <div class="guestDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                    <h3>Birthday: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input type="text" id="birthday" disabled>
+                                </div>
+                            </div>
+                            <div class="guestDetailModalName">
+                                <div class="detailColumn divModalWidth">
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                    <h3>Contact No.: </h3>
+                                 </div>
+                                 <div class="divModalWidth">
+                                    <input type="text" id="contactNumber" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banDetailModalCredCont">
+                            <div class="guestDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <h3>Telephone No.: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input type="text" id="telNumber" disabled>
+                                </div>
+                            </div>
+                            <div class="guestDetailModalName">
+                                <div class="detailColumn divModalWidth">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <h3>Email: </h3>
+                                 </div>
+                                 <div class="divModalWidth">
+                                    <input type="text" id="email" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banDetailModalUsernameCredCont">
+                            <div class="guestDetailUserName divModalUsernameWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <h3>Username: </h3>
+                                </div>
+                                <div class="div divModalUsernameWidth">
+                                    <input type="text" id="username" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banDetailModalCredCont">
+                            <div class="guestDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <h3>Address: </h3>
+                                </div>
+                                <div class="div divModalAddressWidth">
+                                    <input type="text" id="address" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                       
+                       
+                        <input type="text" id="guestModalStatus" hidden>
+                        <!-- <h1>Do you really want to ban this customer?</h1> -->
+                        
+                    </div>
+                    <div class="modalFooter">
+                        
+                        <!-- <div class="modalButtonCont">
+                            <button class="modalBtn modalBanBtn" onclick="inputRemarks()">BAN</button>
+                            <button class="modalBtn modalCancelBtn" onclick="closebanModal()" id="modalCancel">CANCEL</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="banHistoryModal" class="modal">
+                <!-- Modal content -->
+                
+                <div class="modal-content">
+                    <div class="modalHeader">
+                        <span class="close" onclick="closebanHistoryDetailModal()"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                        <h1>BAN DETAILS</h1>
+                        <div class="modalLine"></div>
+                    </div>
+                    <div class="modalBody" id="modalBody">
+                        <input type="text" id="hbanID" disabled hidden>
+                        <div class="banDetailModalCredCont">
+                            <div class="banDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <h3>Guest Name: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input type="text" id="hbanfname" disabled>
+                                </div>
+                            </div>
+                            <div class="banDetailModalDate">
+                                <div class="detailColumn divModalWidth">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <h3>Date Banned: </h3>
+                                 </div>
+                                 <div class="divModalWidth">
+                                    <input type="text" id="hban_date" disabled>
+                                </div>
+                            </div>
+                        </div>
+                         <input type="text" id="hbanlname" disabled hidden>
+                         <div class="resonCont">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <h1>Reason</h1>
+                            </div>
+                        <textarea name="" id="hbanReason" class="textArea" rows="10" placeholder="Input remarks here..." disabled></textarea>
+                        <input type="text" id="res_date" hidden disabled>
+                    
+                    </div>
+                    <div class="modalFooter">
+                        <!-- <div class="modalButtonCont">
+                            <button class="modalBtn modalBanBtn" onclick="inputRemarks()">BAN</button>
+                            <button class="modalBtn modalCancelBtn" onclick="closeunbanModal()" id="modalCancel">CANCEL</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
                 
             </div>
+
         </div>
     </div>
 
     
 
-
+    <script src="../../js/admin_cdms/customer.js"></script>
 </body>
-<script src="../javascript/default.js"></script>
+
+
+
 
 </html>

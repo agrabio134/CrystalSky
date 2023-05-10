@@ -12,7 +12,13 @@
   <link rel="stylesheet" href="/css/admin_tabs_pane.css" />
   <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png" />
   <link rel="stylesheet" href="modal.css" />
+  <link rel="stylesheet" href="/css/admin_cms/admin_cms_announcement.css">
+  <link rel="stylesheet" href="/css/admin_cms/admin_cms_modal_announcement.css">
+  <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -150,10 +156,14 @@
               </div>
               <!-- The Modal -->
               <div id="label_modal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <div id="Labels"></div>
+                <div class="modal-content" id="Labels">
+                        <div class="modalHeader">
+                          <span class="close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                          <h2>ADD LABEL</h2>
+                          <div class="modalLine"></div>
+                      </div>
+                  
+                  
                 </div>
               </div>
 
@@ -170,16 +180,15 @@
               </div>
               <div class="announcement_input" id="#">
                 <div class="announcement_inside">
-                  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search here.."
-                    title="Type in a name" />
+                  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+                    title="Type in a name">
+
+
                 </div>
               </div>
-              <ul id="myUL">
-                <div class="ann_container">
-                  <div id="getAnnouncements" class="getAnnouncements_down">
-                    <!-- FROM DATABASE -->
-                  </div>
-                </div>
+              <div class="ann_container" id="getAnnouncements">
+             
+              </div>
               </ul>
             </div>
           </div>
@@ -187,22 +196,49 @@
       </div>
     </div>
   </div>
+
+
+  <div class="loader-wrapper fadeOut" id="loader-wrapper">
+    <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+  </div>
 </body>
+<script src="./JS/loading.js"></script>
 <script src="./js/Announcements.js"></script>
+<!-- <script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script> -->
 <script>
   function myFunction() {
-    var input, filter, ul, li, a, i, txtValue;
+    var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
       }
     }
   }
@@ -210,4 +246,5 @@
 <script src="../../javascript/default.js"></script>
 <script src="./JS/modal.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </html>

@@ -10,9 +10,14 @@
   <link rel="stylesheet" href="/css/admin_cms/admin_cms.css" />
   <link rel="stylesheet" href="/css/admin_assets.css" />
   <link rel="stylesheet" href="/css/admin_tabs_pane.css" />
+  <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
   <link rel="stylesheet" href="/css/admin_cms/admin_cms_add_announcement.css" />
   <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 
 <body>
@@ -131,8 +136,12 @@
       <div class="admin_right_pane_content_container">
 
         <div class="create_add_aanouncement">
-          <!-- <div class="create_add_aanouncement_container"></div> -->
           <div class="announcement_right_container">
+            <!-- add back button -->
+            <div class="announcement_right_container_back_button">
+              <a href="/html/admin_cms/admin_create_announcements.html">
+                back
+              </a>
             <div class="getLabelAnnouncementForm_container" id="getLabelAnnouncementForm">
             </div>
           </div>
@@ -140,8 +149,12 @@
       </div>
     </div>
   </div>
+  <div class="loader-wrapper fadeOut" id="loader-wrapper">
+    <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+  </div>
 </body>
 <script src="javascript/default.js"></script>
+<script src="./JS/loading.js"></script>
 <script src="./JS/Announcements.js"></script>
 
 </html>

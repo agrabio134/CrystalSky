@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/admin_assets.css">
   <link rel="stylesheet" href="/css/admin_tabs_pane.css">
   <link rel="stylesheet" href="/css/admin_cms/admin_cms_rooms.css">
+  <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
   <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -136,113 +137,70 @@
           <div class="admin_room_container" id="getEditRoomsForm">
 
 
-            <form method="post" enctype="multipart/form-data" action="${url}getRoomsEditFunction" class="form_container">
+            <form method="post" enctype="multipart/form-data" action="${url}getRoomsEditFunction"
+              class="form_container">
               <div class="submit_divs">
-              
-              
+
+
                 <div class="category_title_container">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/R.jpg" style="width:100%" height="200px">
+                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/CMS_CATEGORY.jpg" style="width:100%" height="160px">
                   <div class="category_p">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Click on Create Category to view the existing categories in the database. Edit or add the categories of room and
+                    facilities of the hotel.</p>
                   </div>
                   <div class="category_title">
-                    <a href="/html/admin_cms/admin_cms_category.html">Category</a>
+                    <a href="/html/admin_cms/admin_cms_category.html">CREATE CATEGORY</a>
                   </div>
                 </div>
-              
-              
+
+
                 <div class="create_submit_container">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/pexels-max-rahubovskiy-7534561.jpg" style="width:100%" height="200px">
+                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/CMS_CREATE_ROOM.jpg" style="width:100%" height="160px">
                   <div class="create_p">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.</p>
+                    <p>Click on Create Room to view the existing rooms in the database. Add or delete rooms to be shown onto the reservation
+                    system. Edit the categories and price of the room to be added.</p>
                   </div>
                   <div class="create_submit">
-                    <a href="/html/admin_cms/create_room.html">Create Room</a>
+                    <a href="/html/admin_cms/admin_cms_create_room.html">CREATE ROOM</a>
                   </div>
                 </div>
-              
+
                 <div class="amenities_submit_container">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/pexels-sabel-blanco-1662549.jpg" style="width:100%" height="200px">
+                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/CMS_AMENITIES.jpg" style="width:100%" height="160px">
                   <div class="amenities_p">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.</p>
+                    <p>Click on Add Amenities to view the amenities offered in each room categories. Add, edit, or delete the amenities to be
+                    displayed onto the reservation system.</p>
                   </div>
                   <div class="amenities_submit">
-                    <a href="/html/admin_cms/admin_cms_amenities.html">Add Amenities</a>
+                    <a href="/html/admin_cms/admin_cms_amenities.html">ADD AMENITIES</a>
                   </div>
                 </div>
-                
+
                 <div class="Reception_submit_container">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/disneyland.jpg" style="width:100%" height="200px">
+                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/CMS_RECEPTION.jpg" style="width:100%" height="160px">
                   <div class="Reception_p">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.</p>
+                    <p>Click on Add Amenities to view the amenities offered in each room categories. Add, edit, or delete the amenities to be
+                    displayed onto the reservation system.</p>
                   </div>
                   <div class="Reception_submit">
-                    <a href="/html/admin_cms/admin_cms_reception_desk.html">Reception Desk</a>
+                    <a href="/html/admin_cms/admin_cms_reception_desk.html">RECEPTION DESK</a>
                   </div>
                 </div>
               </div>
-              </form>
+            </form>
 
 
 
-              <!-- <div class="second_details_container" >
-              
-              
-              </div> -->
-
-            <!-- MAIN (Center website) -->
-            <!-- <div class="rooms_h1">
-              <h1>Rooms</h1>
-            </div> -->
-
-            <!-- Portfolio Gallery Grid -->
-            <!-- <div class="row">
-
-              <div class="column ">
-                <h3 >wala na dapat to pati EDIT ROOM DETAILS:
-
-                </h3>
-
-                <div class="content">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/dining.jpg" style="width:100%">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/jpm.jpg" style="width:100%">
-                  <img src="/assets/SUBSYSTEM_PHOTOS/CMS/jpm.jpg" style="width:100%">
-                 
-                </div>
-              </div>
-            </div> -->
-
-            <!-- END MAIN -->
           </div>
 
         </div>
-        <!-- 
-        <div class="preview_container">
-          <div id="preview" class="images_preview"></div>
-        </div> -->
-        <!-- <div class="admin_details_room"> -->
-          
-          <!-- <div class="second_details_container" id="getEditRoomsForm">
-           
-
-          </div> -->
-        
-
-        <!-- </div> -->
-        <!-- <a href="/html/admin_cms/admin_cms_category.html">Category</a>
-        <a href="/html/admin_cms/create_room.html">Create Room</a> -->
-       </div>
+      </div>
 
 
 
 
 
 
-
-      <!-- <input type="file" id="fileInput" multiple /> -->
 
     </div>
   </div>
@@ -250,8 +208,11 @@
 
 
 
-
+<div class="loader-wrapper fadeOut" id="loader-wrapper">
+  <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+</div>
 </body>
+<script src="./JS/loading.js"></script>
 <script src="CrystalSky/javascript/default.js"></script>
 <script src="./JS/Room.js"></script>
 <script>

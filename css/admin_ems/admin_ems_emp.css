@@ -1,0 +1,466 @@
+
+/* Header and Search */
+
+.headerCont {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.textHeading {
+  font-family: "montserrat-bold";
+  color: #424857;
+  font-size: 41;
+  letter-spacing: 0.1em;
+}
+
+.line {
+  width: 20%;
+  background-color: #4bb1f7;
+  height: 3px;
+}
+
+.inputText {
+  width: 30%;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: 20px 0 0 20px;
+  margin-top: 40px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #dfdede;
+}
+
+/* Table Container */
+
+.tableMainCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.tableCont {
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 15px 15px;
+  width: 100%;
+}
+
+table {
+  font-family: "montserrat-medium";
+  border-collapse: collapse;
+  width: 100%;
+  color: #424857;
+}
+
+td,
+th {
+  padding: 8px;
+  text-align: center !important;
+  /* border-bottom: 1px solid #a4acbd;
+  border-left: 1px solid #a4acbd; */
+}
+
+td:first-child,
+th:first-child {
+  width: 10%;
+}
+td:nth-child(2),
+th:nth-child(2) {
+  width: 30%;
+}
+
+td:nth-child(3),
+th:nth-child(3) {
+  width: 30%;
+}
+td:nth-child(4),
+th:nth-child(4) {
+  width: 12%;
+}
+td:nth-child(5),
+th:nth-child(5) {
+  width: 20%;
+}
+
+.thRight {
+  border-radius: 0 15px 0 0;
+}
+
+.selectCont {
+  padding: 5px;
+  text-align: center;
+  border: 3px solid #424857;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: "montserrat-medium";
+}
+
+.banBtn {
+  padding: 7px;
+  padding-left: 23px;
+  padding-right: 23px;
+  background-color: #FF5D5D;
+  border: none;
+  border-radius: 3px;
+  font-family: "montserrat-medium";
+  color: white;
+}
+
+.defBtn {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  font-family: "montserrat-medium";
+  color: white;
+}
+
+.acceptBtn {
+  background-color: #2FA83F;
+  font-family: "montserrat-medium";
+}
+
+.keepBtn {
+  background-color: #4bb1f7;
+  font-family: "montserrat-medium";
+}
+
+.viewBtn {
+  background-color: #424857;
+  font-family: "montserrat-medium";
+}
+
+.filterBtn {
+  padding: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #4bb1f7;
+  border: none;
+  border-radius: 0 20px 20px 0px;
+  font-family: "montserrat-medium";
+  color: white;
+  font-size: 15px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dataTables_wrapper .dataTables_info {
+  clear: both;
+  float: left;
+  padding-top: 0.755em;
+  margin: 17px;
+  font-family: "montserrat-medium";
+  font-size: 13px;
+  color: #424857 !important;
+}
+
+.dataTables_filter {
+  display: none;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  float: right;
+  text-align: right;
+  padding-top: 0.25em;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  cursor: default;
+  color: #4bb1f7 !important;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  float: right;
+  text-align: right;
+  margin-top: 15px;
+  margin-right: 60px;
+  font-size: 15px;
+  font-family: "montserrat-medium";
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.5em 1em;
+  margin-left: 2px;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  color: #5e6574 !important;
+  border-radius: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button i {
+  color: #4bb1f7 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: #d1d1d1;
+  border-radius: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  color: white;
+}
+
+/* Pagination Tab */
+
+.PageBtn {
+  width: 50%;
+  padding: 20px 0 20px 0;
+  background-color: #ffffff;
+  border-radius: 15px 15px 0 0;
+  border: none;
+  font-family: "montserrat-bold";
+  color: #5e6574;
+  font-size: 17px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tabBtnCont {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.buttonsLeft {
+  width: 60%;
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+#buttonsRight{
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addEmployee {
+  padding: 15px 30px;
+  background: #00aeae;
+  border-radius: 5.48644px;
+  color: #f1f1f1;
+  border: none;
+  font-family: "montserrat-bold";
+  font-size: 17px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+#activeBtn {
+  background-color: #4bb1f7;
+  color: white;
+}
+
+.employeePicDiv {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.fullnameDiv {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+
+.employee_image {
+  background-color: #f3f6f9;
+  border: 1px solid #a4acbd;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+.profile_pic {
+  width: 80px;
+}
+
+/* Modal */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  border-radius: 20px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  margin: 5% auto; /* 15% from the top and centered */
+  width: 30%; /* Could be more or less, depending on screen size */
+  border: 1px solid #dfdede;
+  border-radius: 7px 7px 7px 7px;
+}
+
+#addModalContent{
+  width: 70%;
+}
+
+
+/* The Close Button */
+.close {
+  color: #bb9441;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #FF5D5D;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalBody {
+  background-color: #f8fafb;
+  padding: 20px;
+}
+
+.modalBody h1 {
+  font-family: "montserrat-regular";
+  font-weight: 100;
+  font-size: 20px;
+  color: #5e6574;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.modalHeader {
+  background-color: #ffffff;
+  padding: 20px;
+  border-bottom: 1px solid #dfdede;
+  border-radius: 5px 5px 0 0;
+}
+
+.modalHeader h1 {
+  font-family: "montserrat-bold";
+  color: #4bb1f7;
+  font-size: 23px;
+}
+
+.textArea {
+  margin-top: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-family: "montserrat-regular";
+  padding: 10px;
+  border: none;
+}
+
+.modalFooter {
+  background-color: #f8fafb;
+  width: 100%;
+  padding-bottom: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+.modalButtonCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.modalBtn {
+  padding: 20px;
+  font-family: "montserrat-bold";
+  color: white;
+  min-width: 25%;
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modalCancelBtn {
+  background-color: #bdbdbd;
+  color: black;
+}
+
+.modalBanBtn {
+  background-color: #FF5D5D;
+}
+.modalConfirmBtn {
+  background: #00aeae;
+}
+
+.modalLine {
+  margin-top: 5px;
+  width: 17%;
+  height: 2px;
+  background-color: #bb9441;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 110%;
+
+}
+.formBody{
+  margin-left: 10px;
+}
+
+.row label,input,select{
+  font-family: "montserrat-medium";
+  font-size: 18px;
+  width: 90%;
+}
+
+.row-bottom{
+  margin-bottom: 20px;
+}
+
+.col {
+  width: 22.5%;
+  padding: 5px;
+}
+/* .bottom{
+} */
+
+.errorMessage{
+  color: red;
+  font-style: italic;
+}
+.acceptMessage{
+  color:#4bb1f7;
+  font-style: italic;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+}
+
+select {
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+}
+
+.thName {
+
+}

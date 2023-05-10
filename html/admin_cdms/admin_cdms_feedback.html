@@ -7,15 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CS Admin - CDMS </title>
     <!-- <link rel="stylesheet" href="../../css/admin_cdms/admin_datatable.css"> -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.4.0/css/dataTables.dateTime.min.css">
     <link rel="stylesheet" href="/css/admin_assets.css">
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
-    <link rel="stylesheet" href="/css/admin_cdms/admin_cdms.css">
+    <link rel="stylesheet" href="/css/admin_cdms/admin_cdms_feedback.css">
     <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.4.0/js/dataTables.dateTime.min.js"></script>
     <!-- <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
-    <script src="../../js/admin_cdms/customer.js"></script>
+    
     
 </head>
 
@@ -32,8 +38,7 @@
                 <ul>
                     <a href="../admin_cdms/admin_cdms.html"><li> Accounts </li></a>
                     <a href="../admin_cdms/admin_cdms_feedback.html" id="active_subsystem_tab"><li> Feedbacks </li></a>
-                    <a href="#"><li> Bookings </li></a>
-                    <a href="#"><li> Banned </li></a>
+                    <a href="../admin_cdms/admin_cdms_bookings.html"><li> Bookings </li></a>
                 </ul>
             </div>
         </div>
@@ -43,7 +48,7 @@
             <div class="admin_left_pane_content">
                 <div class="admin_left_pane_content_account_name_container">
                     <img id="admin_icon" src="/assets/General Photos/admin_icon.png">
-                    <p id="admin_name_header"> Welcome, <span id="admin_name"> CMS!</span></p>
+                    <p id="admin_name_header"> Welcome, <span id="admin_name"> CDMS!</span></p>
                 </div>
                 <div class="admin_left_pane_content_tabs_container">
                     <a class="admin_unselected_tab tabs" href="/html/admin_index/admin_index.html"> 
@@ -137,13 +142,46 @@
                     <input id="searchInput" class="inputText" type="text" placeholder="&#xf002;    Search..."  style="font-family:montserrat-regular, FontAwesome">
                     <button id="searchBtn" class="filterBtn">FILTER</button>
                 </div>
+
+
                 <div class="tableMainCont">
                     <div class="tabBtnCont">
-                        <button class="PageBtn" id="feedbackPageBtn">FEEDBACK</button>
-                        <button class="PageBtn"  id="savedPageBtn">SAVED FEEDBACK</button>
+                        <button class="PageBtn feedbackPageBtn" id="feedbackPageBtn" onclick="showFeedbackTable()" >FEEDBACKS</button>
+                        <button class="PageBtn savedPageBtn"  id="savedPageBtn" onclick="hideFeedbackTable()">SAVED FEEDBACKS</button>
+                        <button class="PageBtn publishPageBtn"  id="publishPageBtn" onclick="publishTable()">PUBLISHED FEEDBACKS</button>
                     </div>
-                <div class="tableCont">
-                    <table id="example" >
+                    
+                <div class="tableCont ftableCont" id="feedbackTableCont">
+                    <!-- <table id="feedback" >
+                        <thead>
+                            <tr>
+                                <th class="thLeft">Name</th>
+                                <th>Transact no.</th>
+                                <th>Username</th>
+                                <th class="thRight">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Anthony Mizal</td>
+                                <td>+9123456789</td>
+                                <td>anthony_123</td>
+                                <td>
+                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
+                                    <button type="button" class="defBtn keepBtn">KEEP</button>
+                                    <button type="button" class="defBtn viewBtn" id="viewBtn">VIEW</button>
+                                </td>
+                            </tr>
+                            
+                           
+                        </tbody> 
+                      </table> -->
+                </div>
+
+
+
+                <div class="tableCont stableCont" id="saved">
+                    <!-- <table id="save" >
                         <thead>
                             <tr>
                                 <th class="thLeft">Name</th>
@@ -155,142 +193,119 @@
                         <tbody>
                             <tr>
                                 <td>Kim Padua</td>
-                                <td>+1232136969</td>
-                                <td>ughugh420</td>
+                                <td>+9123456789</td>
+                                <td>Kim_123</td>
                                 <td>
                                     <button type="button" class="defBtn acceptBtn">ACCEPT</button>
                                     <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
+                                    <button type="button" class="defBtn viewBtn" id="keptViewBtn">VIEW</button>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abdul Burdagul</td>
-                                <td>+639123456781</td>
-                                <td>Abdul_123</td>
-                                <td>
-                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
-                                    <button type="button" class="defBtn keepBtn">KEEP</button>
-                                    <button type="button" class="defBtn viewBtn">VIEW</button>
-                                </td>
-                            </tr>
+                          
+                            
+                           
                         </tbody>
-                      </table>
-                      
+                      </table> -->
+                </div>
+
+                <div class="tableCont ptableCont" id="publish">
+                    <!-- <table id="feedback" >
+                        <thead>
+                            <tr>
+                                <th class="thLeft">Name</th>
+                                <th>Transact no.</th>
+                                <th>Username</th>
+                                <th class="thRight">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Anthony Mizal</td>
+                                <td>+9123456789</td>
+                                <td>anthony_123</td>
+                                <td>
+                                    <button type="button" class="defBtn acceptBtn">ACCEPT</button>
+                                    <button type="button" class="defBtn keepBtn">KEEP</button>
+                                    <button type="button" class="defBtn viewBtn" id="viewBtn">VIEW</button>
+                                </td>
+                            </tr>
+                            
+                           
+                        </tbody> 
+                      </table> -->
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div id="feedbackModal" class="feedBackModal">
+                <!-- Modal content -->
                 
+                <div class="modal-content">
+                    <div class="modalHeader">
+                        <span class="close"><i class="fa fa-times-circle-o" aria-hidden="true" onclick="closeModal()"></i></span>
+                        <h1>CUSTOMER FEEDBACK</h1>
+                        <div class="modalLine"></div>
+                    </div>
+                    <div class="modalBody">
+                        <input id="feedID" disabled hidden/>
+                        <input id="resID" disabled hidden/>
+                        
+                        <div class="banDetailModalCredCont">
+                            <div class="banDetailModalName divModalWidth">
+                                <div class="detailColumn">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <h3>Guest Name: </h3>
+                                </div>
+                                <div class="div divModalWidth">
+                                    <input id="name" disabled/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <textarea name="" id="feedbackArea" cols="68" rows="10" class="textArea" disabled></textarea>
+                        
+                    </div>
+                    <div class="modalFooter">
+                        <div class="modalButtonCont">
+                            <h5>CUSTOMER RATING</h5> 
+                            <div class="stars">
+                                        
+                                <form action="">
+                              
+                                  <input class="star star-5" id="star-5" type="radio" name="star" value="5" disabled/>
+                              
+                                  <label class="star star-5" for="star-5"></label>
+                              
+                                  <input class="star star-4" id="star-4" type="radio" name="star" value="4" disabled/>
+                              
+                                  <label class="star star-4" for="star-4"></label>
+                              
+                                  <input class="star star-3" id="star-3" type="radio" name="star" value="3" disabled/>
+                              
+                                  <label class="star star-3" for="star-3"></label>
+                              
+                                  <input class="star star-2" id="star-2" type="radio" name="star" value="2" disabled/>
+                              
+                                  <label class="star star-2" for="star-2"></label>
+                              
+                                  <input class="star star-1" id="star-1" type="radio" name="star" value="1" disabled/>
+                              
+                                  <label class="star star-1" for="star-1"></label>
+                              
+                                </form>
+                              
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
             </div>
 
         </div>
     </div>
 
     
-
+    <script src="../../js/admin_cdms/customer_feedback.js"></script>
 
 </body>
 

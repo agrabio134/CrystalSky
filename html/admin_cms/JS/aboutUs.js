@@ -1,6 +1,109 @@
 let url = "http://localhost/CrystalSky/html/admin_cms/api/";
 
 $(document).ready(function () {
+  getContentContact();
+});
+
+const getContentContact = () => {
+  $.ajax({
+    url: url + "getContentContact",
+    type: "post",
+    dataType: "json",
+  })
+    // if success
+
+    .done(function (data) {
+      let getContentContact = data.payload;
+      // accessing all items in the payload
+      // console.log(data.remarks);
+
+      let str = `
+  <form id="editContactForm" method="post" class="form_aboutus">
+
+
+  `;
+      getContentContact.forEach((content) => {
+        str += `
+    
+
+  <div class="contact_form_container">
+  
+  <div class="contact_email">
+    <div class="cont_container">
+      <label class="contact_number_container" for="contact_number" >Contact Number: </label>
+      <input class="contact_placeholder" type="text" pattern="[0-9.]+" id="contact_number" name="phone" value="${content.phone}" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+      </div>
+    <div class="em_cont">
+      <label class="email_container" for="email">Email:</label>
+      <input class="email_cont" type="email" id="email" name="email" value="${content.email}" >
+      </div>
+    </div>
+  
+  
+  
+      <label class="location_container" for="address">Address:</label>
+      <textarea class="edit_address_container" id="edit_address" name="address" value="${content.address}" > ${content.address}"</textarea>
+
+      <label for="opening_hours" class="opening_hours_label">Opening Hours:</label>
+      <input class="openning_hours_input" type="text" id="openning_hours" name="opening_hours" value="${content.opening_hours}" placeholder="Day from - to: time from - to" >
+      </div> 
+
+
+    `;
+      });
+      str += `
+    <button type="submit" class="submit_btn_contact">SUBMIT</button>
+
+  `;
+      $("#getContentContactus").append(str);
+      // ajax
+      $("#editContactForm").submit(function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to update the contact information?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, update it!",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            var data = $(this).serialize();
+            // console.log(data);
+            $.ajax({
+              type: "POST",
+              url: url + "updateContact",
+              data: data,
+              success: function (data) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "Successfully Updated",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                  }
+                });
+              },
+              error: function (data) {
+                console.log("error");
+              },
+            });
+          }
+        });
+      });
+    })
+    // if failed
+    .fail(function (data) {
+      console.error("not okay");
+    });
+};
+
+$(document).ready(function () {
   getContentAbout();
 });
 
@@ -15,10 +118,9 @@ const getContentAbout = () => {
     .done(function (data) {
       let AboutContent = data.payload;
       // accessing all items in the payload
-      console.log(data.remarks);
+      // console.log(data.remarks);
 
-
-  let str = `
+      let str = `
   
 <style>
 .form_aboutus{
@@ -51,6 +153,10 @@ const getContentAbout = () => {
       resize: vertical;
       margin-left: 30px;
 }
+input[type=text]{
+  color: #424857;
+}
+
 .edit_description_about{
   display:flex;
   font-family: montserrat-medium;
@@ -71,6 +177,10 @@ const getContentAbout = () => {
   font-family:montserrat-medium;
   font-size: 15px;
   letter-spacing: 1px;
+  resize: none;
+}
+.edit_description_about_area:focus, .edit_description_about_area:active{
+  outline: none;
 }
 .contact_us_container{
   font-family: montserrat-bold;
@@ -88,16 +198,18 @@ const getContentAbout = () => {
   color: #424857;
   letter-spacing: 1px;
   font-size: 20px;
-  margin-left: 30px;
+  
 }
 .contact_placeholder{
-  display:flex;
-  border: 1px solid #dad9d9;
-  border-radius: 4px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-  width: 50%;
-  background-color: white;
-  height: 20px;
+  font-family: montserrat-medium;
+  font-size: 15px;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+      font-family: heebo;
+      width: 50%;
+      border: 1px solid #dad9d9;
+      border-radius: 4px;
+      resize: vertical;
 }
 input[type=number]{
   padding:10px;
@@ -113,13 +225,16 @@ input[type=number]{
   margin-left: 10px;
 }
 .email_cont{
-  display:flex;
-  border: 1px solid #dad9d9;
-  border-radius: 4px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-  width: 80%;
-  background-color: white;
-  height: 20px;
+  font-family: montserrat-medium;
+  font-size: 15px;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+      font-family: heebo;
+      width: 50%;
+      border: 1px solid #dad9d9;
+      border-radius: 4px;
+      resize: vertical;
+      margin-left: 30px;
 }
 .contact_email{
   display:flex;
@@ -146,6 +261,17 @@ input[type=number]{
 input[type=email]{
   padding:10px;
   font-family:Montserrat-medium;
+  color: #424857;
+}
+input[type=text]{
+  padding:10px;
+  font-family:Montserrat-medium;
+  color: #424857;
+}
+textarea{
+  color: #424857;
+  padding: 10px;
+  height: 100px;
 }
 .location_container{
   display:flex;
@@ -153,7 +279,6 @@ input[type=email]{
   font-size: 20px;
   color: #424857; 
   letter-spacing:1px;
-  margin-left: 60px;
 }
 .edit_address_container{
   display:flex;
@@ -164,21 +289,48 @@ input[type=email]{
   background-color: white;
   height: 20px;
   margin-left:20px;
-  padding:20px;
+  padding:10px;
   font-family:Montserrat-medium;
   letter-spacing:1px;
   font-size: 15px;
   margin-bottom:30px;
+  resize: none;
 }
+.edit_address_container:focus, .edit_address_container:active{
+  outline: none;
+}
+input:focus,
+input:active {
+    outline: none;
+}
+.opening_hours_label{
+  display:flex;
+  font-family: montserrat-medium;
+  font-size: 20px;
+  color: #424857; 
+  letter-spacing:1px;
+}
+.openning_hours_input{
+  display:flex;
+  border: 1px solid #dad9d9;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+  width: 50%;
+  background-color: white;
+  height: 20px;
+  margin-left: 20px;
+  // border: 1px solid red;
+}
+.modal::-webkit-scrollbar{
+        display: none;
+    }
 </style>
 
-  <form action="${url}addAboutUs" method="post" enctype="multipart/form-data" class="form_aboutus">
+  <form id="editForm" method="post" class="form_aboutus">
 
-  `
-  AboutContent.forEach((content) => {
-
-
-    str += `  
+  `;
+      AboutContent.forEach((content) => {
+        str += `  
 
                               <div class="about_form_content">
                                 <label for="edit_title_1" class="edit_title_1_content">Edit Title:</label>
@@ -188,45 +340,61 @@ input[type=email]{
                                 value="${content.description}">${content.description}</textarea>
                               </div>
                       
-                              <div class="contact_us_container">
-                            <h1>CONTACT US</h1>
-                            </div>
-
-                            <div class="contact_form_container">
-
-                            <div class="contact_email">
-                              <div class="cont_container">
-                                <label class="contact_number_container" for="contact_number" >Contact Number: </label>
-                                
-                                <input class="contact_placeholder" type="number" id="contact_number" name="contact_no" value="${content.contact_no}">
-                              </div>
-                              <div class="em_cont">
-                                <label class="email_container" for="email">Email:</label>
-                                <input class="email_cont" type="email" id="email" name="email" value="${content.email}" >
-                                </div>
-                              </div>
-
-
-
-                                <label class="location_container" for="location">Address:</label>
-                                <textarea class="edit_address_container" id="edit_address" name="location" value="${content.location}" > ${content.location}"</textarea>
-                                </div>
-
                                 `;
-                              });
-                              str += `
-                                <button type="submit" class="submit-btn">Submit</button>
+      });
+      str += `
+                                <button type="submit" class="submit_btn_about">SUBMIT</button>
                             </form>`;
 
-  $("#getContentAbout").append(str);
+      $("#getContentAbout").append(str);
 
-})
-// if failed
-.fail(function (data) {
-  console.error("not okay");
-});
+      // ajax
+      $("#editForm").submit(function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to update the form?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, update it!",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            var data = $(this).serialize();
+            // console.log(data);
+            $.ajax({
+              type: "POST",
+              url: url + "addAboutUs",
+              data: data,
+              success: function (data) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "Successfully Updated",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                  }
+                });
+              },
+              error: function (data) {
+                console.log(data);
+              },
+            });
+          }
+        });
+      });
+    })
+    // if failed
+
+    .fail(function (data) {
+      console.error("not okay");
+    });
 };
-
 
 $(document).ready(function () {
   getContentFormFacilities();
@@ -238,115 +406,188 @@ const getContentFormFacilities = () => {
   // $("#ArchivedGallery").empty();
 
   let str = `<style>
-                .form_add_facilities{
-                  //  border: 1px solid black;
-                  display: flex;
-                  width: 100%;
-                  flex-direction: column;
-                }
-                .name_facility_container{
-                  display:flex;
-                  margin-bottom: 5px;
-                  width: 100%;
-                  height: 100%;
-                }
+                
+                
                 .name_facility{
                   // border: 1px solid red;
                   font-family: montserrat-bold;
                   font-size: 20px;
-                  color: #424857;
+                  color: #4BB1F7;
                   letter-spacing: 1px;
                 }
+                input:focus,
+                input:active {
+                    outline: none;
+                }
                 .add_facility_container{
-                  display:flex;
                   border: 1px solid #dad9d9;
                   border-radius: 4px;
                   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-                  width: 50%;
                   background-color: white;
-                  height: 20px;
-                  margin-bottom: 20px;
                 }
                 .edit_description_container{
-                  font-family: montserrat-bold;
+                  font-family: montserrat-medium;
+                  font-size: 20px;
+                  color: #424857;
+                  letter-spacing: 1px;
+                }
+                .edit_facility_container{
+                  font-family: montserrat-medium;
                   font-size: 20px;
                   color: #424857;
                   letter-spacing: 1px;
                 }
                 .add_description_container{
-                  display:flex;
-                  align-items: center;
                   border: 1px solid #dad9d9;
                   border-radius: 4px;
                   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-                  width: 95%;
+                  padding: 10px;
                   background-color: white;
-                  height: 30px;
-                  padding:20px;
                   resize: vertical;
-                  margin-bottom: 20px;
                   font-family: montserrat-medium;
                   font-size: 15px;
                   letter-spacing:1px;
+                  resize: none;
+                }
+                .add_description_container:focus, .add_description_container:active{
+                  outline: none;
                 }
                 .add_icon_container{
-                  font-family: montserrat-bold;
+                  font-family: montserrat-medium;
                   font-size: 20px;
                   color: #424857;
                   letter-spacing: 1px;
                 }
-                .img_cont input{
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  width: 40%;
-                  background-color: white;
-                  border: 1px solid #dad9d9;
-                  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-                  border-radius: 8px;
-                  margin-bottom: 15px;
+                .img_cont{
+                   display: flex;
+                  flex-direction: column;
+                   justify-content: start; 
+                  width: 100%;
+                  margin-top: 10px;
+                  margin-bottom: 10px;
+                //  border: 1px solid red; 
                 }
                 .image_container::-webkit-file-upload-button{
                   width: 120px;
-                  height: 40px;
-                  border: none;
-                  background-color: white;
+                  height: 30px;
+                  color: white;
+                  background-color: #424857;
+                  border: 2px solid #dad9d9;
+                  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
                   font-family: montserrat-medium;
                   cursor: pointer;
-                  font-size: 16px;
+                  font-size: 15x;
                   border-radius: 4px;
                 }
                 input[type=file]{
-                font-family: montserrat-medium;
-                font-size: 16px;
-                letter-spacing: 1px;
-  }
+                  font-family: montserrat-medium;
+                  font-size: 15px;
+                  color: #424857;
+                  }
+                  .fname_cont{
+                    display: flex;
+                    // border: 1px solid red;
+                    width: 100%;
+                    flex-direction: column;
+                    margin-bottom: 20px;
+                  }
+                  .fdescription_cont{
+                      display: flex;
+                    // border: 1px solid red;
+                    width: 100%;
+                    height: 100%;
+                    flex-direction: column;
+                    margin-bottom: 20px;
+                  }
             </style>
   
   <form action="${url}post_facilities" method="post" enctype="multipart/form-data" class="form_add_facilities">
-                  <div class="name_facility_container"> 
-
-                  <label class="name_facility" for="name">Facility</label>
-                  </div>
-
-                  <input class="add_facility_container" type="text" id="text" name="name" placeholder="Add Facility name..." required>
+                      
                   
+                  
+                  <div class="modalBody">
+                  <div class="fname_cont">
+                  <label class="edit_facility_container" for="edit_description">Facility Name</label>
+                  <input class="add_facility_container" type="text" id="text" name="name" placeholder="Add Facility name..." required>
+                  </div>
+                  <div class="fdescription_cont">
                   <label class="edit_description_container" for="edit_description">Facility Description</label>
                   <textarea class="add_description_container" id="edit_description" name="description" placeholder="Add description..." required></textarea>  
-                  
+                  </div>
                   <label class="add_icon_container" for="image">Add Icon</label>
                   <div class="img_cont">
                   <input class="image_container" type="file" name="image" required />
                   </div>
-                            
-                                    <button type="submit" class="submit-btn">Submit</button>
-                                </form>`;
-
+                       <div class="submit_button_amenities">     
+                  <button type="submit" class="submit_btn_facilities">SUBMIT</button>
+                  <button class="cancelButtonAmenities" type="button" id="cancelButton">CANCEL</button>
+                  </div>
+                    </div>            
+                  
+                  </form>`;
 
   $("#getContentFormFacilities").append(str);
+
+  $("#cancelButton").click(function () {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Any unsaved changes will be discarded. Are you sure you want to cancel?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel",
+      cancelButtonText: "No, keep editing",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform the cancel action here
+        window.location.reload(); // Example: Reload the page
+      }
+    });
+  });
+
+  $(".form_add_facilities").submit(function (e) {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to add the facilities?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, add it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        var formData = new FormData(this);
+
+        $.ajax({
+          type: "POST",
+          url: `${url}post_facilities`,
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            Swal.fire({
+              title: "Success!",
+              text: "Facilities added successfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            });
+          },
+          error: function (data) {
+            console.log("error");
+          },
+        });
+      }
+    });
+  });
 };
-
-
 
 $(document).ready(function () {
   getContentAboutFacilities();
@@ -363,7 +604,7 @@ const getContentAboutFacilities = () => {
     .done(function (data) {
       let AboutFacilitiesContent = data.payload;
       // accessing all items in the payload
-      console.log(AboutFacilitiesContent);
+      // console.log(AboutFacilitiesContent);
 
       // $("#ArchivedGallery").empty();
 
@@ -442,7 +683,7 @@ const getContentAboutFacilities = () => {
 
       $("#getContentAboutFacilities").append(str);
 
-      console.log(data);
+      // console.log(data);
     })
     // if failed
     .fail(function (data) {
@@ -450,97 +691,126 @@ const getContentAboutFacilities = () => {
     });
 };
 
-
-
 // Show the modal when the edit button is clicked
-$(document).on('click', '.edit-button', function() {
+$(document).on("click", ".edit-button", function () {
   // Get the ID of the item being edited
-  var itemId = $(this).data('id');
+  var itemId = $(this).data("id");
   // Get the current name, description, and image of the item from the table
-  var itemName = $(this).closest('tr').find('td:eq(2)').text();
-  var itemDesc = $(this).closest('tr').find('td:eq(3)').text();
-  var itemImage = $(this).closest('tr').find('img').attr('src');
+  var itemName = $(this).closest("tr").find("td:eq(2)").text();
+  var itemDesc = $(this).closest("tr").find("td:eq(3)").text();
+  var itemImage = $(this).closest("tr").find("img").attr("src");
   // Set the values of the input fields in the modal
-  $('#nameInput').val(itemName);
-  $('#descriptionInput').val(itemDesc);
-  $('#preview').attr('src', itemImage).show();
+  $("#nameInput").val(itemName);
+  $("#descriptionInput").val(itemDesc);
+  $("#preview").attr("src", itemImage).show();
   // Set the ID of the item being edited in a hidden input field
-  $('#editId').val(itemId);
+  $("#editId").val(itemId);
   // Show the modal
-  $('.modal-container').fadeIn();
+  $(".modal-container").fadeIn();
 });
 
 // Hide the modal when the cancel button is clicked
-$(document).on('click', '#cancelButton', function() {
-  $('.modal-container').fadeOut();
+$(document).on("click", "#cancelButton", function () {
+  $(".modal-container").fadeOut();
 });
 
 // Preview the image when a file is selected
-$(document).on('change', '#imageInput', function() {
+$(document).on("change", "#imageInput", function () {
   var file = this.files[0];
   var reader = new FileReader();
-  reader.onload = function(event) {
-    $('#preview').attr('src', event.target.result).show();
+  reader.onload = function (event) {
+    $("#preview").attr("src", event.target.result).show();
   };
   reader.readAsDataURL(file);
 });
 
 // Save the changes when the save button is clicked
-$(document).on('click', '#saveButton', function() {
+$(document).on("click", "#saveButton", function () {
   // Get the values of the input fields
-  var itemId = $('#editId').val();
-  var itemName = $('#nameInput').val();
-  var itemDesc = $('#descriptionInput').val();
-  var itemImage = $('#imageInput')[0].files[0];
+  var itemId = $("#editId").val();
+  var itemName = $("#nameInput").val();
+  var itemDesc = $("#descriptionInput").val();
+  var itemImage = $("#imageInput")[0].files[0];
+
+  
+
   // Create a FormData object to send the data to the server
   var formData = new FormData();
-  formData.append('id', itemId);
-  formData.append('name', itemName);
-  formData.append('description', itemDesc);
-  formData.append('image', itemImage);
-  // Send the data to the server
-  $.ajax({
-    url: url + "updateContentFacilities",
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function(data) {
-      // Reload the page
-      location.reload();
+  formData.append("id", itemId);
+  formData.append("name", itemName);
+  formData.append("description", itemDesc);
+  formData.append("image", itemImage);
+
+  // Show a confirmation dialog using Swal
+  Swal.fire({
+    title: "Confirmation",
+    text: "Are you sure you want to save the changes?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Save",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Send the data to the server
+      $.ajax({
+        url: url + "updateContentFacilities",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          Swal.fire({
+            icon: "success",
+            title: "Saved!",
+            text: "Your changes have been saved.",
+            showConfirmButton: true,
+          }).then((result) => {
+            // Reload the page
+            location.reload();
+          });
+        },
+      });
     }
   });
 });
-
-$(document).on('click', '.delete-button', function() {
+$(document).on("click", ".delete-button", function () {
   // Get the ID of the item being deleted
-  var itemId = $(this).data('id');
+  var itemId = $(this).data("id");
   // Confirm with the user before deleting the item
-  if (confirm('Are you sure you want to delete this item?')) {
-    // Send a DELETE request to the server
-    $.ajax({
-      url: url + "deleteContentFacilities",
-      type: 'post',
-      data: {
-        id: itemId
-      },
-      success: function(data) {
-        // Reload the page
+  Swal.fire({
+    title: 'Confirmation',
+    text: 'Are you sure you want to delete this item?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Delete',
+    cancelButtonText: 'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Send a DELETE request to the server
+      $.ajax({
+        url: url + "deleteContentFacilities",
+        type: "post",
+        data: {
+          id: itemId,
+        },
+        success: function (data) {
+          // Show success message using Swal
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Category has been deleted.",
+            showConfirmButton: true,
+          }).then((result) => {
+            location.reload();
+          }
+          );
 
-        // console.log(data);
-        // location.reload();
-        Swal.fire({
-          icon: 'success',
-          title: 'Deleted!',
-          text: 'Category has been deleted.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-      }
-    });
-  }
+          // Reload the page after a short delay
+          setTimeout(function () {
+            location.reload();
+          }, 1800);
+        },
+      });
+    }
+  });
 });

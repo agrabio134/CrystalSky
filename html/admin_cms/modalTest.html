@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=1)" />
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=1)" />
+    <title> CS Admin - Dashboard </title>
+    <link rel="stylesheet" href="/css/admin_assets.css">
+    <link rel="stylesheet" href="/css/admin_tabs_pane.css">
+    <link rel="stylesheet" href="/css/admin_dashboard/admin_dashboard.css">
+    <link rel="stylesheet" href="/css/admin_dashboard/date_picker.css" />
+    <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <button id="myBtn"> Open modal </button>
+
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        
+        <div class="modal-content">
+            <div class="modalHeader">
+                <span class="close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+                <h1>BAN CONFIRMATION</h1>
+                <div class="modalLine"></div>
+            </div>
+            <div class="modalBody">
+                <h1>Do you really want to ban this customer?</h1>
+                <textarea name="" id="" class="textArea" rows="10" placeholder="Input remarks here..."></textarea>
+            </div>
+            <div class="modalFooter">
+                <div class="modalButtonCont">
+                    <button class="modalBtn modalBanBtn">BAN</button>
+                    <button class="modalBtn modalCancelBtn" id="modalCancel">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+<style>
+    /* Modal */
+
+    .modal::-webkit-scrollbar{
+        display: none;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        margin: 10% auto; /* 15% from the top and centered */
+        width: 30%; /* Could be more or less, depending on screen size */
+        border: 1px solid #dfdede;
+        border-radius: 7px 7px 7px 7px;
+    }
+
+
+    /* The Close Button */
+    .close {
+        color: #BDBDBD;
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #F27171;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modalBody{
+        background-color: #F8FAFB;
+        padding: 20px;
+    }
+
+    .modalBody h1{
+        font-family: 'montserrat-regular';
+        font-weight: 100;
+        font-size: 20px;
+        color: #5E6574;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    .modalHeader{
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-bottom: 1px solid #dfdede;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .modalHeader h1{
+        font-family: 'montserrat-bold';
+        color: #4BB1F7;
+        font-size: 23px;
+    }
+
+    .textArea {
+        margin-top: 10px;
+        background-color: #F1F1F1;
+        border-radius: 5px;
+        font-family: 'montserrat-regular';
+        padding: 10px;
+        border: none;
+        width: 96.3%;
+        resize: none;
+        height: 100%;
+        border: 1px solid #dfdede;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+        font-size: 15px;
+    }
+
+    .textArea:active, .textArea:focus{
+        outline: none;
+    }
+
+    .modalFooter{
+        background-color: #F8FAFB;
+        width: 100%;
+        padding-bottom: 20px;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .modalButtonCont{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .modalBtn{
+        padding: 20px;
+        font-family: 'montserrat-bold';
+        color: white;
+        min-width: 25%;
+        border-radius: 5px;
+        border: 1px solid #dfdede;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+    }
+
+    .modalCancelBtn:hover{
+        cursor: pointer;
+        background-color: #a3a1a1;
+    }
+
+    .modalCancelBtn{
+        background-color: #BDBDBD;
+    }
+
+    .modalBanBtn{
+        background-color: #F27171;
+    }
+
+    .modalBanBtn:hover{
+        cursor: pointer;
+        background-color: #e66060;
+    }
+
+    .modalLine{
+        margin-top: 5px;
+        width: 17%;
+        height: 2px;
+        background-color: #BB9441;
+    }
+
+</style>
+
+    
+</body>
+
+<script>
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+
+</html>

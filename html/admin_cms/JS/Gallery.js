@@ -62,7 +62,7 @@ const getGallery = () => {
         <div class="column " style="display:flex" >
         <div class="content">
         <img id="chosen-image" src="/assets/SUBSYSTEM_PHOTOS/CMS/${content.media}"
-        alt="Mountains" style="width:100%">
+        alt="Mountains" style="width:100%" height="200px">
       <div class="archived_button">
       <button type="button" onclick="ImgArchive(${content.id})" class="defBtn acceptBtn" id="ImgArchive${content.id}" >Archive</button>
       </div>

@@ -1,5 +1,10 @@
-
+html {
+  scroll-behavior: smooth;
+}
 /* Header and Search */
+.swal2-popup {
+  font-family: 'montserrat-regular' !important;
+}
 
 .headerCont {
     display: flex;
@@ -64,8 +69,10 @@ table {
     border-radius: 0 15px 0 0;
   }
 
+
+
   td {
-    font-size: 14px;
+    font-size: 15px;
     padding-top: 15px !important;
     padding-bottom: 15px !important;
   }
@@ -101,7 +108,8 @@ table {
 
 .defBtn {
   padding: 7px;
-  width: 18%;
+  padding-left: 23px;
+  padding-right: 23px;
   border: none;
   border-radius: 3px;
   font-family: 'montserrat-medium';
@@ -208,7 +216,7 @@ table {
 }
 
 .PageBtn{
-  width: 50%;
+  width: 30%;
   padding: 20px 0 20px 0;
   background-color: #FFFFFF;
   border-radius: 15px 15px 0 0;
@@ -220,13 +228,282 @@ table {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
 }
 
-#feedbackPageBtn:active{
+#ActivePageBtn{
   background-color: #4BB1F7;
   color: white;
 }
 
-#savedPageBtn:active{
+
+.feedbackPageBtn:active{
   background-color: #4BB1F7;
   color: white;
 }
 
+.savedPageBtn:active{
+  background-color: #4BB1F7;
+  color: white;
+}
+
+/* Modal */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  margin: 10% auto; /* 15% from the top and centered */
+  width: 30%; /* Could be more or less, depending on screen size */
+  border: 1px solid #dfdede;
+  border-radius: 7px 7px 7px 7px;
+}
+
+
+/* The Close Button */
+.close {
+  color: #BDBDBD;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #F27171;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalBody{
+  background-color: #F8FAFB;
+  padding: 20px;
+}
+
+.modalBody h1{
+  font-family: 'montserrat-regular';
+  font-weight: 100;
+  font-size: 20px;
+  color: #5E6574;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.modalHeader{
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-bottom: 1px solid #dfdede;
+  border-radius: 5px 5px 0 0;
+}
+
+.modalHeader h1{
+  font-family: 'montserrat-bold';
+  color: #4BB1F7;
+  font-size: 23px;
+}
+
+.textArea {
+  margin-top: 10px;
+  background-color: #F1F1F1;
+  border-radius: 5px;
+  font-family: 'montserrat-regular';
+  padding: 10px;
+  border: none;
+  width: 96.3%;
+  resize: none;
+  height: 100%;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+  font-size: 15px;
+}
+
+.modalFooter{
+  background-color: #F8FAFB;
+  width: 100%;
+  padding-bottom: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+.modalButtonCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.modalBtn{
+  padding: 20px;
+  font-family: 'montserrat-bold';
+  color: white;
+  min-width: 25%;
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.modalCancelBtn{
+  background-color: #BDBDBD;
+}
+
+.modalBanBtn{
+  background-color: #F27171;
+}
+
+.modalLine{
+  margin-top: 5px;
+  width: 17%;
+  height: 2px;
+  background-color: #4BB1F7;
+}
+
+
+.banDetailModalCredCont{
+  display: flex;
+  flex-direction: row;
+  font-family: 'montserrat-regular';
+  color: #424857;
+}
+
+.banDetailModalUsernameCredCont{
+  display: flex;
+  flex-direction: row;
+  font-family: 'montserrat-regular';
+  color: #424857;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.guestDetailModalCont{
+  display: flex;
+  flex-direction: row;
+  font-family: 'montserrat-regular';
+  color: #424857;
+}
+
+.guestDetailModalName{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  margin-left: 30px;
+}
+
+/* .guestDetailModalUserName{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+} */
+
+.detailColumn{
+  display: flex;
+}
+
+.detailColumn h3 {
+  font-family: 'montserrat-medium';
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.detailColumn i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #4BB1F7;
+}
+
+.banDetailModalDate, .banDetailModalName{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+#banfname, #banlname, #ban_date, #hbanfname, #hban_date, #fullname, #gender,
+#birthday,
+#contactNumber,
+#telNumber,
+#email,
+#username,
+#address{
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-family: 'montserrat-regular';
+  font-weight: 100;
+  font-size: 15px;
+}
+
+.resonCont{
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resonCont i{
+  font-size: 20px;
+  color: #4BB1F7;
+}
+
+.resonCont h1{
+  font-family: 'montserrat-medium';
+  font-size: 17px;
+  color: #424857;
+  font-weight: 600;
+}
+
+.divModalWidth{
+  min-width: 50%;
+ /* border: solid red 1px; */
+}
+
+.divModalUsernameWidth{
+  min-width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.divModalAddressWidth input{
+  width: 500px;
+}
+
+table.dataTable thead .sorting,
+  table.dataTable thead .sorting_asc,
+  table.dataTable thead .sorting_desc,
+  table.dataTable thead .sorting_asc_disabled,
+  table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+    background-repeat: no-repeat;
+    background-position: center right;
+  }
+  table.dataTable thead .sorting {
+    background-image: url("../../assets/sort.png");
+  }
+  table.dataTable thead .sorting_asc {
+    background-image: url("../../assets/asc_sort.png") !important;
+  }
+  table.dataTable thead .sorting_desc {
+    background-image: url("../../assets/desc_sort.png") !important;
+  }
+  table.dataTable thead .sorting_asc_disabled {
+    background-image: url("../images/sort_asc_disabled.png");
+  }
+  table.dataTable thead .sorting_desc_disabled {
+    background-image: url("../images/sort_desc_disabled.png");
+  }

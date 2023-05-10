@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-product-sans: "Product Sans";
+  --font-montserrat: Montserrat;
+
+  /* font sizes */
+  --font-size-3xs: 10px;
+  --font-size-mini: 15px;
+  --font-size-xl-3: 20.3px;
+  --font-size-base: 16px;
+  --font-size-mini-5: 14.5px;
+  --font-size-sm: 14px;
+  --font-size-9xl: 28px;
+
+  /* Colors */
+  --color-whitesmoke-100: #f8fafb;
+  --color-whitesmoke-200: #efefef;
+  --color-white: #fff;
+  --secondary-subtitle-color: #686868;
+  --background-color: #fafafa;
+  --color-gray-100: #949494;
+  --color-gray-200: #232323;
+  --color-gainsboro: #e0e0e0;
+  --color-darkslategray-100: #343434;
+  --secondary-title-color: #303030;
+  --color-black: #000;
+  --color-aliceblue: #eceef6;
+  --color-mediumaquamarine-100: #16c098;
+  --color-mediumaquamarine-200: rgba(22, 192, 152, 0.2);
+
+  /* Gaps */
+  --gap-76xl: 95px;
+  --gap-xl: 20px;
+  --gap-7xs: 6px;
+
+  /* Paddings */
+  --padding-xs: 12px;
+  --padding-base: 16px;
+  --padding-9xs: 4px;
+  --padding-5xs: 8px;
+
+  /* border radiuses */
+  --br-9xs: 4px;
+  --br-7xs: 6px;
+
+  /* Effects */
+  --shadow: 0px 20px 60px rgba(0, 0, 0, 0.05);
+}

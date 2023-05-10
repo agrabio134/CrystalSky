@@ -85,17 +85,7 @@ const getLabels = () => {
 }
 
 /* Modal styles */
-.modal1 {
-  display: block; /* make modal visible */
-  position: fixed; /* position it relative to the viewport */
-  z-index: 1; /* make sure modal is above everything else */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* enable scrolling if modal content overflows */
-  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black background */
-}
+
 
 
 
@@ -130,32 +120,30 @@ const getLabels = () => {
 
       console.log(data);
 
-      
-$(document).on('click', '.edit-btn', function() {
-  const contentId = $(this).attr('id');
-  const name = $(this).closest('.birthday_div').find('p').text();
-  console.log('Clicked edit button with id:', contentId, 'and name:', name);
-  // Check if modal already exists in the DOM
+      $(document).on("click", ".edit-btn", function () {
+        const contentId = $(this).attr("id");
 
-  console.log(contentId);
-  if ($('.modal1').length) {
-    // Show existing modal
-    $('.modal1').show();
-  } else {
-    // Create modal element
-    const modal = `
+        console.log(contentId);
+        if ($(".modal1").length) {
+          // Show existing modal
+          $(".modal1").show();
+        } else {
+          // Create modal element
+          const modal = `
       <div class="modal1">
         <div class="modal-content">
-          <span class="close">&times;</span>
-          <form action="${url}editLabel" method="post">
-          <div class="modal_edit_content">
-            <p>Edit Content</p>
+          
+        <form id="editForm" action="${url}editLabel" method="post">
+        <div class="modalHeader">
+          <span class="close" id="closeBtn"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+            <h2>EDIT CONTENT</h2>
+            <div class="modalLine"></div>
             </div>
 
             <input type="hidden" name="id" value="${contentId}"/>
-
+            <div class="modalBody">
             <div>
-            <label class="modal_name_content" for="name">Name:</label>
+            <label class="modal_name_content" for="name">Name</label>
             </div>
 
             <div class="modal_name_text_content">
@@ -163,52 +151,95 @@ $(document).on('click', '.edit-btn', function() {
             </div>
 
             <div class="color_container">
-            <label class="color_label" for="color">Color Picker:</label>
+            <label class="color_label" for="color">Color Picker</label>
             <input class="color_label_picker" type="color" name="color" id="color" />
             </div>
 
             <div class="announce_modal_content">
             <input class="announce_modal_input" type="submit"/>
+            <span>
+            <button class="cancelButton_about" type="button" id="btnCancel">CANCEL</button>
+          </span>            </div>
+
             </div>
-
-
           </form>
         </div>
       </div>
     `;
 
-    console.log("clicked!");
-    // Add modal element to the DOM
-    $('body').append(modal);
+          console.log("clicked!");
+          // Add modal element to the DOM
+          $("body").append(modal);
 
-    // Add event listener to the "close" button
-    $('.close').click(function() {
-      // Remove modal element from the DOM
-      $('.modal1').remove();
-    });
+          // Add event listener to the "close" button
+          $("#closeBtn").click(function () {
+            // Remove modal element from the DOM
+            $(".modal1").remove();
+          });
 
-    // Add event listener to the document object
-    $(document).on('click', function(event) {
-      // Check if the click occurred outside of the modal
-      if (!$(event.target).closest('.modal-content').length && !$(event.target).is('.edit-btn')) {
-        // Remove modal element from the DOM
-        $('.modal1').remove();
-      }
-    });
-  }
-});
+          // Add event listener to the document object
+          $(document).on("click", function (event) {
+            // Check if the click occurred outside of the modal
+            if (
+              !$(event.target).closest(".modal-content").length &&
+              !$(event.target).is(".edit-btn")
+            ) {
+              // Remove modal element from the DOM
+              $(".modal1").remove();
+            }
+          });
 
 
+          
+          document
+            .getElementById("editForm")
+            .addEventListener("submit", function (event) {
+              event.preventDefault(); // Prevent the default form submission
 
+              Swal.fire({
+                title: "Are you sure?",
+                text: "This action cannot be undone.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, proceed!",
+                cancelButtonText: "Cancel",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // If user confirms, submit the form
+                  document.getElementById("editForm").submit();
+                }
+              });
+            });
+
+            document.getElementById("btnCancel").addEventListener("click", function () {
+              Swal.fire({
+                title: "Are you sure?",
+                text: "Any unsaved changes will be discarded.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, cancel!",
+                cancelButtonText: "No",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // If user confirms, navigate back or perform desired action
+                  $(".modal1").remove(); // Remove modal element from the DOM
+                  window.history.back(); // Navigate back
+                }
+              });
+            });
+            
+        }
+      });
     })
     // if failed
     .fail(function (data) {
       console.error("not okay");
     });
-
-    
 };
-
 
 $(document).ready(function () {
   getAnnouncements();
@@ -229,77 +260,26 @@ const getAnnouncements = () => {
 
       // $("#ArchivedGallery").empty();
 
-      let str = ``;
+      let str = `<table id="myTable">`;
 
       Announcements.forEach((content) => {
         str += `  
-          <style>
-          .announcement_color${content.id}{
-            width: 10px;
-            background-color: ${content.color};
-            height: 40px;
-            margin-top: -15px;
-            border-radius: 4px;
-            margin-left: -7px;
-        }
-    .announcement_display{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 120vh;
-    margin-bottom:-5px;
-    flex-direction: row;
-
-
-}
-.announcement_name{
-    width: 100%;
-    display: flex;
-     align-items: center;
-        background-color: white;
-        height: 60px;
-        margin-bottom: 4px;
-
-}
-.announcement_name a {
-  display: flex;
-  align-items: center;
-    font-size: 15px;
-    padding: 5px;
-    font-family: montserrat-medium;
-     padding-left: 45px;
-     border: 1px solid #dad9d9;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-    width: 113vh;
-    background-color: white;
-    height:48px;
-    margin-top:-40px;
-    // border: 1px solid gold; 
-}
-.announcement_name  p{
-  border:2px solid purple;
-  margin-right: 10px;
-  margin-left: 800px;
-  width: 100px;
-  font-family: montserrat-medium;
-}
-        
-      </style>
-    <div class="announcement_display_container">
-      <div class="announcement_display">
-      
-            <div class="announcement_name">
-            <div class="announcement_color${content.id}"></div>
-                <li><p style="color: ${content.color}">${content.name}</p><a href="#">${content.title}</a>
-                </div>
-                </li>
-  </div>
-  </div>
+          
     
+        <tr>
+            <td class="second">${content.title}</td>
+            <td class="first"><p style="color: ${content.color}">${content.name}</p></td>
+            
+      
+            
+                
+                
+
+    </tr>
       
           `;
       });
-      str += ``;
+      str += `</table>`;
 
       $("#getAnnouncements").append(str);
 
@@ -316,32 +296,16 @@ $(document).ready(function () {
 });
 
 const addLabel = () => {
-  // $.ajax({
-  //   url: url + "getGallery",
-  //   type: "post",
-  //   dataType: "json",
-  // })
-  //   // if success
-
-  //   .done(function (data) {
-  //     let inactiveContent = data.payload;
-  //     // accessing all items in the payload
-  //     console.log(data.remarks);
-
-  //     // $("#ArchivedGallery").empty();
-
-  let str = `<form action="${url}addLabel" method="post">
+  let str = `<form id="addLabelData" >
     
-      <div class="modal_edit_content_add">  
-      <p>Add Label</p>
-      </div>
-
+      
+      <div class="modalBody">
       <div class="modal_name_container">
       <Label class="modal_name_content" for="name">Category Name:</Label>
       </div>
       
       <div class="modal_name_text_content">
-      <input class="modal_name_text_edit" type="text" name="name" id="name"/>
+      <input class="modal_name_text_edit" type="text" name="name" id="name" required/>
       </div>
 
       <div class="color_container">
@@ -351,6 +315,8 @@ const addLabel = () => {
 
       <div class="announce_modal_content">
       <input class="announce_modal_input" type="submit"/>
+      <button class="cancelButton_about" type="button" id="btnCancel">CANCEL</button>
+      </div>
       </div>
       </form>
 
@@ -360,15 +326,88 @@ const addLabel = () => {
 
   $("#Labels").append(str);
 
+  /// Submit form
+  document.getElementById("btnCancel").addEventListener("click", function () {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Any unsaved changes will be discarded.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If user confirms, navigate back or perform desired action
+        $(".modal").remove(); // Remove modal element from the DOM
+      }
+    });
+  });
+  
+  $("#addLabelData").submit(function (e) {
+    e.preventDefault();
+    console.log("clicked!");
+
+    // Get form data
+    let formData = new FormData(this);
+    formData.append("name", $("#name").val());
+    formData.append("color", $("#color").val());
+
+    // Confirm form submission
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to add this label?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: url + "addLabel",
+          type: "post",
+          dataType: "json",
+          data: formData,
+          processData: false,
+          contentType: false,
+        })
+          .done(function (data) {
+            console.log(data);
+            Swal.fire({
+              title: "Success!",
+              text: "Label has been added!",
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              location.reload();
+            });
+          })
+          .fail(function (data) {
+            console.log(data);
+            Swal.fire({
+              title: "Success!",
+              text: "Label has been added!",
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              location.reload();
+            });
+            
+          });
+      }
+    });
+  });
+
+  //
+
   console.log(data);
-  // })
-  // // if failed
-  // .fail(function (data) {
-  //   console.error("not okay");
-  // });
 };
 
 //GET LABEL ANNOUNCEMENT
+$(document).on("click", "#cancelButton", function () {
+  $(".modal-container").fadeOut();
+});
 
 $(document).ready(function () {
   getLabelsAnnouncements();
@@ -380,6 +419,7 @@ const getLabelsAnnouncements = () => {
     type: "post",
     dataType: "json",
   })
+
     // if success
 
     .done(function (data) {
@@ -398,14 +438,13 @@ const getLabelsAnnouncements = () => {
       .title_announcement{
         width: 100%;
         height: 10%;
-        // border: 1px solid green;
+        //  border: 1px solid green;
         display: flex;
         align-items: center;
       }
       .title_announcement p{
         font-family: montserrat-bold;
         font-size: 20px;
-        padding-left: 30px;
         letter-spacing: 1px;
         color: #424857;
       }
@@ -420,62 +459,70 @@ const getLabelsAnnouncements = () => {
         font-family: montserrat-medium;
         letter-spacing: 1px;
       }
+      input:focus,input:active{
+    outline: none;
+}
       .form_text_announcement input{
         width: 40%;
+        height: 40px;
         border-radius: 4px;
         border: 1px solid #dad9d9;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-        margin-left: 30px;
+    
         padding-left: 30px;
       }
       .form_labels_announcement{
         display: flex;
+        flex-direction: column;
         width: 100%;
-        //  border: 1px solid black;
-        height: 8%;
+          //  border: 1px solid black;
+        min-height: 10px;
         
       }
       .select_category {
         display: flex;
-        width: 15%;
-        height: 100%;
+        width: 20%;
+        text-align: center;
+        padding: 10px;
         border: 1px solid #dad9d9;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
         border-radius: 4px;
         font-family: montserrat-medium;
-         padding-left: 20px;
-        color: black;
+        color: #424857;
+      }
+
+      .select_category:any-link, .select_category:focus, .select_category:active{
+        outline:none;
       }
       .label_category_announcement{
         display: flex;
-        width: 15%;
+        justify-content: start;
+        width: 100%;
         align-items: center;
-        justify-content: center;
-        // border: 1px solid black;
-        margin-left: 15px;
+        //  border: 1px solid black;
+        margin-bottom: 10px;
         color: #424857;
       }
-      .label_category_announcement{
+      .label_category_announcement:any-link, .label_category_announcement:focus, .label_category_announcement:active{
+        outline: none;
+      }
+      .label_category_announcement p{
         font-family: montserrat-bold;
         font-size: 20px;
       }
       .description_form_add_announcement{
         // border: 1px solid red;
         width: 100%;
-        height: 8%;
+        height: 10%;
         display: flex;
         align-items: center;
-        justify-content: center;
         margin-top: 5px;
         
       }
       .description_form_add_announcement p{
-        display: flex;
         font-family: montserrat-bold;
-        font-size: 22px;
-        height: 100%;
-        margin-right:950px;
-        // border: 1px solid green;
+        font-size: 20px;
+        letter-spacing: 1px;
         color: #424857;
       }
       .description_text{
@@ -487,11 +534,17 @@ const getLabelsAnnouncements = () => {
       }
       .description_text .text_textarea{
         width: 100%;
-        margin-left: 40px;
-        margin-right:40px;
         padding: 20px;
         border: 3px solid #dad9d9;
+        resize: vertical;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+        resize: none;
+        font-family: montserrat-medium;
+        letter-spacing: 1px;
+        color: #424857; 
+      }
+      .text_textarea:focus, .text_textarea:active{
+        outline: none;
       }
       .thumnail_container{
         display: flex;
@@ -508,7 +561,6 @@ const getLabelsAnnouncements = () => {
         width: 12%;
         height: 50%;
         // border: 1px solid red;
-        margin-left: 30px;
       }
       .thumbnail_text p{
         font-family: montserrat-bold;
@@ -546,10 +598,11 @@ const getLabelsAnnouncements = () => {
       .submit_announcement{
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: end;
         width: 100%;
         height: 8%;
-        // border: 1px solid black;
+        
+        //  border: 1px solid black;  
       }
       .submit_announcement_button{
         display: flex;
@@ -559,9 +612,10 @@ const getLabelsAnnouncements = () => {
         height: 80%;
         border: none;
         width: 10%;
+        margin-right: 30px;
         cursor: pointer;
         border-radius: 4px;
-        margin-left: 950px;
+        // margin-left: 950px;
       }
       input[type="submit"]{
         font-family: montserrat-medium;
@@ -570,7 +624,7 @@ const getLabelsAnnouncements = () => {
       }
       </style>
 
-      <form method="post" enctype="multipart/form-data" action="${url}post_announcements" class="form_container">
+      <form method="post" enctype="multipart/form-data" action="${url}post_announcements" id="postForm" class="form_container">
       
         <div class="title_announcement">
           <label for="title"><p>Add Announcement:</p></label>
@@ -583,13 +637,13 @@ const getLabelsAnnouncements = () => {
       <div class="label_category_announcement"><p> Choose Labels</p></div>
             <select id="label" name="label" class="select_category">
                 `;
-                
-          label.forEach((content) => {
-            str += `  
+
+      label.forEach((content) => {
+        str += `  
             <option value="${content.id}">${content.name}</option>
             `;
-          });
-          str += `
+      });
+      str += `
        </select>
        </div>
 
@@ -610,29 +664,56 @@ const getLabelsAnnouncements = () => {
           </div>
         </div>
         <div class="submit_announcement">
-        <input class="submit_announcement_button" type="submit" value="Submit" />
+        <input class="submit_announcement_button" type="submit" value="SUBMIT" />
+        
         </div>
  </form>`;
 
       $("#getLabelAnnouncementForm").append(str);
+      $("#getLabelAnnouncementForm").on("submit", "form", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+      
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to submit this announcement?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, submit!",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // If user confirms, submit the form
+            // redirect to the home page
 
+            document.getElementById("postForm").submit();
+
+
+
+            // $(this).off("submit"); // Remove the event listener to avoid infinite loop
+            // $(this).submit();
+          }
+        });
+      });
+      
       console.log(data);
     })
-    
+
     // if failed
     .fail(function (data) {
       console.error("not okay");
-    })
+    });
 
-    // .always(function () {
-    //   location.reload();
-    // });
+  // .always(function () {
+  //   location.reload();
+  // });
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Add submit event listener to the form
-  $('form').submit(function() {
+  $("form").submit(function () {
     // Reload the page after submitting the form
-    location.reload();
+    // location.reload();
   });
 });

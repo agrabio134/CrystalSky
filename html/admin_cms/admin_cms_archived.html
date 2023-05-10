@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="/css/admin_tabs_pane.css">
     <!-- <link rel="stylesheet" href="/css/admin_cms/admin_cms_modal.css"> -->
     <link rel="stylesheet" href="/css/admin_cms/admin_cms_archived.css">
+    <link rel="icon" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <link rel="stylesheet" href="/assets/General Photos/Crystal Sky - Logo Only.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
 </head>
 
 
@@ -173,6 +176,7 @@
                             <a href="">Archived Post</a>
                         </div>
                         <!-- <div class="title_archived_separator"></div> -->
+
                         <div class="inside_right_archived_images" id="getArchivedGallery">
 
 
@@ -197,9 +201,12 @@
     </div>
 
 
-
+<div class="loader-wrapper fadeOut" id="loader-wrapper">
+    <img class="loader" src="../../assets/General Photos/Crystal Sky - Logo Only.png">
+</div>
 </body>
 <script src="/javascript/default.js"></script>
+<script src="./JS/loading.js"></script>
 <script src="./js/getArchived.js"></script>
 <script>
     filterSelection("all")

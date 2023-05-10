@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS Admin - EMS - Employees</title>
+    <link rel="stylesheet" href="/css/admin_tabs_pane.css" />
+    <link rel="stylesheet" href="/css/admin_assets.css">
+    <link rel="stylesheet" href="/css/admin_index/admin_index.css">
+    <link rel="stylesheet" href="/css/admin_ems/admin_ems_emp.css" />
+    <link
+      rel="icon"
+      href="/assets/General Photos/Crystal Sky - Logo Only.png"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="admin_navigation_container">
+      <div class="admin_navigation_logo_container">
+        <a href="/html/admin_index/admin_index.html"
+          ><img
+            id="admin_header_logo"
+            src="/assets/General Photos/Crystal Sky - Logo.png"
+        /></a>
+      </div>
+      <div class="admin_right_navigation_tabs_container">
+        <div class="admin_navigation_tab_logo_container">
+          <img
+            id="admin_navigation_tab_logo"
+            src="/assets/Back Office - Tabs Logos/admin_ems/EMS.png"
+          />
+        </div>
+        <div class="admin_navigation_tabs_container">
+          <ul>
+            <a href="index.html">Panel</a>
+            <a href="admin_ems_emp.html" id="active_subsystem_tab"><li>Employees</li></a>
+            <a href="admin_ems_departments.html"><li>Department</li></a>
+            <a href="admin_ems_calendar.html"><li>Calendar</li></a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="admin_container">
+      <div class="admin_left_pane">
+        <div class="admin_left_pane_content">
+          <div class="admin_left_pane_content_account_name_container">
+            <img id="admin_icon" src="/assets/General Photos/admin_icon.png" />
+            <p id="admin_name_header">
+              Welcome, <span id="admin_name"> CMS!</span>
+            </p>
+          </div>
+          <div class="admin_left_pane_content_tabs_container">
+            <a
+              class="admin_unselected_tab tabs"
+              href="/html/admin_index/admin_index.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_dashboard/Dashboard Logo/Dashboard - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Dashboard</p>
+                <p id="admin_tab_short_text">PANEL</p>
+              </div>
+            </a>
+
+            <p id="admin_left_pane_content_management">Management</p>
+            <p id="admin_left_pane_content_short_management">Manage</p>
+
+            <a
+              class="admin_unselected_tab tabs pulse admin_tab_secgroup"
+              href="/html/admin_cms/admin_cms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_cms/CMS Logo/CMS - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Content</p>
+                <p id="admin_tab_short_text">CMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_cdms/admin_cdms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_cdms/CDMS Logo/CDMS - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Customer Data</p>
+                <p id="admin_tab_short_text">CDMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_current_tab tabs admin_tab_secgroup"
+              href="/html/admin_ems/admin_ems.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_ems/EMS Logo/EMS - Blue.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Employee</p>
+                <p id="admin_tab_short_text">EMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_ims/admin_ims.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_ims/Inventory Logo/Inventory - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Inventory</p>
+                <p id="admin_tab_short_text">IMS</p>
+              </div>
+            </a>
+
+            <a
+              class="admin_unselected_tab tabs admin_tab_secgroup"
+              href="/html/admin_rms/admin_rms.html"
+            >
+              <div class="admin_tab_logo_container">
+                <img
+                  id="admin_tab_logo"
+                  src="/assets/Back Office - Tabs Logos/admin_rms/Revenue Logo/Revenue - 7b.png"
+                />
+              </div>
+              <div class="admin_tab_text_container">
+                <p id="admin_tab_text">Revenue</p>
+                <p id="admin_tab_short_text">RMS</p>
+              </div>
+            </a>
+
+            <div class="admin_logout_icon_pane">
+              <div class="admin_logout_icon_container">
+                <img
+                  id="admin_logout_icon"
+                  src="/assets/General Photos/logout.png"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD YOUR SUBSYSTEM CODES HERE -->
+
+      <div class="admin_right_pane">
+        <div class="admin_right_pane_content_container">
+          <div class="headerCont">
+            <h1 class="textHeading">EMPLOYEES</h1>
+            <div class="line"></div>
+          </div>
+
+          <div class="inputCont">
+            <input
+              id="searchInput"
+              class="inputText"
+              type="text"
+              placeholder="&#xf002;    Search..."
+              style="font-family: montserrat-regular, FontAwesome"
+            />
+            <button id="searchBtn" class="filterBtn">FILTER</button>
+          </div>
+          <div class="tableMainCont">
+            <div class="tabBtnCont">
+              <div class="buttonsLeft">
+                <button class="PageBtn" id="activeBtn">ACTIVE</button>
+                <button class="PageBtn" id="inactiveBtn">INACTIVE</button>
+              </div>
+              <div id="buttonsRight">
+                <button
+                  class="addEmployee"
+                  id="addEmployee"
+                  onclick="openAddModal()"
+                >
+                  + Add New Employee
+                </button>
+              </div>
+            </div>
+            <div class="activeEmployeesTableCont tableCont">
+              <!-- Data Tables for active employees-->
+            </div>
+            <div class="inactiveEmployeesTableCont tableCont" hidden>
+              <!-- Data Tables for inactive employees-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of right panel -->
+
+      <!-- Confirm Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+
+        <div class="modal-content">
+          <div class="modalHeader">
+            <span class="close" id="closeBtn"
+              ><i class="fa fa-times-circle-o" aria-hidden="true"></i></span
+            >
+            <div class="headTitle" id="headTitle"></div>
+
+            <div class="modalLine"></div>
+          </div>
+          <div class="modalBody" id="modalBody"></div>
+          <div class="modalFooter">
+            <div class="modalButtonCont" id="buttonsModal"></div>
+          </div>
+        </div>
+      </div>
+      <!-- end of confirm modal -->
+
+      <!-- Add new employee Modal -->
+
+      <div id="addModal" class="modal">
+        <!-- //Modal content -->
+
+        <div class="modal-content" id="addModalContent">
+          <div class="modalHeader">
+            <span class="close" id="addcloseBtn"
+              ><i class="fa fa-times-circle-o" aria-hidden="true"></i></span
+            >
+            <div class="headTitle">
+              <h1>ADD NEW EMPLOYEE</h1>
+            </div>
+            <div class="modalLine"></div>
+          </div>
+          <div class="modalBody">
+            <form id="addConfirmBtn">
+              <div class="formBody">
+                <div class="row">
+                  <div class="col">
+                    <label for="employee_number">Employee Number:</label>
+                  </div>
+                  <div class="col">
+                    <label for="firstname">First Name:</label>
+                  </div>
+                  <div class="col">
+                    <label for="lastname">Last Name:</label>
+                  </div>
+                </div>
+                <div class="row row-bottom">
+                  <div class="col bottom">
+                    <input type="number" step="any" id="employee_number" onchange="nozero(this)" min="0" placeholder="Employee Number" required/>
+                  </div>
+                  <div class="col bottom">
+                    <input type="text" id="firstname" placeholder="First Name" required/>
+                    
+                  </div>
+                  <div class="col bottom">
+                    <input type="text" id="lastname" placeholder="Last Name" required/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="gender">Gender:</label>                    
+                  </div>
+                  <div class="col">
+                    <label for="birthday">Date of Birth:</label>
+                  </div>
+                  <div class="col">
+                    <label for="contactnumber">Contact Number:</label>
+                  </div>
+                </div>
+                <div class="row row-bottom">
+                  <div class="col bottom">
+                    <select id="gender">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>                
+                  </div>
+                  <div class="col bottom">
+                    <input type="date" id="birthday" required/>
+                  </div>
+                  <div class="col bottom">
+                    <input type="number" step="any" id="contact_number" min="0" placeholder="Ex. 09011234567" minlength="11" required onkeyup="num_checker(this.value)"/>  
+                    <p class="errorMessage" id="contactNumberError"></p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label for="house_number">House Number:</label>                    
+                  </div>
+                  <div class="col">
+                    <label for="street">Street Name:</label>
+                  </div>
+                  <div class="col">
+                    <label for="barangay">Barangay:</label>
+                  </div>
+                  <div class="col">
+                    <label for="city">City:</label>
+                  </div>
+                </div>
+
+                <div class="row row-bottom">
+                  <div class="col bottom">
+                    <input type="number" step="any" id="house_number" placeholder="House/Block Number" onchange="nozero(this)" min="0" required/>   
+                  </div>
+                  <div class="col bottom">
+                    <input type="text" id="street" placeholder="Street Name" required/>
+                  </div>
+                  <div class="col bottom">
+                    <input type="text" id="barangay" placeholder="Barangay" required/>  
+                  </div>
+                  <div class="col bottom">  
+                    <input type="text" id="city" placeholder="City" required/>
+                  </div>
+                </div>
+
+                <div class="row" id="departmentRow">
+                    <!-- items are on function getDepartments in js -->
+                </div>
+                <div class="row" id="salaryRow">
+                    <!-- items are on function getDepartments in js -->
+                </div>
+                
+                <div class="row">
+                  <div class="col">
+                    <label for="username">Employee Username:</label>                    
+                  </div>
+                  <div class="col">
+                    <label for="password">Employee Password:</label>
+                  </div>
+                </div>
+                <div class="row row-bottom">
+                  <div class="col bottom">
+                    <input type="text" id="username" onkeyup="username_check(this.value)" placeholder="Employee Username" required/>
+                  <span class="errorMessage" id="username_error" hidden>Username is already taken.</span>
+                  <span class="errorMessage" id="username_less" hidden>Username should be at least 4 characters.</span>
+                  <span class="acceptMessage" id="username_accept" hidden>Username available.</span>
+                  </div>
+                  
+                  <div class="col bottom">
+                    <input type="text" id="password" value="password123" required/>
+                  </div>
+                </div>
+                
+              </div>
+          </div>
+          <div class="modalFooter">
+            <div class="modalButtonCont">
+              <button type="submit" class="modalBtn modalConfirmBtn">
+                ADD EMPLOYEE
+              </button>
+            </form>
+              <button class="modalBtn modalBanBtn" id="addmodalCancel">
+                CANCEL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of add modal -->
+
+      <!-- Edit employee Modal -->
+
+      <div id="editModal" class="modal">
+        <!-- //Modal content -->
+
+        <div class="modal-content" id="addModalContent">
+          <div class="modalHeader">
+            <span class="close" id="editcloseBtn"
+              ><i class="fa fa-times-circle-o" aria-hidden="true"></i></span
+            >
+            <div class="headTitle">
+              <h1>EDIT EMPLOYEE INFORMATION</h1>
+            </div>
+            <div class="modalLine"></div>
+          </div>
+          <!-- <div class="modalBody"> -->
+            <div class="modalBody">
+              <form id="editConfirmBtn">
+                <div class="formBody">
+                  <div class="row">
+                    <div class="col">
+                      <label for="edit_employee_number">Employee Number:</label>
+                    </div>
+                    <div class="col">
+                      <label for="edit_firstname">First Name:</label>
+                    </div>
+                    <div class="col">
+                      <label for="edit_lastname">Last Name:</label>
+                    </div>
+                  </div>
+                  <div class="row row-bottom">
+                    <div class="col bottom">
+                      <input type="number" step="any" id="edit_employee_number" onchange="nozero(this)" min="0" placeholder="Employee Number" required/>
+                    </div>
+                    <div class="col bottom">
+                      <input type="text" id="edit_firstname" placeholder="First Name" required/>
+                      
+                    </div>
+                    <div class="col bottom">
+                      <input type="text" id="edit_lastname" placeholder="Last Name" required/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <label for="edit_gender">Gender:</label>                    
+                    </div>
+                    <div class="col">
+                      <label for="edit_birthday">Date of Birth:</label>
+                    </div>
+                    <div class="col">
+                      <label for="edit_contactnumber">Contact Number:</label>
+                    </div>
+                  </div>
+                  <div class="row row-bottom">
+                    <div class="col bottom">
+                      <select id="edit_gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>                
+                    </div>
+                    <div class="col bottom">
+                      <input type="date" id="edit_birthday" required/>
+                    </div>
+                    <div class="col bottom">
+                      <input type="number" step="any" id="edit_contact_number" min="0" placeholder="Ex. 09011234567" minlength="11" required onkeyup="num_checker2(this.value)"/>  
+                      <p class="errorMessage" id="edit_contactNumberError"></p>
+                    </div>
+                  </div>
+  
+                  <div class="row">
+                    <div class="col">
+                      <label for="edit_house_number">House Number:</label>                    
+                    </div>
+                    <div class="col">
+                      <label for="edit_street">Street Name:</label>
+                    </div>
+                    <div class="col">
+                      <label for="edit_barangay">Barangay:</label>
+                    </div>
+                    <div class="col">
+                      <label for="edit_city">City:</label>
+                    </div>
+                  </div>
+  
+                  <div class="row row-bottom">
+                    <div class="col bottom">
+                      <input type="number" step="any" id="edit_house_number" placeholder="House/Block Number" onchange="nozero(this)" min="0" required/>   
+                    </div>
+                    <div class="col bottom">
+                      <input type="text" id="edit_street" placeholder="Street Name" required/>
+                    </div>
+                    <div class="col bottom">
+                      <input type="text" id="edit_barangay" placeholder="Barangay" required/>  
+                    </div>
+                    <div class="col bottom">  
+                      <input type="text" id="edit_city" placeholder="City" required/>
+                    </div>
+                  </div>
+  
+                  <div class="row" id="edit_departmentRow">
+                      <!-- items are on function getDepartments in js -->
+                  </div>
+                  <div class="row" id="edit_salaryRow">
+                      <!-- items are on function getDepartments in js -->
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col">
+                      <label for="edit_username">Employee Username:</label>                    
+                    </div>
+                    <div class="col">
+                      <!-- <label for="edit_password">Employee Password:</label> -->
+                    </div>
+                  </div>
+                  <div class="row row-bottom">
+                    <div class="col bottom">
+                      <input type="text" id="edit_username" onkeyup="username_check2(this.value)" placeholder="Employee Username" required/>
+                      <span class="errorMessage" id="edit_username_error" hidden>Username is already taken.</span>
+                      <span class="errorMessage" id="edit_username_less" hidden>Username should be at least 4 characters.</span>
+                      <span class="acceptMessage" id="edit_username_accept" hidden>Username available.</span>
+                    
+                    </div>
+                    
+                    <div class="col bottom">
+                      <!-- <input type="text" id="edit_password" value="password123" required/> -->
+                      <button type="button" class="modalButtonCont modalBtn modalCancelBtn" onclick="resetPassword()">Reset Password</button>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+          <div class="modalFooter">
+            <div class="modalButtonCont">
+              <button type="submit" class="modalBtn modalConfirmBtn" id="editmodalConfirmBtn">
+                APPLY CHANGES
+              </button>
+            </form>
+              <button class="modalBtn modalBanBtn" id="editmodalCancel">
+                CANCEL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of add modal -->
+    </div>
+  </body>
+  <!-- <script src="../javascript/default.js"></script> -->
+  <script src="../admin_ems/js/employees.js"></script>
+</html>

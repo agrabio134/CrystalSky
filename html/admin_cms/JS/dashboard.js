@@ -239,47 +239,158 @@ $(".see-more").click(function (event) {
   $(this).remove();
 });
 
+let timeouts = {};
+
 function RoomPublish(id) {
-  let confirmPublish = confirm("Are you sure to Publish?");
+  Swal.fire({
+    title: "Publish Room",
+    text: "Do you want to publish this room now or schedule it for later?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#4BB1F7",
+    cancelButtonColor: "#BB9441",
+    confirmButtonText: "PUBLISH NOW",
+    cancelButtonText: "SCHEDULE FOR LATER",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      publishRoom(id);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "SCHEDULE ROOM",
+        html:
+          '<div style="display:flex; flex-direction: column; text-align: start;">' +
+          '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
+          '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "SCHEDULE",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const date = document.getElementById("publish-date").value;
+          const time = document.getElementById("publish-time").value;
+          if (date === "" || time === "") {
+            Swal.fire({
+              title: "Error",
+              text: "Please select a valid date and time.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
 
-  if (confirmPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+          const publishDateTime = new Date(`${date} ${time}`).getTime();
+          const now = new Date().getTime();
+          const delay = publishDateTime - now;
+          localStorage.setItem(`scheduled_${id}`, publishDateTime);
 
-    console.log(item);
+          $(`#RoomPublish${id}`).text("SCHEDULED");
+          $(`#RoomPublish${id}`).addClass("scheduled");
+          // color change
+          $(`#RoomPublish${id}`).css("background-color", "#FFC107", "Font-family", "montserrat-medium", "border-radius", "4px");
+          $(`#RoomPublish${id}`).off("click");
+          $(`#RoomPublish${id}`).click(function () {
+            Swal.fire({
+              title: "Scheduled Room",
+              text: `This room is scheduled to be published on ${date} at ${time}.`,
+              icon: "info",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "CANCEL SCHEDULE",
+              cancelButtonText: "CLOSE",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cancelRoomSchedule(id);
+              }
+            });
+          });
 
-    $.ajax({
-      url: url + "RoomPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'Room has been published.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
+          timeouts[id] = setTimeout(function () {
+            publishRoom(id);
+          }, delay);
 
-        getRooms();
-      })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
+          Swal.fire({
+            title: "Room Scheduled",
+            text: "The room has been scheduled for publication.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          });
+        }
       });
-  }
+    }
+  });
+}
+
+// check local storage for scheduled date and time
+
+function cancelRoomSchedule(id) {
+  // Remove "scheduled" class and change text to "Publish"
+  $(`#RoomPublish${id}`).text("Publish");
+  $(`#RoomPublish${id}`).removeClass("scheduled");
+  // color change
+  $(`#RoomPublish${id}`).css("background-color", "#4CAF50");
+
+  // Remove existing click event and add RoomPublish function as click event
+  $(`#RoomPublish${id}`).off("click");
+  $(`#RoomPublish${id}`).click(function () {
+    RoomPublish(id);
+  });
+
+  clearTimeout(timeouts[id]);
+
+  // Clear timeout associated with scheduled publish
+
+  // Remove "Cancel Scheduled" button and replace with "Schedule for Later"
+  $(`#RoomCancel${id}`).remove();
+
+  // Add click event for "Schedule for Later" button
+  $(`#RoomSchedule${id}`).click(function () {
+    scheduleRoom(id);
+  });
+}
+
+function publishRoom(id) {
+  item = {};
+  // inputs will be turned into objects
+  item["id"] = id;
+  // stringify the object
+  item = JSON.stringify(item);
+
+  console.log(item);
+
+  $.ajax({
+    url: url + "RoomPublish",
+    type: "post",
+    dataType: "json",
+    data: item,
+  })
+    // if success
+    .done(function (data) {
+      // set id as local storage
+      // reload page
+      Swal.fire({
+        icon: "success",
+        title: "Done!",
+        confirmButtonColor: "#4BB1F7",
+        text: "Room has been published.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(function () {
+        location.reload();
+      }, 1800);
+
+      getRooms();
+    })
+    // if failed
+    .fail(function (data) {
+      console.log("not working");
+    });
 }
 
 //LIVE ROOM
@@ -502,38 +613,173 @@ const getGalleryPublish = () => {
     });
 };
 
-const galleryPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to Publish?");
+function galleryPublish(id) {
+  Swal.fire({
+    title: "Publish Gallery",
+    text: "Do you want to publish this Image now or schedule it for later?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Publish Now",
+    cancelButtonText: "Schedule for Later",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      publishGallery(id);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "Schedule Post",
+        html:
+          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Schedule",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const date = document.getElementById("publish-date").value;
+          const time = document.getElementById("publish-time").value;
+          if (date === "" || time === "") {
+            Swal.fire({
+              title: "Error",
+              text: "Please select a valid date and time.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+          const publishDateTime = new Date(`${date} ${time}`).getTime();
+          const now = new Date().getTime();
+          const delay = publishDateTime - now;
+          $(`#galleryPublish${id}`).text("Scheduled");
+          $(`#galleryPublish${id}`).addClass("scheduled");
+          $(`#galleryPublish${id}`).css("background-color", "#FFC107");
 
-    console.log(item);
+          $(`#galleryPublish${id}`).off("click");
+          $(`#galleryPublish${id}`).click(function () {
+            Swal.fire({
+              title: "Scheduled Post",
+              text: `This room is scheduled to be published on ${date} at ${time}.`,
+              icon: "info",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Cancel Schedule",
+              cancelButtonText: "Close",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cancelGallerySchedule(id);
+              }
+            });
+          });
 
-    $.ajax({
-      url: url + "galleryPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        window.location.reload();
+          timeouts[id] = setTimeout(function () {
+            publishGallery(id);
+          }, delay);
 
-        getRooms();
-      })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
+          Swal.fire({
+            title: "Post Scheduled",
+            text: "The room has been scheduled for publication.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          });
+        }
       });
-  }
-};
+    }
+  });
+}
+function cancelGallerySchedule(id) {
+  // Remove "scheduled" class and change text to "Publish"
+  $(`#galleryPublish${id}`).text("Publish");
+  $(`#galleryPublish${id}`).removeClass("scheduled");
+  $(`#galleryPublish${id}`).css("background-color", "#4CAF50");
+
+  // Remove existing click event and add RoomPublish function as click event
+  $(`#galleryPublish${id}`).off("click");
+  $(`#galleryPublish${id}`).click(function () {
+    galleryPublish(id);
+  });
+
+  clearTimeout(timeouts[id]);
+}
+
+function publishGallery(id) {
+  item = {};
+  // inputs will be turned into objects
+  item["id"] = id;
+  // stringify the object
+  item = JSON.stringify(item);
+
+  console.log(item);
+
+  $.ajax({
+    url: url + "galleryPublish",
+    type: "post",
+    dataType: "json",
+    data: item,
+  })
+    // if success
+    .done(function (data) {
+      // set id as local storage
+      // reload page
+      Swal.fire({
+        icon: "success",
+        title: "Done!",
+        confirmButtonColor: "#4BB1F7",
+        text: "Room has been published.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(function () {
+        location.reload();
+      }, 1800);
+
+      getRooms();
+    })
+    // if failed
+    .fail(function (data) {
+      console.log("not working");
+    });
+}
+
+// const galleryPublish = (id) => {
+//   let confirmUnPublish = confirm("Are you sure to Publish?");
+
+//   if (confirmUnPublish) {
+//     item = {};
+//     // inputs will be turned into objects
+//     item["id"] = id;
+//     // stringify the object
+//     item = JSON.stringify(item);
+
+//     console.log(item);
+
+//     $.ajax({
+//       url: url + "galleryPublish",
+//       type: "post",
+//       dataType: "json",
+//       data: item,
+//     })
+//       // if success
+//       .done(function (data) {
+//         // set id as local storage
+//         // reload page
+//         window.location.reload();
+
+//         getRooms();
+//       })
+//       // if failed
+//       .fail(function (data) {
+//         console.log("not working");
+//       });
+//   }
+// };
 
 $(document).ready(function () {
   getAnnouncements();
@@ -562,16 +808,23 @@ const getAnnouncements = () => {
         .publish_title_announcement${content.id}{
          display:flex;
          width: 100%;
-         min-height: 20px;
-        //  border: 1px solid red;
+         align-items: center;
+         height: 30px;
+          // border: 1px solid red;
          margin-top: 5px;
          margin-bottom: 5px;
+         
         }
         .publish_title_announcement${content.id} p{
           font-family: montserrat-bold;
           letter-spacing:1px;
           font-size:20px;
           color:  #424857;
+           width: 100%; 
+           white-space: nowrap;
+           text-overflow: ellipsis;
+          overflow: hidden;
+          font-weight: bold;
         }
         </style>
 
@@ -660,12 +913,15 @@ const getAnnouncementsPublish = () => {
          margin-bottom: 5px;
         }
         .publish_title_announcement${content.id} p{
-          display: flex;
-          flex-direction: row;
-          font-family: montserrat-medium;
-          color: #424857;
+          font-family: montserrat-bold;
           letter-spacing:1px;
           font-size:20px;
+          color:  #424857;
+           width: 100%; 
+           white-space: nowrap;
+           text-overflow: ellipsis;
+          overflow: hidden;
+          font-weight: bold;
         }
         </style>
 
@@ -701,91 +957,318 @@ alt="Mountains" style="width:100%" height="200px"
     });
 };
 
-const announcementPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to Publish?");
+function announcementPublish(id) {
+  Swal.fire({
+    title: "Publish Gallery",
+    text: "Do you want to publish this Announcement now or schedule it for later?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Publish Now",
+    cancelButtonText: "Schedule for Later",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      publishAnnouncement(id);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "Schedule Post",
+        html:
+          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Schedule",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const date = document.getElementById("publish-date").value;
+          const time = document.getElementById("publish-time").value;
+          if (date === "" || time === "") {
+            Swal.fire({
+              title: "Error",
+              text: "Please select a valid date and time.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+          const publishDateTime = new Date(`${date} ${time}`).getTime();
+          const now = new Date().getTime();
+          const delay = publishDateTime - now;
+          $(`#announcementPublish${id}`).text("Scheduled");
+          $(`#announcementPublish${id}`).addClass("scheduled");
+          $(`#announcementPublish${id}`).css("background-color", "#FFC107");
 
-    console.log(item);
+          $(`#announcementPublish${id}`).off("click");
+          $(`#announcementPublish${id}`).click(function () {
+            Swal.fire({
+              title: "Scheduled Announcement",
+              text: `This room is scheduled to be published on ${date} at ${time}.`,
+              icon: "info",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Cancel Schedule",
+              cancelButtonText: "Close",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cancelAnnouncementSchedule(id);
+              }
+            });
+          });
 
-    $.ajax({
-      url: url + "announcementPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'Announcement has been published.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-        
+          timeouts[id] = setTimeout(function () {
+            publishAnnouncement(id);
+          }, delay);
 
-        // reload page
-
-        // getAnnouncements();
-      })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
+          Swal.fire({
+            title: "Post Scheduled",
+            text: "The room has been scheduled for publication.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          });
+        }
       });
-  }
-};
+    }
+  });
+}
+function cancelAnnouncementSchedule(id) {
+  // Remove "scheduled" class and change text to "Publish"
+  $(`#announcementPublish${id}`).text("Publish");
+  $(`#announcementPublish${id}`).removeClass("scheduled");
+  $(`#announcementPublish${id}`).css("background-color", "#4CAF50");
 
-const eventPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to Publish?");
+  // Remove existing click event and add RoomPublish function as click event
+  $(`#announcementPublish${id}`).off("click");
+  $(`#announcementPublish${id}`).click(function () {
+    announcementPublish(id);
+  });
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+  clearTimeout(timeouts[id]);
+}
 
-    console.log(item);
+function publishAnnouncement(id) {
+  item = {};
+  // inputs will be turned into objects
+  item["id"] = id;
+  // stringify the object
+  item = JSON.stringify(item);
 
-    $.ajax({
-      url: url + "eventPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'Event has been published.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-      })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
+  console.log(item);
+
+  $.ajax({
+    url: url + "announcementPublish",
+    type: "post",
+    dataType: "json",
+    data: item,
+  })
+    // if success
+    .done(function (data) {
+      // set id as local storage
+      // reload page
+      Swal.fire({
+        icon: "success",
+        title: "Done!",
+        confirmButtonColor: "#4BB1F7",
+        text: "Room has been published.",
+        showConfirmButton: false,
+        timer: 1500,
       });
-  }
-};
+
+      setTimeout(function () {
+        location.reload();
+      }, 1800);
+
+      getRooms();
+    })
+    // if failed
+    .fail(function (data) {
+      console.log("not working");
+    });
+}
+
+function eventPublish(id) {
+  Swal.fire({
+    title: "Publish Gallery",
+    text: "Do you want to publish this Event now or schedule it for later?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Publish Now",
+    cancelButtonText: "Schedule for Later",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      publishEvent(id);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire({
+        title: "Schedule Post",
+        html:
+          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Schedule",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const date = document.getElementById("publish-date").value;
+          const time = document.getElementById("publish-time").value;
+          if (date === "" || time === "") {
+            Swal.fire({
+              title: "Error",
+              text: "Please select a valid date and time.",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          }
+
+          const publishDateTime = new Date(`${date} ${time}`).getTime();
+          const now = new Date().getTime();
+          const delay = publishDateTime - now;
+          $(`#eventPublish${id}`).text("Scheduled");
+          $(`#eventPublish${id}`).addClass("scheduled");
+          $(`#eventPublish${id}`).css("background-color", "#FFC107");
+
+          $(`#eventPublish${id}`).off("click");
+          $(`#eventPublish${id}`).click(function () {
+            Swal.fire({
+              title: "Scheduled Event",
+              text: `This room is scheduled to be published on ${date} at ${time}.`,
+              icon: "info",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Cancel Schedule",
+              cancelButtonText: "Close",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cancelEventSchedule(id);
+              }
+            });
+          });
+
+          timeouts[id] = setTimeout(function () {
+            publishEvent(id);
+          }, delay);
+
+          Swal.fire({
+            title: "Post Scheduled",
+            text: "The room has been scheduled for publication.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          });
+        }
+      });
+    }
+  });
+}
+function cancelEventSchedule(id) {
+  // Remove "scheduled" class and change text to "Publish"
+  $(`#eventPublish${id}`).text("Publish");
+  $(`#eventPublish${id}`).removeClass("scheduled");
+
+  $(`#eventPublish${id}`).css("background-color", "#4CAF50");
+
+  // Remove existing click event and add RoomPublish function as click event
+  $(`#eventPublish${id}`).off("click");
+  $(`#eventPublish${id}`).click(function () {
+    eventPublish(id);
+  });
+
+  clearTimeout(timeouts[id]);
+}
+
+function publishEvent(id) {
+  item = {};
+  // inputs will be turned into objects
+  item["id"] = id;
+  // stringify the object
+  item = JSON.stringify(item);
+
+  console.log(item);
+
+  $.ajax({
+    url: url + "eventPublish",
+    type: "post",
+    dataType: "json",
+    data: item,
+  })
+    // if success
+    .done(function (data) {
+      // set id as local storage
+      // reload page
+      Swal.fire({
+        icon: "success",
+        title: "Done!",
+        confirmButtonColor: "#4BB1F7",
+        text: "Room has been published.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(function () {
+        location.reload();
+      }, 1800);
+
+      getEventPublish();
+    })
+    // if failed
+    .fail(function (data) {
+      console.log("not working");
+    });
+}
+
+// const eventPublish = (id) => {
+//   let confirmUnPublish = confirm("Are you sure to Publish?");
+
+//   if (confirmUnPublish) {
+//     item = {};
+//     // inputs will be turned into objects
+//     item["id"] = id;
+//     // stringify the object
+//     item = JSON.stringify(item);
+
+//     console.log(item);
+
+//     $.ajax({
+//       url: url + "eventPublish",
+//       type: "post",
+//       dataType: "json",
+//       data: item,
+//     })
+//       // if success
+//       .done(function (data) {
+//         // set id as local storage
+//         // reload page
+//         Swal.fire({
+//           icon: "success",
+//           title: "Done!",
+//           confirmButtonColor: "#4BB1F7",
+//           text: "Event has been published.",
+//           showConfirmButton: false,
+//           timer: 1500,
+//         });
+
+//         setTimeout(function () {
+//           location.reload();
+//         }, 1800);
+//       })
+//       // if failed
+//       .fail(function (data) {
+//         console.log("not working");
+//       });
+//   }
+// };
 // $(document).ready(function () {
 //   getAnnouncements();
 // });
@@ -940,14 +1423,15 @@ const eventUnPublish = (id) => {
         // set id as local storage
         // reload page
         Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'You unpublished an event.',
+          icon: "success",
+          title: "Done!",
+          confirmButtonColor: "#4BB1F7",
+          text: "You unpublished an event.",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           location.reload();
         }, 1800);
       })
@@ -981,14 +1465,15 @@ const announcementUnPublish = (id) => {
         // set id as local storage
         // reload page
         Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'You unpublished an announcement.',
+          icon: "success",
+          title: "Done!",
+          confirmButtonColor: "#4BB1F7",
+          text: "You unpublished an announcement.",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           location.reload();
         }, 1800);
       })
@@ -1021,14 +1506,15 @@ const galleryUnPublish = (id) => {
         // set id as local storage
         // reload page
         Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'Image has unpublished.',
+          icon: "success",
+          title: "Done!",
+          confirmButtonColor: "#4BB1F7",
+          text: "Image has unpublished.",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           location.reload();
         }, 1800);
       })
@@ -1058,137 +1544,143 @@ $(document).ready(function () {
 });
 
 // archive
-
 const galleryArchive = (id) => {
-  let confirmRestore = confirm("Are you sure to Archive this?");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure you want to archive this?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, archive it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      item = {};
+      item["id"] = id;
+      item = JSON.stringify(item);
 
-  if (confirmRestore) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+      console.log(item);
 
-    console.log(item);
-
-    $.ajax({
-      url: url + "galleryArchive",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'You archive an image.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-        // getRooms();
+      $.ajax({
+        url: url + "galleryArchive",
+        type: "post",
+        dataType: "json",
+        data: item,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "You archived an image.",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+        })
+        .fail(function (data) {
+          console.log("not working");
+        });
+    }
+  });
 };
+
 const eventArchive = (id) => {
-  let confirmRestore = confirm("Are you sure to Archive this?");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure you want to archive this?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, archive it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      item = {};
+      item["id"] = id;
+      item = JSON.stringify(item);
 
-  if (confirmRestore) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+      console.log(item);
 
-    console.log(item);
-
-    $.ajax({
-      url: url + "eventArchive",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'You archive an event.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-
-        // getRooms();
+      $.ajax({
+        url: url + "eventArchive",
+        type: "post",
+        dataType: "json",
+        data: item,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "You archived an event.",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+        })
+        .fail(function (data) {
+          console.log("not working");
+        });
+    }
+  });
 };
 const announcementArchive = (id) => {
-  let confirmRestore = confirm("Are you sure to Archive this?");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure you want to Archive this?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, archive it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      item = {};
+      item["id"] = id;
+      item = JSON.stringify(item);
 
-  if (confirmRestore) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
+      console.log(item);
 
-    console.log(item);
-
-    $.ajax({
-      url: url + "announcementArchive",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        Swal.fire({
-          icon: 'success',
-          title: 'Done!',
-          text: 'You archive an announcement.',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1800);
-
-        // getRooms();
+      $.ajax({
+        url: url + "announcementArchive",
+        type: "post",
+        dataType: "json",
+        data: item,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "You archived an announcement.",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+        })
+        .fail(function (data) {
+          console.log("not working");
+        });
+    }
+  });
 };
+
+
+
+
 
 $(document).ready(function () {
   getRooms();
 });
 
-const editRoom = (roomId) =>{
+const editRoom = (roomId) => {
   $.ajax({
     url: url + "getRooms",
     type: "post",
@@ -1199,14 +1691,23 @@ const editRoom = (roomId) =>{
     .done(function (data) {
       let Rooms = data.payload;
 
-      const roomNumber = Rooms.find(
-        (content) => content.id === roomId
-      );
-      window.location.href = `http://127.0.0.1:5501//html/admin_cms/create_room.html?id=${roomId}`;
+      const roomNumber = Rooms.find((content) => content.id === roomId);
+      window.location.href = `http://127.0.0.1:5501//html/admin_cms/admin_cms_create_room.html?id=${roomId}`;
       // i want to auto click the edit button by room id
     })
     // if failed
     .fail(function (data) {
       console.error("not okay");
     });
-}
+};
+// Swal.fire({
+//   title: 'Change Profile Picture',
+//   text: "Are you sure you want update your profile picture?",
+//   icon: 'warning',
+//   showCancelButton: true,
+//   background: '#222222',
+//   confirmButtonText: 'Continue',
+//   confirmButtonColor: "#00AEAE",
+//   color: '#b7b7b7',
+//   confirmButtonText: 'Yes'
+// })

@@ -1,13 +1,12 @@
 body{
     display: flex;
     flex-direction: column;
-    height:100%; 
+    height: 150vh; 
 }
 
 .admin_left_pane{
     width: 14%;
     background-color: #ffffff;
-    height: 100vh;
     z-index: 0;
     position: fixed;
     top: 115px;
@@ -20,7 +19,7 @@ body{
     margin-left: 14%;
     margin-top: 6%;
     border-left: 1px solid #E8E8E8;
-    min-height: 100vh;
+    height: 150%;
 }
 
 .admin_navigation_container{
@@ -51,9 +50,10 @@ body{
 
 #admin_name_header{
     font-family: 'montserrat-medium';
-    color: black;
+    color: #1d2027;
     font-size: 20px;
     margin-left: 5px;
+    text-align: center;
 }
 
 #admin_name{
@@ -64,7 +64,7 @@ body{
 .admin_left_pane_content{
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
+    padding-top: 20px;
 }
 
 .admin_left_pane_content_account_name_container{
@@ -73,6 +73,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    word-wrap: break-word;
 }
 
 .admin_left_pane_content_tabs_container{
@@ -82,7 +83,7 @@ body{
 }
 
 .admin_current_tab{
-    background-color: #f1f1f1;
+    background-color: #e6f5ff;
     padding: 12px 12px 12px 20px;
     display: flex;
     align-items: center;
@@ -91,7 +92,6 @@ body{
     border-left: 4px solid #4BB1F7;
     pointer-events: none;
 }
-
 
 .admin_tab_secgroup{
     margin-bottom: 7px;
@@ -117,11 +117,12 @@ body{
 
 #admin_left_pane_content_management{  
     font-family: 'montserrat-medium';
-    color: black;
+    color: #1d2027;
     border-top: 1px solid #e8e8e8;
     margin-top: 20px;
     padding: 20px;
     font-size: 20px;
+    text-align: center;
 }
 
 .admin_logout_icon_pane{
@@ -150,6 +151,7 @@ body{
 
 .tabs:hover{
     border-left: 4px solid #4BB1F7;
+    background-color: #f1f1f1;
 }
 
 .admin_unselected_tab{
@@ -187,6 +189,7 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    margin-right: 20px;
 }
 
 #admin_navigation_tab_logo{
@@ -234,13 +237,65 @@ body{
     display: none;
 }
 
+.admin_right_pane_content_container{
+    display: flex;
+    flex-direction: column;
+    border:1px;
+}
+
+.loader-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #F8FAFB;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.loader {
+    display: block;
+    width: 70px;
+    position: absolute;
+    animation: loader 0.65s forwards;
+}
+
+@keyframes loader {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@media(max-width: 1750px){
+    .admin_left_pane{
+        top: 107px;
+    }
+}
+
+@media(max-width: 1550px){
+    .admin_left_pane{
+        top: 100px;
+    }
+}
+
 @media (max-width: 1500px){
     #admin_icon{
         display: none;
     }
 }
 
+@media(max-width: 1450px){
+    .admin_left_pane{
+        top: 95px;
+    }
+}
+
 @media(max-width: 1350px){
+    .admin_left_pane{
+        top: 110px;
+    }
 
     .admin_right_pane_content_container{
         margin-top: 30px;

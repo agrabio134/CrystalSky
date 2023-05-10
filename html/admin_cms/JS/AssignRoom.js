@@ -14,6 +14,9 @@ const getRooms = () => {
     .done(function (data) {
       let RoomContent = data.payload;
 
+      RoomContent.sort((a, b) => a.room_number - b.room_number);
+
+
       let str = `
         <style>
   .tableMainCont{
@@ -153,11 +156,11 @@ const getRoomForm = () => {
         </style>    
 
 
-        <form action="${url}postNewRoom" method="post" class="form_create_room">
-        <div class="form_create_room">
+        <form id="postNewRoom" method="post" class="form_create_room">
+        <div class="div_create_rooms">
           <div class="room_container">
             <label class="room_number_label" for="room_number">Room number: </label>
-            <input class="Room_number_input" type="number" id="room_number" name="room_number" placeholder="Room number..">
+            <input class="Room_number_input" type="number" id="room_number" name="room_number"  min="1" placeholder="Room number.." required>
           </div>
 
           <div class="label_container">
@@ -173,16 +176,79 @@ const getRoomForm = () => {
       str += `  
         </select>
         </div>
-
         <div class="submit_cont">
-        <input class="submit_input" type="submit" value="Submit">
+        <input class="submit_input" type="submit" value="SUBMIT">
+        </div>
         </div>
 
-        </div>
-        </form>`;
+        
+        </form>
+        `;
+
+
+
       console.log(data);
 
+
+
       $("#getRoomForm").append(str);
+
+      $("#postNewRoom").submit(function (e) {
+        e.preventDefault();
+        
+        var roomNumber = $("#room_number").val();
+        var categoryId = $("#category_id").val();
+      
+        // Display a confirmation dialog
+        Swal.fire({
+          icon: "question",
+          title: "Confirmation",
+          text: "Are you sure you want to post this new room?",
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          cancelButtonText: "No"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // User confirmed, make the AJAX request to the server
+            $.ajax({
+              url: url + "postNewRoom",
+              method: "POST",
+              data: {
+                room_number: roomNumber,
+                category_id: categoryId
+              },
+              success: function (response) {
+                // Handle the success response from the server
+                console.log(response);
+                Swal.fire({
+                  icon: "success",
+                  title: "Success!",
+                  text: "New room has been posted.",
+                  showConfirmButton: true,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+                
+                // Add any additional logic or redirection here
+              },
+              error: function (xhr, status, error) {
+                // Handle the error response from the server
+                console.log(xhr.responseText);
+                Swal.fire({
+                  icon: "error",
+                  title: "Error!",
+                  text: "Failed to post new room."
+                });
+              }
+            });
+          }
+        });
+      });
+      
+
+        
     })
     // if failed
     .fail(function (data) {
@@ -211,18 +277,23 @@ const getRoomsCategory = () => {
 
       // $("#ArchivedGallery").empty();
 
-      let str = ` <h2>Edit Room</h2>
-              <form class="form_container_about">
+      let str = ` 
+      
+          
+        
+          
+              <form class="form_container_about"  >
                 <input type="hidden" id="id">
 
+              <div class="modalBody">
                 <div class="about_text_container">
                 <label class="assign_room_container" for="RoomNumber">Room Number</label>
-                  <input class="" type="text" id="RoomNumber" readonly>
+                  <input class="assign_room_container_input" type="text" id="RoomNumber" min="1" readonly>
                 </div>
 
                 <div class="assign_category_container">
-                <div class="choose_category_rooms">Choose Category:</div>
-                <select class="about_textarea_input" id="categoriInput">
+                <div class="choose_category_rooms">Choose Category</div>
+                <select class="about_textarea_input" id="category">
                 <option value="" selected disabled>Select a category</option>
 
           
@@ -241,10 +312,12 @@ const getRoomsCategory = () => {
       str += `
               <select>
               </div>
+              
               <div class="submit_button_about">
-                <button class="saveButton_about" type="button" id="saveButton">Save</button>
+                <button class="saveButton_about" type="button" id="saveButton">SAVE</button>
       
-                <button class="cancelButton_about" type="button" id="cancelButton">Cancel</button>
+                <button class="cancelButton_about" type="button" id="cancelButton">CANCEL</button>
+              </div>
               </div>
             </form>`;
 
@@ -286,77 +359,97 @@ $(document).on("click", "#cancelButton", function () {
 $(document).on("click", "#saveButton", function () {
   // get the values from the form
   let id = $("#id").val();
-  // let name = $("#RoomNumber").val();
+  let category = $("#category option:selected").val();
 
-  console.log(id);
-  // console.log(name);
-
-  // i want to get the value of the select option by id
-  let category = $("#categoriInput option:selected").val();
-
-  console.log(category);
-  // console.log(category);
-  $(document).ready(function () {
-    updateRoomCategory();
+  Swal.fire({
+    icon: "question",
+    title: "Confirmation",
+    text: "Are you sure you want to update the room category?",
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "No"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Send a POST request to the server
+      $.ajax({
+        url: url + "updateRoomCategoryById",
+        type: "POST",
+        dataType: "json",
+        data: {
+          id: id,
+          category: category,
+        },
+        success: function (data) {
+          console.log(data); // Log the response
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Room category has been updated.",
+            showConfirmButton: true,
+            timer: 1500
+          }).then(() => {
+            window.location.href = `/html/admin_cms/admin_cms_create_room.html`;
+          });
+        },
+        error: function (data) {
+          console.log(data); // Log the error
+          Swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: "Failed to update room category."
+          });
+        }
+      });
+    }
   });
-
-  const updateRoomCategory = () => {
-    // Send a POST request to the server
-    $.ajax({
-      url: url + "updateRoomCategoryById",
-      type: "POST",
-      dataType: "json",
-      data: {
-        id: id,
-        category: category,
-      },
-    });
-
-    // i want to console log the response
-    console.log(id);
-    console.log(category);
-    // if success
-    // post the data to the server
-    $.post(url + "updateRoomCategoryById", {
-      id: id,
-      category: category,
-    });
-    window.location.href = `/html/admin_cms/create_room.html`;
-
-    
-
-    //   .done(function (data) {
-    //     console.log(data);
-    //     // Reload the page
-    // })
-    // // if failed
-    // .fail(function (data) {
-    //     console.error("not okay");
-    // });
-  };
 });
+
 
 $(document).on("click", ".delete-button", function () {
   // Get the ID of the item being deleted
   let itemId = $(this).data("id");
-  console.log(itemId);
-  // Confirm with the user before deleting the item
-  if (confirm("Are you sure you want to delete this item?")) {
-    // Send a DELETE request to the server
-    $.ajax({
-      url: url + "deleteRoom",
-      type: "post",
-      data: {
-        id: itemId,
-      },
-      success: function (data) {
-        // Reload the page
-        console.log(data);
-        // location.reload();
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-    });
-  }
+  
+  // Display a SweetAlert confirmation dialog
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    // Proceed with deletion if confirmed
+    if (result.isConfirmed) {
+      // Send a DELETE request to the server
+      $.ajax({
+        url: url + "deleteRoom",
+        type: "post",
+        data: {
+          id: itemId,
+        },
+        success: function (data) {
+          // Reload the page
+          console.log(data);
+          // Display success message with SweetAlert
+          Swal.fire({
+            title: "Success!",
+            text: "Room has been deleted",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            // Reload the page
+            location.reload();
+          }
+          );
+
+          
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        },
+      });
+    }
+  });
 });
+
