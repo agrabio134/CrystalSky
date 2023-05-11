@@ -221,7 +221,7 @@ input.file-input {
     height: 100%;
   } */
 .second_about_us {
-  margin-top: 30px;
+  width: 100%;
   /* border: 1px solid black; */
 }
 
@@ -229,8 +229,8 @@ input.file-input {
   display: flex;
   align-items: center;
   /* border: 1px solid blue; */
-  height: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  width: 100%;
 
 }
 
@@ -239,16 +239,15 @@ input.file-input {
   font-family: montserrat-bold;
   letter-spacing: 1px;
   color: #424857;
-  margin-left: 30px;
 }
 
 .add_facilities_container {
   /* border: 1px solid green; */
   display: flex;
+  justify-content: start;
   width: 100%;
-  height: 45px;
+  min-height: 45px;
   align-items: center;
-  margin-bottom: 30px;
 
 
 }
@@ -257,13 +256,12 @@ input.file-input {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
+  min-width: 20%;
   padding: 10px;
   background-color: #2FA83F;
   border: 1px solid #dad9d9;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  margin-left: 30px;
   cursor: pointer;
   font-family: montserrat-medium;
   letter-spacing: 1px;
@@ -538,8 +536,9 @@ input[type=file] {
 
 .facilities_cont {
   width: 100%;
-  min-height: 600px;
-  /* border: 1px solid red; */
+  min-height: 100px;
+  /* 
+  border: 1px solid red; */
 }
 
 .facilities_main_cont {
@@ -547,12 +546,15 @@ input[type=file] {
   background-color: white;
   border-radius: 8px;
   border: 1px solid #dad9d9;
+  /* border: 1px solid red; */
+  padding: 30px;
 }
 
 .about_main_cont {
   width: 100%;
   display: flex;
   justify-content: center;
+  /* border: 1px solid red; */
   flex-direction: column;
 }
 
@@ -640,4 +642,29 @@ th {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
   background-color: #FF5D5D;
   cursor: pointer;
+}
+.swal2-popup {
+  font-size: 0.8rem !important;
+  color: #424857 !important;
+  background-color: #ffffff !important;
+  font-family: "Montserrat-medium" !important;
+}
+.swal2-styled.swal2-confirm {
+  border: 0 !important;
+  border-radius: .25em !important;
+  background: initial !important;
+  background-color: #4BB1F7 !important;
+  color: #fff !important;
+  font-size: 1em !important;
+  font-family: "Montserrat-medium" !important;
+}
+
+.swal2-styled.swal2-cancel {
+  border: 0 !important;
+  border-radius: .25em !important;
+  background: initial !important;
+  background-color: #FF5D5D !important;
+  color: #fff !important;
+  font-size: 1em !important;
+  font-family: "Montserrat-medium" !important;
 }

@@ -83,24 +83,21 @@ const getCategoryForm = () => {
       <style>
       .preview-img-container{
         display: flex;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
   
       }
 
       .preview-img-container img {
         width: 200px;
         height: auto;
-        margin: 10px;
+        margin-top: 10px;
         object-fit: contain;
       }
       .create_category_images_container{
         display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center; 
+        flex-direction: column;
+        // justify-content: start;
         width: 100%;
-        height: 50%;
-        // margin-left:30px;
         //  border: 1px solid red;
       }
       .category_images_conts::-webkit-file-upload-button{
@@ -115,7 +112,6 @@ const getCategoryForm = () => {
         cursor: pointer;
         font-size: 15x;
         border-radius: 4px;
-        margin-left: 30px;
       }
       input[type=file]{
         font-family: montserrat-medium;

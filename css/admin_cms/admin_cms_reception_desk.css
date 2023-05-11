@@ -1,6 +1,7 @@
 .reception_main_container{
     width: 100%;
     min-height: 600px;
+    /* border: 1px solid green; */
 }
 .reception_container{
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);

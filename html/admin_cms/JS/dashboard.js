@@ -249,8 +249,8 @@ function RoomPublish(id) {
     showCancelButton: true,
     confirmButtonColor: "#4BB1F7",
     cancelButtonColor: "#BB9441",
-    confirmButtonText: "PUBLISH NOW",
-    cancelButtonText: "SCHEDULE FOR LATER",
+    confirmButtonText: "Publish Now",
+    cancelButtonText: "Scedule For Later",
   }).then((result) => {
     if (result.isConfirmed) {
       publishRoom(id);
@@ -258,16 +258,16 @@ function RoomPublish(id) {
       Swal.fire({
         title: "SCHEDULE ROOM",
         html:
-          '<div style="display:flex; flex-direction: column; text-align: start;">' +
-          '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
-          '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
-          '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
-          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
-        icon: "info",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "SCHEDULE",
+        '<div style="display:flex; flex-direction: column; text-align: start;">' +
+        '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
+        '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
+        '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
+        '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Schedule",
       }).then((result) => {
         if (result.isConfirmed) {
           const date = document.getElementById("publish-date").value;
@@ -290,7 +290,7 @@ function RoomPublish(id) {
           $(`#RoomPublish${id}`).text("SCHEDULED");
           $(`#RoomPublish${id}`).addClass("scheduled");
           // color change
-          $(`#RoomPublish${id}`).css("background-color", "#FFC107", "Font-family", "montserrat-medium", "border-radius", "4px");
+          $(`#RoomPublish${id}`).css("background-color", "#BB9441", "Font-family", "montserrat-medium", "border-radius", "4px");
           $(`#RoomPublish${id}`).off("click");
           $(`#RoomPublish${id}`).click(function () {
             Swal.fire({
@@ -475,37 +475,46 @@ const getLiveRooms = () => {
 };
 
 function RoomUnPublish(id) {
-  let confirmUnPublish = confirm("Are you sure to Publish?");
+  Swal.fire({
+    title: "Confirm Unpublish",
+    text: "Are you sure you want to unpublish?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Unpublish",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform the unpublish operation
+      const item = { id: id };
+      const jsonItem = JSON.stringify(item);
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
-
-    console.log(item);
-
-    $.ajax({
-      url: url + "RoomUnPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        window.location.reload();
-
-        getRooms();
+      $.ajax({
+        url: url + "RoomUnPublish",
+        type: "post",
+        dataType: "json",
+        data: jsonItem,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          // Unpublish operation successful
+          Swal.fire({
+            title: "Success",
+            text: "Room has been unpublished.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          }).then((result) => {
+          window.location.reload();
+          });
+          getRooms();
+        })
+        .fail(function (data) {
+          console.log("Unpublish operation failed");
+        });
+    }
+  });
 }
+
 
 $(document).ready(function () {
   getGalleryUnPublish();
@@ -619,8 +628,8 @@ function galleryPublish(id) {
     text: "Do you want to publish this Image now or schedule it for later?",
     icon: "question",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
+    confirmButtonColor: "#4BB1F7",
+    cancelButtonColor: "#FF5D5D",
     confirmButtonText: "Publish Now",
     cancelButtonText: "Schedule for Later",
   }).then((result) => {
@@ -630,14 +639,15 @@ function galleryPublish(id) {
       Swal.fire({
         title: "Schedule Post",
         html:
-          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
-          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<div style="display:flex; flex-direction: column; text-align: start;">' +
+          '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
           '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
-          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
         icon: "info",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#4BB1F7",
+        cancelButtonColor: "#FF5D5D",
         confirmButtonText: "Schedule",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -658,7 +668,7 @@ function galleryPublish(id) {
           const delay = publishDateTime - now;
           $(`#galleryPublish${id}`).text("Scheduled");
           $(`#galleryPublish${id}`).addClass("scheduled");
-          $(`#galleryPublish${id}`).css("background-color", "#FFC107");
+          $(`#galleryPublish${id}`).css("background-color", "#BB9441");
 
           $(`#galleryPublish${id}`).off("click");
           $(`#galleryPublish${id}`).click(function () {
@@ -974,10 +984,11 @@ function announcementPublish(id) {
       Swal.fire({
         title: "Schedule Post",
         html:
-          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
-          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<div style="display:flex; flex-direction: column; text-align: start;">' +
+          '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
           '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
-          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
         icon: "info",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -1002,7 +1013,7 @@ function announcementPublish(id) {
           const delay = publishDateTime - now;
           $(`#announcementPublish${id}`).text("Scheduled");
           $(`#announcementPublish${id}`).addClass("scheduled");
-          $(`#announcementPublish${id}`).css("background-color", "#FFC107");
+          $(`#announcementPublish${id}`).css("background-color", "#BB9441");
 
           $(`#announcementPublish${id}`).off("click");
           $(`#announcementPublish${id}`).click(function () {
@@ -1109,10 +1120,11 @@ function eventPublish(id) {
       Swal.fire({
         title: "Schedule Post",
         html:
-          '<label for="publish-date" style="display:block; margin-bottom:10px;">Publish Date</label>' +
-          '<input type="date" id="publish-date" style="padding:5px;">' +
+          '<div style="display:flex; flex-direction: column; text-align: start;">' +
+          '<label for="publish-date" style="display:block; margin-bottom:10px; color:">Publish Date</label>' +
+          '<input type="date" id="publish-date" style="padding:5px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px; padding-left:14px; padding-right:14px;">' +
           '<label for="publish-time" style="display:block; margin-top:10px; margin-bottom:10px;">Publish Time</label>' +
-          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px;">',
+          '<input type="time" id="publish-time" style="padding:5px; padding-left:14px; padding-right:14px; border-radius: 4px; border: 1px solid #dad9d9; color: #424857; height: 30px;" >',
         icon: "info",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -1399,130 +1411,131 @@ const getEventPublish = () => {
       console.error("not okay");
     });
 };
-
 const eventUnPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to unpublish?");
+  Swal.fire({
+    title: "Confirm Unpublish",
+    text: "Are you sure you want to unpublish?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Unpublish",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform the unpublish operation
+      const item = { id: id };
+      const jsonItem = JSON.stringify(item);
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
-
-    console.log(item);
-
-    $.ajax({
-      url: url + "eventUnPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: "success",
-          title: "Done!",
-          confirmButtonColor: "#4BB1F7",
-          text: "You unpublished an event.",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-        setTimeout(function () {
-          location.reload();
-        }, 1800);
+      $.ajax({
+        url: url + "eventUnPublish",
+        type: "post",
+        dataType: "json",
+        data: jsonItem,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          // Unpublish operation successful
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "You unpublished an event.",
+            showConfirmButton: true,
+          }).then((result) => {
+            location.reload();
+          }
+          );
+        })
+        .fail(function (data) {
+          console.log("Unpublish operation failed");
+        });
+    }
+  });
 };
 
 const announcementUnPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to unpublish?");
+  Swal.fire({
+    title: "Confirm Unpublish",
+    text: "Are you sure you want to unpublish?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Unpublish",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform the unpublish operation
+      const item = { id: id };
+      const jsonItem = JSON.stringify(item);
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
-
-    console.log(item);
-
-    $.ajax({
-      url: url + "announcementUnPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: "success",
-          title: "Done!",
-          confirmButtonColor: "#4BB1F7",
-          text: "You unpublished an announcement.",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-        setTimeout(function () {
-          location.reload();
-        }, 1800);
+      $.ajax({
+        url: url + "announcementUnPublish",
+        type: "post",
+        dataType: "json",
+        data: jsonItem,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          // Unpublish operation successful
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "You unpublished an announcement.",
+            showConfirmButton: true,
+          }).then((result) => {
+            location.reload();
+          }
+          );
+        })
+        .fail(function (data) {
+          console.log("Unpublish operation failed");
+        });
+    }
+  });
 };
 const galleryUnPublish = (id) => {
-  let confirmUnPublish = confirm("Are you sure to unpublish?");
+  Swal.fire({
+    title: "Confirm Unpublish",
+    text: "Are you sure you want to unpublish?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Unpublish",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform the unpublish operation
+      const item = { id: id };
+      const jsonItem = JSON.stringify(item);
 
-  if (confirmUnPublish) {
-    item = {};
-    // inputs will be turned into objects
-    item["id"] = id;
-    // stringify the object
-    item = JSON.stringify(item);
-
-    console.log(item);
-
-    $.ajax({
-      url: url + "galleryUnPublish",
-      type: "post",
-      dataType: "json",
-      data: item,
-    })
-      // if success
-      .done(function (data) {
-        // set id as local storage
-        // reload page
-        Swal.fire({
-          icon: "success",
-          title: "Done!",
-          confirmButtonColor: "#4BB1F7",
-          text: "Image has unpublished.",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-        setTimeout(function () {
-          location.reload();
-        }, 1800);
+      $.ajax({
+        url: url + "galleryUnPublish",
+        type: "post",
+        dataType: "json",
+        data: jsonItem,
       })
-      // if failed
-      .fail(function (data) {
-        console.log("not working");
-      });
-  }
+        .done(function (data) {
+          // Unpublish operation successful
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            confirmButtonColor: "#4BB1F7",
+            text: "Image has been unpublished.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          setTimeout(function () {
+            location.reload();
+          }, 1800);
+        })
+        .fail(function (data) {
+          console.log("Unpublish operation failed");
+        });
+    }
+  });
 };
 
 $(document).ready(function () {

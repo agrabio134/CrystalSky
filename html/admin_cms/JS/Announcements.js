@@ -135,7 +135,7 @@ const getLabels = () => {
           
         <form id="editForm" action="${url}editLabel" method="post">
         <div class="modalHeader">
-          <span class="close" id="closeBtn"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+          <span class="close" id="buttnCancel"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
             <h2>EDIT CONTENT</h2>
             <div class="modalLine"></div>
             </div>
@@ -147,7 +147,7 @@ const getLabels = () => {
             </div>
 
             <div class="modal_name_text_content">
-            <input class="modal_name_text_edit" type="text" name="name" id="name"  value="${name}"/>
+            <input class="modal_name_text_edit" type="text" name="name" id="name"  value="${name}" required/>
             </div>
 
             <div class="color_container">
@@ -158,7 +158,7 @@ const getLabels = () => {
             <div class="announce_modal_content">
             <input class="announce_modal_input" type="submit"/>
             <span>
-            <button class="cancelButton_about" type="button" id="btnCancel">CANCEL</button>
+            <button class="cancelButton_about" type="button" id="buttnCancel1">CANCEL</button>
           </span>            </div>
 
             </div>
@@ -213,7 +213,26 @@ const getLabels = () => {
               });
             });
 
-            document.getElementById("btnCancel").addEventListener("click", function () {
+            document.getElementById("buttnCancel").addEventListener("click", function () {
+              Swal.fire({
+                title: "Are you sure?",
+                text: "Any unsaved changes will be discarded.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, cancel!",
+                cancelButtonText: "No",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // If user confirms, navigate back or perform desired action
+                  $(".modal1").remove(); // Remove modal element from the DOM
+                  window.history.back(); // Navigate back
+                }
+              });
+            });
+
+            document.getElementById("buttnCancel1").addEventListener("click", function () {
               Swal.fire({
                 title: "Are you sure?",
                 text: "Any unsaved changes will be discarded.",
@@ -438,15 +457,32 @@ const getLabelsAnnouncements = () => {
       .title_announcement{
         width: 100%;
         height: 10%;
+        margin-bottom: 15px;
         //  border: 1px solid green;
         display: flex;
         align-items: center;
+        justify-content: space-between;
       }
       .title_announcement p{
         font-family: montserrat-bold;
         font-size: 20px;
         letter-spacing: 1px;
         color: #424857;
+      }
+      .back_announcement{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FF5D5D;
+        border: none;
+        width: 10%;
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: montserrat-medium;
+        font-size: 15px;
+        color: white;
+        text-decoration: none;
       }
       .form_text_announcement{
         width: 100%;
@@ -484,6 +520,7 @@ const getLabelsAnnouncements = () => {
         width: 20%;
         text-align: center;
         padding: 10px;
+        margin-bottom: 15px;
         border: 1px solid #dad9d9;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
         border-radius: 4px;
@@ -500,7 +537,7 @@ const getLabelsAnnouncements = () => {
         width: 100%;
         align-items: center;
         //  border: 1px solid black;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         color: #424857;
       }
       .label_category_announcement:any-link, .label_category_announcement:focus, .label_category_announcement:active{
@@ -516,8 +553,7 @@ const getLabelsAnnouncements = () => {
         height: 10%;
         display: flex;
         align-items: center;
-        margin-top: 5px;
-        
+        margin-bottom: 15px;
       }
       .description_form_add_announcement p{
         font-family: montserrat-bold;
@@ -528,9 +564,9 @@ const getLabelsAnnouncements = () => {
       .description_text{
         width: 100%;
         display: flex;
-        // border: 1px solid blue;
+        //  border: 1px solid blue;
         height:20%;
-        margin-bottom:20px;
+        margin-bottom:15px;
       }
       .description_text .text_textarea{
         width: 100%;
@@ -548,10 +584,9 @@ const getLabelsAnnouncements = () => {
       }
       .thumnail_container{
         display: flex;
+        flex-direction: column;
         width: 100%;
         height: 10%;
-        align-items: center;
-        gap: 5px;
         //  border:1px solid green;
       }
       .thumbnail_text{
@@ -559,7 +594,7 @@ const getLabelsAnnouncements = () => {
         align-items: center;
         justify-content: center;
         width: 12%;
-        height: 50%;
+        margin-bottom:15px;
         // border: 1px solid red;
       }
       .thumbnail_text p{
@@ -600,7 +635,6 @@ const getLabelsAnnouncements = () => {
         align-items: center;
         justify-content: end;
         width: 100%;
-        height: 8%;
         
         //  border: 1px solid black;  
       }
@@ -609,13 +643,11 @@ const getLabelsAnnouncements = () => {
         align-items: center;
         justify-content: center;
         background-color: #2FA83F;
-        height: 80%;
         border: none;
         width: 10%;
-        margin-right: 30px;
+        padding: 10px;
         cursor: pointer;
         border-radius: 4px;
-        // margin-left: 950px;
       }
       input[type="submit"]{
         font-family: montserrat-medium;
@@ -628,6 +660,9 @@ const getLabelsAnnouncements = () => {
       
         <div class="title_announcement">
           <label for="title"><p>Add Announcement:</p></label>
+          <a class="back_announcement" href="/html/admin_cms/admin_create_announcements.html">
+                BACK
+              </a>
         </div>
           <div class="form_text_announcement">
             <input placeholder="Add title" type="text" id="title" name="title" required />
@@ -687,7 +722,21 @@ const getLabelsAnnouncements = () => {
             // If user confirms, submit the form
             // redirect to the home page
 
-            document.getElementById("postForm").submit();
+
+            Swal.fire({
+              title: "Success!",
+              text: "Announcement has been submitted.",
+              icon: "success",
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Okay",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                document.getElementById("postForm").submit();
+              }
+            });
+
+
+
 
 
 

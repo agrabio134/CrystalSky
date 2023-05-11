@@ -16,7 +16,7 @@
     width: 100%;
     background-color: white;
     height: 130px;
-    min-height: 400px;
+    min-height: 450px;
     padding: 30px;
 }
 .getLabelAnnouncementForm_container{
@@ -60,3 +60,29 @@ input:active {
     }
 }
 
+.swal2-popup {
+    font-size: 0.8rem !important;
+    color: #424857 !important;
+    background-color: #ffffff !important;
+    font-family: "Montserrat-medium" !important;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0 !important;
+    border-radius: .25em !important;
+    background: initial !important;
+    background-color: #4BB1F7 !important;
+    color: #fff !important;
+    font-size: 1em !important;
+    font-family: "Montserrat-medium" !important;
+}
+
+.swal2-styled.swal2-cancel {
+    border: 0 !important;
+    border-radius: .25em !important;
+    background: initial !important;
+    background-color: #FF5D5D !important;
+    color: #fff !important;
+    font-size: 1em !important;
+    font-family: "Montserrat-medium" !important;
+}

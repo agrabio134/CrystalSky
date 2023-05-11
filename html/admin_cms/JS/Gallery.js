@@ -95,37 +95,46 @@ const getGallery = () => {
 // archived image
 
  
-
 function ImgArchive(id) {
-  let confirmArchive = confirm("Are you sure to Archive?")
+  Swal.fire({
+    title: "Confirm Archive",
+    text: "Are you sure you want to archive?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Archive",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform the archive operation
+      const item = { id: id };
+      const jsonItem = JSON.stringify(item);
 
-  if (confirmArchive){
-    item = {};
-  // inputs will be turned into objects
-  item["id"] = id;
-  // stringify the object
-  item = JSON.stringify(item);
+      $.ajax({
+        url: url + "ImgArchive",
+        type: "post",
+        dataType: "json",
+        data: jsonItem,
+      })
+        .done(function (data) {
+          Swal.fire({
+            title: "Success!",
+            text: "Image has been archived",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Okay",
+          }).then((result) => {
 
-  console.log(item);
 
-  $.ajax({
-    url: url + "ImgArchive",
-    type: "post",
-    dataType: "json",
-    data: item,
-  })
-    // if success
-    .done(function (data) {
-      // set id as local storage
-      // reload page
-      window.location.reload();
 
-      getGallery();
-    })
-    // if failed
-    .fail(function (data) {
-      console.log("not working");
-    });
-  }
-  
+          window.location.reload();
+          });
+          getGallery();
+        })
+        .fail(function (data) {
+          console.log("Archive operation failed");
+        });
+    }
+  });
 }

@@ -160,16 +160,14 @@ const getReceptionForm = () => {
       .preview-img-container img {
         width: 200px;
         height: auto;
-        margin: 10px;
         object-fit: contain;
       }
       .create_category_images_container{
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center; 
-        width: 36%;
-        // border: 1px solid red;
+        justify-content: start;
+        width: 100%;
+        //  border: 1px solid red;
       }
       .category_images_conts::-webkit-file-upload-button{
          width: 120px;

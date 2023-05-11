@@ -31,21 +31,21 @@ const getContentContact = () => {
   <div class="contact_email">
     <div class="cont_container">
       <label class="contact_number_container" for="contact_number" >Contact Number: </label>
-      <input class="contact_placeholder" type="text" pattern="[0-9.]+" id="contact_number" name="phone" value="${content.phone}" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+      <input class="contact_placeholder" placeholder="Add contact number" type="text" pattern="[0-9.]+" id="contact_number" name="phone" value="${content.phone}" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
       </div>
     <div class="em_cont">
       <label class="email_container" for="email">Email:</label>
-      <input class="email_cont" type="email" id="email" name="email" value="${content.email}" >
+      <input class="email_cont" type="email" id="email" placeholder="Add email address" name="email" value="${content.email}" >
       </div>
     </div>
   
   
   
       <label class="location_container" for="address">Address:</label>
-      <textarea class="edit_address_container" id="edit_address" name="address" value="${content.address}" > ${content.address}"</textarea>
+      <textarea placeholder="Add address" class="edit_address_container" id="edit_address" name="address" value="${content.address}" > ${content.address}"</textarea>
 
       <label for="opening_hours" class="opening_hours_label">Opening Hours:</label>
-      <input class="openning_hours_input" type="text" id="openning_hours" name="opening_hours" value="${content.opening_hours}" placeholder="Day from - to: time from - to" >
+      <input placeholder="Add opening hours" class="openning_hours_input" type="text" id="openning_hours" name="opening_hours" value="${content.opening_hours}" placeholder="Day from - to: time from - to" >
       </div> 
 
 
@@ -65,8 +65,8 @@ const getContentContact = () => {
           text: "Do you want to update the contact information?",
           icon: "question",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
+          confirmButtonColor: "##4BB1F7",
+          cancelButtonColor: "#FF5D5D",
           confirmButtonText: "Yes, update it!",
           cancelButtonText: "Cancel",
         }).then((result) => {
@@ -82,6 +82,7 @@ const getContentContact = () => {
                   title: "Success!",
                   text: "Successfully Updated",
                   icon: "success",
+                  confirmButtonColor: "##4BB1F7",
                   confirmButtonText: "Ok",
                 }).then((result) => {
                   if (result.isConfirmed) {
@@ -132,7 +133,7 @@ const getContentAbout = () => {
   width: 100%;
   display:flex;
   flex-direction: column;
-  // border: 1px solid red;
+  //  border: 1px solid red;
 }
 .edit_title_1_content{
   display:flex;
@@ -151,7 +152,6 @@ const getContentAbout = () => {
       border: 1px solid #dad9d9;
       border-radius: 4px;
       resize: vertical;
-      margin-left: 30px;
 }
 input[type=text]{
   color: #424857;
@@ -167,13 +167,12 @@ input[type=text]{
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
   font-family: heebo;
   margin-bottom: 30px; 
-  width: 93%;
+  width: 96%;
   padding: 20px;
   height: 100px;
   border: 1px solid #dad9d9;
   border-radius: 4px;
   resize: vertical;
-  margin-left: 30px;
   font-family:montserrat-medium;
   font-size: 15px;
   letter-spacing: 1px;
@@ -288,7 +287,6 @@ textarea{
   width: 94.5%;
   background-color: white;
   height: 20px;
-  margin-left:20px;
   padding:10px;
   font-family:Montserrat-medium;
   letter-spacing:1px;
@@ -318,7 +316,6 @@ input:active {
   width: 50%;
   background-color: white;
   height: 20px;
-  margin-left: 20px;
   // border: 1px solid red;
 }
 .modal::-webkit-scrollbar{
@@ -334,9 +331,9 @@ input:active {
 
                               <div class="about_form_content">
                                 <label for="edit_title_1" class="edit_title_1_content">Edit Title:</label>
-                                <input class="about_edit_text_content" type="text" id="edit_title_1" name="title"  value="${content.title}">
+                                <input class="about_edit_text_content" placeholder="Add title" type="text" id="edit_title_1" name="title"  value="${content.title}">
                                 <label class="edit_description_about" for="edit_description">Edit About Description:</label>
-                                <textarea class="edit_description_about_area" id="edit_description" name="description"
+                                <textarea placeholder="Add description" class="edit_description_about_area" id="edit_description" name="description"
                                 value="${content.description}">${content.description}</textarea>
                               </div>
                       
@@ -357,8 +354,8 @@ input:active {
           text: "Do you want to update the form?",
           icon: "question",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
+          confirmButtonColor: "#4BB1F7",
+          cancelButtonColor: "#FF5D5D",
           confirmButtonText: "Yes, update it!",
           cancelButtonText: "Cancel",
         }).then((result) => {
@@ -374,6 +371,7 @@ input:active {
                   title: "Success!",
                   text: "Successfully Updated",
                   icon: "success",
+                  confirmButtonColor: "#4BB1F7",
                   confirmButtonText: "Ok",
                 }).then((result) => {
                   if (result.isConfirmed) {
@@ -747,6 +745,8 @@ $(document).on("click", "#saveButton", function () {
     text: "Are you sure you want to save the changes?",
     icon: "question",
     showCancelButton: true,
+    confirmButtonColor: "##4BB1F7",
+    cancelButtonColor: "#FF5D5D",
     confirmButtonText: "Save",
     cancelButtonText: "Cancel",
   }).then((result) => {
@@ -782,6 +782,8 @@ $(document).on("click", ".delete-button", function () {
     text: 'Are you sure you want to delete this item?',
     icon: 'warning',
     showCancelButton: true,
+    confirmButtonColor: "##4BB1F7",
+    cancelButtonColor: "#FF5D5D",
     confirmButtonText: 'Delete',
     cancelButtonText: 'Cancel',
   }).then((result) => {

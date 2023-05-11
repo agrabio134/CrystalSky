@@ -1,3 +1,4 @@
+
 .archived_divs {
     display: flex;
     flex-direction: row;
@@ -8,16 +9,22 @@
     text-align: center;
     border-radius: 8px;
     border: 1px solid #dad9d9;
-    width: 24%;
+    width: 20%;
     background-color: white;
-    min-height: 600px;
+    max-height: 320px;
+    padding: 30px;
+}
+.filter_title{
+    font-family: montserrat-bold;
+    font-size: 30px;
+    color: #4BB1F7;
 }
 .button_select {
     display: flex;
     flex-direction: column;
     width: 100%;
     /* border:1px solid green; */
-    margin-top: 100px;
+    margin-top: 30px;
     justify-content: center;
 }
 
@@ -31,7 +38,7 @@
 }
 
 .one_arhived_container button {
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: montserrat-medium;
     font-size: 15px;
@@ -55,7 +62,7 @@
 }
 
 .two_arhived_container button {
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: montserrat-medium;
     font-size: 15px;
@@ -78,7 +85,7 @@
 }
 
 .three_arhived_container button {
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: montserrat-medium;
     font-size: 15px;
@@ -102,7 +109,7 @@
 }
 
 .four_arhived_container button {
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: montserrat-medium;
     font-size: 15px;
@@ -126,7 +133,7 @@
 }
 
 .five_arhived_container button {
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: montserrat-medium;
     font-size: 15px;
@@ -163,6 +170,7 @@
 }
 .title_archived_post {
     display: flex;
+    justify-content: center;
     width: 100%;
 }
 
@@ -170,7 +178,7 @@
     text-decoration: none;
     font-family: montserrat-bold;
     font-size: 30px;
-    color: #424857;
+    color: #4BB1F7;
     /* border: 1px solid green; */
     margin-bottom: 25px;
     margin-top: 10px;
@@ -401,3 +409,29 @@ height: 100%; */
     border: 1px solid purple;
     margin-left: 12px;
 } */
+.swal2-popup {
+    font-size: 0.8rem !important;
+    color: #424857 !important;
+    background-color: #ffffff !important;
+    font-family: "Montserrat-medium" !important;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0 !important;
+    border-radius: .25em !important;
+    background: initial !important;
+    background-color: #4BB1F7 !important;
+    color: #fff !important;
+    font-size: 1em !important;
+    font-family: "Montserrat-medium" !important;
+}
+
+.swal2-styled.swal2-cancel {
+    border: 0 !important;
+    border-radius: .25em !important;
+    background: initial !important;
+    background-color: #FF5D5D !important;
+    color: #fff !important;
+    font-size: 1em !important;
+    font-family: "Montserrat-medium" !important;
+}
